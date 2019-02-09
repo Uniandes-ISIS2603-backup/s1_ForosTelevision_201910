@@ -33,6 +33,13 @@
             <scope>test</scope>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>co.edu.uniandes.csw</groupId>
+            <artifactId>s1_foros-api</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+            <type>war</type>
+        </dependency>
     </dependencies>
     
 </project>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="s1_foros-api:war">
+    <output-path>$PROJECT_DIR$/s1_foros-api/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>s1_foros-api</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="s1_foros-api-1.0.war">
+      <element id="artifact" artifact-name="s1_foros-api:war exploded" />
+    </root>
+  </artifact>
+</component>

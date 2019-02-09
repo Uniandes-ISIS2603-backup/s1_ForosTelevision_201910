@@ -23,12 +23,15 @@ SOFTWARE.
  */
 package co.edu.uniandes.csw.foros.tests.postman;
 
+
+
+import java.io.File;
+import java.io.IOException;
+
 import co.edu.uniandes.csw.foros.mappers.BusinessLogicExceptionMapper;
 import co.edu.uniandes.csw.foros.dtos.CascaraDTO;
 import co.edu.uniandes.csw.foros.resources.RestConfig;
 import co.edu.uniandes.csw.postman.tests.PostmanTestBuilder;
-import java.io.File;
-import java.io.IOException;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.container.test.api.RunAsClient;
 import org.jboss.arquillian.junit.Arquillian;
