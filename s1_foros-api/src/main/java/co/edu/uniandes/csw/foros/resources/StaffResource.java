@@ -33,7 +33,7 @@ public class StaffResource {
      */
     @GET
     @Path("/staff/{id: \\d+}")
-    public StaffDTO darRecursosStaff(@PathParam("id") Long id) {
+    public StaffDTO darStaff(@PathParam("id") Long id) {
         return new StaffDTO();
     }
 
