@@ -131,6 +131,5 @@ public class StaffDTO implements Serializable {
     public void editarDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
 }
