@@ -69,6 +69,7 @@ public abstract class BaseEntity implements Serializable {
         return Objects.equals(this.id, other.id);
     }
 
+    //override aaca abajo :v
     @Override
     public int hashCode() {
         if (this.getId() != null) {
