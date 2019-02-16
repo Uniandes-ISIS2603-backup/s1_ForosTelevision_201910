@@ -20,10 +20,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     private String clave;
     private Acceso privilegio;
     
-    public  UsuarioEntity(){
-
-    }
-
     public String getNombre() {
         return nombre;
     }
