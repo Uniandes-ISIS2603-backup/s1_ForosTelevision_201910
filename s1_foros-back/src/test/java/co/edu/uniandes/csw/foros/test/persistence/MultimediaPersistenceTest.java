@@ -1,8 +1,7 @@
-
 package co.edu.uniandes.csw.foros.test.persistence;
 
-import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
-import co.edu.uniandes.csw.foros.persistence.UsuarioPersistence;
+import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
+import co.edu.uniandes.csw.foros.persistence.MultimediaPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -20,16 +19,16 @@ import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
-
 /**
  *
  * @author bsrincon
  */
-
 @RunWith(Arquillian.class)
-public class UsuarioPersistenceTest {
+
+public class MultimediaPersistenceTest {
+    
      @Inject
-    private UsuarioPersistence usuarioPersistence;
+    private MultimediaPersistence MultimediaPersistence;
 
     @PersistenceContext
     private EntityManager em;
@@ -37,9 +36,9 @@ public class UsuarioPersistenceTest {
     @Inject
     UserTransaction utx;
 
-    private List<UsuarioEntity> data = new ArrayList<>();
-
-    /**
+    private List<MultimediaEntity> data = new ArrayList<>();
+    
+     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
      * El jar contiene las clases, el descriptor de la base de datos y el
      * archivo beans.xml para resolver la inyección de dependencias.
@@ -47,8 +46,8 @@ public class UsuarioPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(UsuarioEntity.class.getPackage())
-                .addPackage(UsuarioPersistence.class.getPackage())
+                .addPackage(MultimediaEntity.class.getPackage())
+                .addPackage(MultimediaPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -78,7 +77,7 @@ public class UsuarioPersistenceTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from UsuarioEntity").executeUpdate();
+        em.createQuery("delete from MultimediaEntity").executeUpdate();
     }
 
     /**
@@ -88,38 +87,35 @@ public class UsuarioPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            UsuarioEntity entity = factory.manufacturePojo(UsuarioEntity.class);
+            MultimediaEntity entity = factory.manufacturePojo(MultimediaEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
 
     /**
-     * Prueba para crear un Author.
+     * Prueba para crear un recurso Multimedia.
      */
     @Test
     public void createUsuarioTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
-        UsuarioEntity result = usuarioPersistence.create(newEntity);
-
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        MultimediaEntity result = MultimediaPersistence.create(newEntity);
         Assert.assertNotNull(result);
-
-        UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());
-
-        Assert.assertEquals(newEntity.getNombre(), entity.getNombre());
+        MultimediaEntity entity = em.find(MultimediaEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
     }
 
     /**
-     * Prueba para consultar la lista de Usuarios.
+     * Prueba para consultar la lista de recursos.
      */
     @Test
     public void getAllTest() {
-        List<UsuarioEntity> list = usuarioPersistence.getAll();
+        List<MultimediaEntity> list = MultimediaPersistence.getAll();
         Assert.assertEquals(data.size(), list.size());
-        for (UsuarioEntity ent : list) {
+        for (MultimediaEntity ent : list) {
             boolean found = false;
-            for (UsuarioEntity entity : data) {
+            for (MultimediaEntity entity : data) {
                 if (ent.getId().equals(entity.getId())) {
                     found = true;
                 }
@@ -129,38 +125,38 @@ public class UsuarioPersistenceTest {
     }
 
     /**
-     * Prueba para consultar un Author.
+     * Prueba para consultar un Recurso.
      */
     @Test
     public void getAuthorTest() {
-        UsuarioEntity entity = data.get(0);
-        UsuarioEntity newEntity = usuarioPersistence.find(entity.getId());
+        MultimediaEntity entity = data.get(0);
+        MultimediaEntity newEntity = MultimediaPersistence.find(entity.getId());
         Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getNombre(), newEntity.getNombre());
+        Assert.assertEquals(entity.getId(), newEntity.getId());
     }
 
     /**
-     * Prueba para actualizar un Author.
+     * Prueba para actualizar un recurso.
      */
     @Test
     public void updateAuthorTest() {
-        UsuarioEntity entity = data.get(0);
+        MultimediaEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
         newEntity.setId(entity.getId());
-        usuarioPersistence.update(newEntity);
-        UsuarioEntity resp = em.find(UsuarioEntity.class, entity.getId());
-        Assert.assertEquals(newEntity.getNombre(), resp.getNombre());
+        MultimediaPersistence.update(newEntity);
+        MultimediaEntity resp = em.find(MultimediaEntity.class, entity.getId());
+        Assert.assertEquals(newEntity.getId(), resp.getId());
     }
-
+    
     /**
      * Prueba para eliminar un Author.
      */
     @Test
     public void deleteAuthorTest() {
-        UsuarioEntity entity = data.get(0);
-        usuarioPersistence.delete(entity.getId());
-        UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
+        MultimediaEntity entity = data.get(0);
+        MultimediaPersistence.delete(entity.getId());
+        MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 }

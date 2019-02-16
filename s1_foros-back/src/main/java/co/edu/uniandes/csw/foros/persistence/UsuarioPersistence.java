@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.persistence;
 
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
@@ -26,11 +21,20 @@ public class UsuarioPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(UsuarioPersistence.class.getName());
     
+    /**
+     * Crea un registro persistente de usuario
+     * @param usuario entidad a registrar
+     * @return instancia de usuario registrado
+     */
     public UsuarioEntity create(UsuarioEntity usuario){
         em.persist(usuario);
         return usuario;
     }
-    
+    /**
+     * Busca un usuario
+     * @param userId identificador de usuario
+     * @return instancia de UsuarioEntity
+     */
     public UsuarioEntity find(Long userId){
        UsuarioEntity find= em.find(UsuarioEntity.class, userId);
        LOGGER.log(Level.INFO, "Encontrar  el usuario con id={0}",userId);
@@ -48,7 +52,6 @@ public class UsuarioPersistence {
     
      /**
      * Actualiza un usuario.
-     
      * @return un usuario con los cambios aplicados.
      */
     public UsuarioEntity update(UsuarioEntity usuarioEntity) {
@@ -60,7 +63,7 @@ public class UsuarioPersistence {
      * Borra un usuario de la base de datos recibiendo como argumento el id de
      * la usuario
      *
-     * @param authorsId: id correspondiente del usuario a borrar.
+     * @param userId: id correspondiente del usuario a borrar.
      */
     public void delete(Long userId) {
         LOGGER.log(Level.INFO, "Borrando el usuario con id={0}", userId);
