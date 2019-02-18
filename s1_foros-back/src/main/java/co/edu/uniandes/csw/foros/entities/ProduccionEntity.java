@@ -17,7 +17,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author 
+ * @author jf.castaneda 
  */
 @Entity
 public class ProduccionEntity extends BaseEntity implements Serializable {
@@ -139,6 +139,110 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      */
     public List<StaffEntity> darStaff() {
         return staff;
+    }
+    
+    /**
+     * Setter del staff de la producción.
+     * @param staff los nuevos miembros del staff.
+     */
+    private void editarStaff(List<StaffEntity> staff) {
+        this.staff = staff;
+    }
+    
+    /**
+     * Getter de los capítulos de la producción.
+     * @return lista con las entidades de los capítulos de la producción.
+     */
+    public List<CapituloEntity> darCapitulos() {
+        return capitulos;
+    }
+
+    /**
+     * Setter de los capítulos de la producción.
+     * @param capitulos los nuevos capitulos.
+     */
+    public void editarCapitulos(List<CapituloEntity> capitulos) {
+        this.capitulos = capitulos;
+    }
+    
+    /**
+     * Getter de las categorías de la producción.
+     * @return lista con las entidades de las categorías de la producción.
+     */
+    public List<CategoriaEntity> darCategorias() {
+        return categorias;
+    }
+
+    /**
+     * Setter de las categorías de la producción.
+     * @param categorias las nuevas categorías.
+     */
+    public void editarCategorias(List<CategoriaEntity> categorias) {
+        this.categorias = categorias;
+    }
+    
+    /**
+     * Getter de la multimedia de la producción.
+     * @return entidad de la multimedia de la producción.
+     */
+    public MultimediaEntity darMultimedia() {
+        return multimedia;
+    }
+
+    /**
+     * Setter de la multimedia de la producción.
+     * @param multimedia las nueva multimedia.
+     */
+    public void editarMultimedia(MultimediaEntity multimedia) {
+        this.multimedia = multimedia;
+    }
+    
+    /**
+     * Getter de la productora de la producción.
+     * @return la entidad de la productora de la producción.
+     */
+    public ProductoraEntity darProductora() {
+        return productora;
+    }
+
+    /**
+     * Setter de la productora de la producción.
+     * @param productora las nueva productora.
+     */
+    public void editarPorductora(ProductoraEntity productora) {
+        this.productora = productora;
+    }
+    
+    /**
+     * Getter del estado de la producción.
+     * @return entidad del estado de la producción.
+     */
+    public EstadoEntity darEstado() {
+        return estado;
+    }
+
+    /**
+     * Setter del estado de la producción.
+     * @param estado el nuevo estado.
+     */
+    public void editarEstado(EstadoEntity estado) {
+        this.estado = estado;
+    }
+    
+    /**
+     * Getter de las reseñas de la producción.
+     * @return lista con las entidades de las reseñas de la producción.
+     */
+    public List<ResenaEntity> darResenas() {
+        return resenas;
+    }
+
+    /**
+     * Setter de las reseñas de la producción.
+     * @param resenas las nuevas reseñas.
+     */
+    public void editarResenas(List<ResenaEntity> resenas) {
+        this.resenas = resenas;
     }
     
     /**

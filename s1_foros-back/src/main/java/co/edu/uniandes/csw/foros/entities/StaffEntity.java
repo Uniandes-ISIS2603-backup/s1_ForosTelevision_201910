@@ -6,13 +6,9 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
