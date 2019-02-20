@@ -15,7 +15,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Clase de persistencia de los miembros del staff.
+ * 
  * @author jf.castaneda
  */
 @Stateless

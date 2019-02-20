@@ -15,7 +15,8 @@ import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- *
+ * Entidad de la clase producción.
+ * 
  * @author jf.castaneda 
  */
 @Entity
@@ -208,7 +209,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la productora de la producción.
      * @param productora las nueva productora.
      */
-    public void editarPorductora(ProductoraEntity productora) {
+    public void editarProductora(ProductoraEntity productora) {
         this.productora = productora;
     }
     
@@ -248,7 +249,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del id de la producción.
      * @return id de la producción.
      */
-    public long darIdProduccion() {
+    public long getIdProduccion() {
         return idProduccion;
     }
 
@@ -256,7 +257,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del id de la producción.
      * @param idProduccion nuevo id de la producción.
      */
-    public void editarIdProduccion(long idProduccion) {
+    public void setIdProduccion(long idProduccion) {
         this.idProduccion = idProduccion;
     }
 
@@ -264,7 +265,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del nombre de la producción.
      * @return nombre de la producción.
      */
-    public String darNombre() {
+    public String getNombre() {
         return nombre;
     }
     
@@ -272,7 +273,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del nombre de la producción.
      * @param nombre nuevo nombre de la producción.
      */
-    public void editarNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -280,7 +281,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la descripción de la producción.
      * @return nombre de la producción.
      */
-    public String darDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -288,7 +289,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la descripción de la producción.
      * @param descripcion nueva descripción de la producción.
      */
-    public void editarDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -296,7 +297,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la clasificación de audiencia de la producción.
      * @return clasificacionAudiencia clasificación de audiencia de la producción.
      */
-    public ClasificacionAudiencia darClasificacionAudiencia() {
+    public ClasificacionAudiencia getClasificacionAudiencia() {
         return clasificacionAudiencia;
     }
 
