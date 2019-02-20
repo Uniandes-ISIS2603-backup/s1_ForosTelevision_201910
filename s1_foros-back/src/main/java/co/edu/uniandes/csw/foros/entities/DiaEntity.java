@@ -20,8 +20,8 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class DiaEntity extends BaseEntity implements Serializable{
     
-    @ManyToOne
     @PodamExclude
+    @ManyToOne
     private EmisionEntity emision;
     /**
      * Nombre de la entidad.

@@ -24,6 +24,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 /**
+ * Recurso de una producción.
  *
  * @author jf.castaneda
  */

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
 
+
 /**
  *
  * @author estudiante
