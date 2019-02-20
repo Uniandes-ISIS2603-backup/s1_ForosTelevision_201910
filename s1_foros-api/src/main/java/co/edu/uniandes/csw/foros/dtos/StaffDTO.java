@@ -8,38 +8,39 @@ package co.edu.uniandes.csw.foros.dtos;
 import java.io.Serializable;
 
 /**
+ * DTO que representa un miembro del staff.
  *
  * @author jf.castaneda
  */
 public class StaffDTO implements Serializable {
-    
+
     /**
      * Rol que el miembro del staff puede cumplir.
      */
     public enum RolStaff {
         ACTOR, DIRECTOR, ACTORYDIRECTOR
     }
-    
+
     /**
      * Id del miembro del staff de al menos una película.
      */
     private long idStaff;
-    
+
     /**
      * Rol que cumple el staff dentro de la producción.
      */
     private RolStaff rol;
-    
+
     /**
      * Nombre del miembro del staff de al menos una película.
-    */
+     */
     private String nombre;
-    
+
     /**
      * Foto característica del miembro del Staff de al menos una película.
      */
     private String foto;
-    
+
     /**
      * Descripción dle miembro del staff de al menos una película.
      */
@@ -49,11 +50,12 @@ public class StaffDTO implements Serializable {
      * Constructor del DTO de un miembro del staff de al menos una película.
      */
     public StaffDTO() {
-    
+
     }
-    
+
     /**
      * Getter del id del miembro del staff.
+     *
      * @return id del miembro del staff.
      */
     public long darIdStaff() {
@@ -62,6 +64,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Setter del id del miembro del staff.
+     *
      * @param idStaff nuevo id del miembro del staff.
      */
     public void editarIdStaff(long idStaff) {
@@ -70,6 +73,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Getter del rol del miembro del staff.
+     *
      * @return rol del miembro del staff.
      */
     public RolStaff darRol() {
@@ -78,6 +82,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Setter del rol del miembro del staff.
+     *
      * @param rol nuevo rol del miembro del staff.
      */
     public void editarRol(RolStaff rol) {
@@ -86,6 +91,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Getter del nombre del miembro del staff.
+     *
      * @return nombre del miembro del staff.
      */
     public String darNombre() {
@@ -94,6 +100,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Setter del nombre del miembro del staff.
+     *
      * @param nombre nuevo nombre del miembro del staff.
      */
     public void editarNombre(String nombre) {
@@ -102,6 +109,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Getter de la foto del miembro del staff.
+     *
      * @return ruta de la foto del miembro del staff.
      */
     public String darFoto() {
@@ -110,6 +118,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Setter de la nueva foto del miembro del staff.
+     *
      * @param foto nueva ruta de la foto del mimebro del staff.
      */
     public void editarFoto(String foto) {
@@ -118,6 +127,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Getter de la descripción del miembro del staff.
+     *
      * @return descripción del miembro del staff.
      */
     public String darDescripcion() {
@@ -126,6 +136,7 @@ public class StaffDTO implements Serializable {
 
     /**
      * Setter de la descripción del miembro del staff.
+     *
      * @param descripcion nueva descripción del miembro del staff.
      */
     public void editarDescripcion(String descripcion) {

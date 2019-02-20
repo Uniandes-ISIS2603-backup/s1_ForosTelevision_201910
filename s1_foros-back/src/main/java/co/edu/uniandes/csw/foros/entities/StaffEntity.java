@@ -12,7 +12,8 @@ import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- *
+ * Entidad de la clase staff.
+ * 
  * @author jf.castaneda
  */
 @Entity

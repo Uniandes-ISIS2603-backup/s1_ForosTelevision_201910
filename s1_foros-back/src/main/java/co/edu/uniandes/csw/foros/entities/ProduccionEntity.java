@@ -15,7 +15,8 @@ import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- *
+ * Entidad de la clase producción.
+ * 
  * @author jf.castaneda 
  */
 @Entity
@@ -208,7 +209,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la productora de la producción.
      * @param productora las nueva productora.
      */
-    public void editarPorductora(ProductoraEntity productora) {
+    public void editarProductora(ProductoraEntity productora) {
         this.productora = productora;
     }
     
@@ -304,7 +305,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la clasificación de audiencia de la producción.
      * @param clasificacionAudiencia nueva clasificación de audiencia de la producción.
      */
-    public void setClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
+    public void editarClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
         this.clasificacionAudiencia = clasificacionAudiencia;
     }
 
@@ -312,7 +313,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la calificación promedio de la producción.
      * @return calificacionPromedio calificación promedio de la producción.
      */
-    public int getCalificacionPromedio() {
+    public int darCalificacionPromedio() {
         return calificacionPromedio;
     }
 
@@ -320,7 +321,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la calificación promedio de la producción.
      * @param calificacionPromedio nueva calificación promedio de la producción.
      */
-    public void setCalificacionPromedio(int calificacionPromedio) {
+    public void editarCalificacionPromedio(int calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
     
