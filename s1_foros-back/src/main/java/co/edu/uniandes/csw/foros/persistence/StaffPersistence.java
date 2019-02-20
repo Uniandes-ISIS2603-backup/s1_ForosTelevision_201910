@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -17,6 +18,7 @@ import javax.persistence.TypedQuery;
  *
  * @author jf.castaneda
  */
+@Stateless
 public class StaffPersistence {
     
     @PersistenceContext(unitName="forosPU")

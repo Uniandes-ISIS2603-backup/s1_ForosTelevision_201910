@@ -6,23 +6,24 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
-import java.util.List;
+import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
  * @author jf.castaneda
  */
+@Entity
 public class StaffEntity extends BaseEntity implements Serializable{
     
     /**
      * Relación del miembro del staff con una producción.
      */
-    @ManyToMany(mappedBy="staff", fetch=LAZY)
     @PodamExclude
-    private List<ProduccionEntity> producciones;
+    @ManyToOne(fetch=LAZY)
+    private ProduccionEntity produccion;
     
     /**
      * Rol que el miembro del staff puede cumplir.
@@ -62,16 +63,16 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter de las producciones con las que está relacionada un miembro del staff.
      * @return lista con las producciones en las que ha participado el miembro del staff.
      */
-    public List<ProduccionEntity> darProducciones() {
-        return producciones;
+    public ProduccionEntity darProducciones() {
+        return produccion;
     }
     
     /**
      * Setter de las producciones en las que ha participado un miembro del staff.
      * @param producciones producciones en las que ha participado un miembro del staff.
      */
-    public void editarProducciones(List<ProduccionEntity> producciones) {
-        this.producciones = producciones;
+    public void editarProducciones(ProduccionEntity producciones) {
+        this.produccion = producciones;
     }
 
     /**

@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -26,14 +25,14 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Relación entre producción y emisión.
      */
     @PodamExclude
-    @ManyToMany(mappedBy="producciones", fetch=LAZY)
+    @OneToMany(mappedBy="produccion", fetch=LAZY)
     private List<EmisionEntity> emisiones;
     
     /**
      * Relación entre producción y staff.
      */
     @PodamExclude
-    @ManyToMany(mappedBy="producciones", fetch=LAZY)
+    @OneToMany(mappedBy="produccion", fetch=LAZY)
     private List<StaffEntity> staff;
     
     /**
@@ -61,7 +60,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Relación entre producción y productora.
      */
     @PodamExclude
-    @ManyToOne(mappedBy="producciones", fetch=LAZY)
+    @ManyToOne(fetch=LAZY)
     private ProductoraEntity productora;
     
     /**

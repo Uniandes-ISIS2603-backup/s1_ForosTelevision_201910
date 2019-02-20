@@ -11,10 +11,10 @@ import javax.persistence.Entity;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToOne;
-import javax.persistence.ManyToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import java.util.List;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 /**
@@ -33,8 +33,8 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     private List<DiaEntity> dias;
     
     @PodamExclude
-    @ManyToMany(mappedBy="emisiones", fetch=LAZY)
-    private List<ProduccionEntity> producciones;
+    @ManyToOne(fetch=LAZY) 
+    private ProduccionEntity produccion;
     /**
      * Rating de la emision.
      */
@@ -132,14 +132,14 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     /**
      * @return the producciones
      */
-    public List<ProduccionEntity> getProducciones() {
-        return producciones;
+    public ProduccionEntity getProducciones() {
+        return produccion;
     }
 
     /**
-     * @param producciones the producciones to set
+     * @param produccion the producciones to set
      */
-    public void setProducciones(List<ProduccionEntity> producciones) {
-        this.producciones = producciones;
+    public void setProducciones(ProduccionEntity produccion) {
+        this.produccion = produccion;
     }
 }
