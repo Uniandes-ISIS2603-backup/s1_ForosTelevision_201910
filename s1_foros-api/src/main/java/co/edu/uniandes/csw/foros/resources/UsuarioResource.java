@@ -1,6 +1,8 @@
 package co.edu.uniandes.csw.foros.resources;
 
+import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
 import co.edu.uniandes.csw.foros.dtos.UsuarioDTO;
+import java.util.ArrayList;
 
 
 import javax.enterprise.context.RequestScoped;
@@ -59,8 +61,8 @@ public class UsuarioResource {
 
     @GET
     @Path("/usuarios/{id: \\d+}/favoritos")
-    public String darUsuariosFavoritos(@PathParam("id") Long id){
-        return id.toString();
+    public List<UsuarioDTO> darUsuariosFavoritos(@PathParam("id") Long id){
+        return new ArrayList<UsuarioDTO>();
     }
 
     @DELETE
@@ -77,8 +79,8 @@ public class UsuarioResource {
 
     @GET
     @Path("/usuarios/{id: \\d+}/vistas")
-    public String darProduccionesVistas(@PathParam("id") Long id){
-        return id.toString();
+    public ProduccionDTO darProduccionesVistas(@PathParam("id") Long id){
+        return new ProduccionDTO();
     }
 
     @POST
@@ -95,8 +97,8 @@ public class UsuarioResource {
 
     @GET
     @Path("/usuarios/{usuario: \\d+}/seguidores/{id: \\d+}")
-    public String darSeguidoresUsuario(@PathParam("id") Long id,@PathParam("usuario") Long usuario_id){
-        return id.toString();
+    public UsuarioDTO darSeguidoresUsuario(@PathParam("id") Long id,@PathParam("usuario") Long usuario_id){
+        return new UsuarioDTO();
     }
 
 
