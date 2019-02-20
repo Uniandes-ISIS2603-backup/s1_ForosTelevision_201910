@@ -249,7 +249,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del id de la producción.
      * @return id de la producción.
      */
-    public long darIdProduccion() {
+    public long getIdProduccion() {
         return idProduccion;
     }
 
@@ -257,7 +257,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del id de la producción.
      * @param idProduccion nuevo id de la producción.
      */
-    public void editarIdProduccion(long idProduccion) {
+    public void setIdProduccion(long idProduccion) {
         this.idProduccion = idProduccion;
     }
 
@@ -265,7 +265,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del nombre de la producción.
      * @return nombre de la producción.
      */
-    public String darNombre() {
+    public String getNombre() {
         return nombre;
     }
     
@@ -273,7 +273,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del nombre de la producción.
      * @param nombre nuevo nombre de la producción.
      */
-    public void editarNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -281,7 +281,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la descripción de la producción.
      * @return nombre de la producción.
      */
-    public String darDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -289,7 +289,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la descripción de la producción.
      * @param descripcion nueva descripción de la producción.
      */
-    public void editarDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
@@ -297,7 +297,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la clasificación de audiencia de la producción.
      * @return clasificacionAudiencia clasificación de audiencia de la producción.
      */
-    public ClasificacionAudiencia darClasificacionAudiencia() {
+    public ClasificacionAudiencia getClasificacionAudiencia() {
         return clasificacionAudiencia;
     }
 
@@ -305,7 +305,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la clasificación de audiencia de la producción.
      * @param clasificacionAudiencia nueva clasificación de audiencia de la producción.
      */
-    public void editarClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
+    public void setClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
         this.clasificacionAudiencia = clasificacionAudiencia;
     }
 
@@ -313,7 +313,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la calificación promedio de la producción.
      * @return calificacionPromedio calificación promedio de la producción.
      */
-    public int darCalificacionPromedio() {
+    public int getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
@@ -321,7 +321,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la calificación promedio de la producción.
      * @param calificacionPromedio nueva calificación promedio de la producción.
      */
-    public void editarCalificacionPromedio(int calificacionPromedio) {
+    public void setCalificacionPromedio(int calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
     

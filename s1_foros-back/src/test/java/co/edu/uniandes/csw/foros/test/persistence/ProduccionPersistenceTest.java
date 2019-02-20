@@ -127,7 +127,7 @@ public class ProduccionPersistenceTest {
         Assert.assertNotNull(resultado);
 
         ProduccionEntity nuevaEntidadEnDB = em.find(ProduccionEntity.class, resultado.getId());
-        Assert.assertEquals(nuevaEntidad.darNombre(), nuevaEntidadEnDB.darNombre());
+        Assert.assertEquals(nuevaEntidad.getNombre(), nuevaEntidadEnDB.getNombre());
     }
 
     /**
@@ -150,10 +150,10 @@ public class ProduccionPersistenceTest {
         ProduccionEntity entidadEnDB = produccionPersistence.find(entidadEnData.getId());
         Assert.assertNotNull(entidadEnDB);
         Assert.assertEquals(entidadEnData.getId(), entidadEnDB.getId());
-        Assert.assertEquals(entidadEnData.darNombre(), entidadEnDB.darNombre());
-        Assert.assertEquals(entidadEnData.darDescripcion(), entidadEnDB.darDescripcion());
-        Assert.assertEquals(entidadEnData.darClasificacionAudiencia(), entidadEnDB.darClasificacionAudiencia());
-        Assert.assertEquals(entidadEnData.darCalificacionPromedio(), entidadEnDB.darCalificacionPromedio());
+        Assert.assertEquals(entidadEnData.getNombre(), entidadEnDB.getNombre());
+        Assert.assertEquals(entidadEnData.getDescripcion(), entidadEnDB.getDescripcion());
+        Assert.assertEquals(entidadEnData.getClasificacionAudiencia(), entidadEnDB.getClasificacionAudiencia());
+        Assert.assertEquals(entidadEnData.getCalificacionPromedio(), entidadEnDB.getCalificacionPromedio());
     }
 
     /**
@@ -163,23 +163,22 @@ public class ProduccionPersistenceTest {
     public void updateProduccionTest() {
         ProduccionEntity entidadEnData = data.get(0);
         ProduccionEntity entidadDuplicada = new ProduccionEntity();
-        entidadDuplicada.editarCalificacionPromedio(entidadEnData.darCalificacionPromedio());
-        entidadDuplicada.editarDescripcion(entidadEnData.darDescripcion());
-        entidadDuplicada.editarNombre(entidadEnData.darNombre());
-        entidadDuplicada.editarClasificacionAudiencia(entidadEnData.darClasificacionAudiencia());
+        entidadDuplicada.setCalificacionPromedio(entidadEnData.getCalificacionPromedio());
+        entidadDuplicada.setDescripcion(entidadEnData.getDescripcion());
+        entidadDuplicada.setNombre(entidadEnData.getNombre());
+        entidadDuplicada.setClasificacionAudiencia(entidadEnData.getClasificacionAudiencia());
         PodamFactory factory = new PodamFactoryImpl();
         ProduccionEntity nuevaEntidad = factory.manufacturePojo(ProduccionEntity.class);
-        entidadEnData.editarCalificacionPromedio(nuevaEntidad.darCalificacionPromedio());
-        entidadEnData.editarDescripcion(nuevaEntidad.darDescripcion());
-        entidadEnData.editarNombre(nuevaEntidad.darNombre());
-        entidadEnData.editarClasificacionAudiencia(nuevaEntidad.darClasificacionAudiencia());
+        entidadEnData.setCalificacionPromedio(nuevaEntidad.getCalificacionPromedio());
+        entidadEnData.setDescripcion(nuevaEntidad.getDescripcion());
+        entidadEnData.setNombre(nuevaEntidad.getNombre());
+        entidadEnData.setClasificacionAudiencia(nuevaEntidad.getClasificacionAudiencia());
         
         ProduccionEntity entidadActualizada = produccionPersistence.update(entidadEnData);
-        Assert.assertNotEquals(entidadDuplicada.getId(), entidadActualizada.getId());
-        Assert.assertNotEquals(entidadDuplicada.darNombre(), entidadActualizada.darNombre());
-        Assert.assertNotEquals(entidadDuplicada.darDescripcion(), entidadActualizada.darDescripcion());
-        Assert.assertNotEquals(entidadDuplicada.darClasificacionAudiencia(), entidadActualizada.darClasificacionAudiencia());
-        Assert.assertNotEquals(entidadDuplicada.darCalificacionPromedio(), entidadActualizada.darCalificacionPromedio());
+        
+        Assert.assertNotEquals(entidadDuplicada.getNombre(), entidadActualizada.getNombre());
+        Assert.assertNotEquals(entidadDuplicada.getDescripcion(), entidadActualizada.getDescripcion());
+        Assert.assertNotEquals(entidadDuplicada.getCalificacionPromedio(), entidadActualizada.getCalificacionPromedio());
     }
 
 }
