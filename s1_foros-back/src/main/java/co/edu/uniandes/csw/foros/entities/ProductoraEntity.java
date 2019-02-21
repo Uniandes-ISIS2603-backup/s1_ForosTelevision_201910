@@ -9,4 +9,5 @@ import javax.persistence.Entity;
  */
 @Entity
 public class ProductoraEntity extends BaseEntity implements Serializable {
+    
 }

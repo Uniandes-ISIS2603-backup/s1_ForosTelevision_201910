@@ -12,7 +12,8 @@ import javax.persistence.ManyToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
- *
+ * Entidad de la clase staff.
+ * 
  * @author jf.castaneda
  */
 @Entity
@@ -63,7 +64,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter de las producciones con las que está relacionada un miembro del staff.
      * @return lista con las producciones en las que ha participado el miembro del staff.
      */
-    public ProduccionEntity darProducciones() {
+    public ProduccionEntity getProducciones() {
         return produccion;
     }
     
@@ -71,7 +72,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Setter de las producciones en las que ha participado un miembro del staff.
      * @param producciones producciones en las que ha participado un miembro del staff.
      */
-    public void editarProducciones(ProduccionEntity producciones) {
+    public void setProducciones(ProduccionEntity producciones) {
         this.produccion = producciones;
     }
 
@@ -79,7 +80,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter del rol del miembro del staff.
      * @return rol del miembro del staff.
      */
-    public RolStaff darRol() {
+    public RolStaff getRol() {
         return rol;
     }
 
@@ -87,7 +88,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Setter del rol del miembro del staff.
      * @param rol nuevo rol del miembro del staff.
      */
-    public void editarRol(RolStaff rol) {
+    public void setRol(RolStaff rol) {
         this.rol = rol;
     }
 
@@ -95,7 +96,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter del nombre del miembro del staff.
      * @return nombre del miembro del staff.
      */
-    public String darNombre() {
+    public String getNombre() {
         return nombre;
     }
 
@@ -103,7 +104,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Setter del nombre del miembro del staff.
      * @param nombre nuevo nombre del miembro del staff.
      */
-    public void editarNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -111,7 +112,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter de la foto del miembro del staff.
      * @return ruta de la foto del miembro del staff.
      */
-    public String darFoto() {
+    public String getFoto() {
         return foto;
     }
 
@@ -119,7 +120,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Setter de la nueva foto del miembro del staff.
      * @param foto nueva ruta de la foto del mimebro del staff.
      */
-    public void editarFoto(String foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
@@ -127,7 +128,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Getter de la descripción del miembro del staff.
      * @return descripción del miembro del staff.
      */
-    public String darDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
@@ -135,7 +136,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
      * Setter de la descripción del miembro del staff.
      * @param descripcion nueva descripción del miembro del staff.
      */
-    public void editarDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
     

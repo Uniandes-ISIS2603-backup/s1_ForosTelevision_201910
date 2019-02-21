@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 
 /**
+ * Recurso de un miembro del staff.
  *
  * @author jf.castaneda
  */

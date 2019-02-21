@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.foros.persistence;
 
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
-import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,7 +15,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 /**
- *
+ * Clase persistencia de la producción.
+ * 
  * @author jf.castaneda
  */
 @Stateless
@@ -42,17 +42,17 @@ public class ProduccionPersistence {
      * @return entidad con la información de la producción que se encontró.
      */
     public ProduccionEntity find(Long id){
+       LOGGER.log(Level.INFO, "Encontrar la producción con id = {0}",id);
        ProduccionEntity find= em.find(ProduccionEntity.class, id);
-       LOGGER.log(Level.INFO, "Encontrar la producción con id={0}",id);
        return find;
     }
     /***
      * Método que retorna todas las producciones existentes.
-     * @return lista ordenada descendetemente por nombre con todas las producciones.
+     * @return lista con todas las producciones.
      */
     public List<ProduccionEntity> getAll(){
-        LOGGER.log(Level.INFO, "Generando lista de producciones");
-        TypedQuery<ProduccionEntity> tp = em.createQuery("SELECT u FROM ProduccionEntity u ORDER BY u.nombre ASC", ProduccionEntity.class);
+        LOGGER.log(Level.INFO, "Generando lista de Producciones");
+        TypedQuery<ProduccionEntity> tp = em.createQuery("SELECT u FROM ProduccionEntity u", ProduccionEntity.class);
         return tp.getResultList();
     }
     
@@ -62,7 +62,7 @@ public class ProduccionPersistence {
      * @return la entidad de la producción con todos los cambios aplicados.
      */
     public ProduccionEntity update(ProduccionEntity produccionEntity) {
-        LOGGER.log(Level.INFO, "Actualizando la producción con id={0}", produccionEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando la producción con id = {0}", produccionEntity.getId());
         return em.merge(produccionEntity);
     }
 
