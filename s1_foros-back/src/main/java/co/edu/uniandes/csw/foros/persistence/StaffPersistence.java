@@ -48,11 +48,11 @@ public class StaffPersistence {
     }
     /***
      * Método que retorna todos los miembros del staff existentes.
-     * @return lista ordenada descendetemente por nombre con todos los miembros del staff.
+     * @return lista con todos los miembros del staff.
      */
     public List<StaffEntity> getAll(){
         LOGGER.log(Level.INFO, "Generando lista de miembros del Staff");
-        TypedQuery<StaffEntity> tp = em.createQuery("SELECT u FROM StaffEntity u ORDER BY u.nombre ASC", StaffEntity.class);
+        TypedQuery<StaffEntity> tp = em.createQuery("SELECT u FROM StaffEntity u", StaffEntity.class);
         return tp.getResultList();
     }
     
@@ -62,7 +62,7 @@ public class StaffPersistence {
      * @return la entidad del usuario con todos los cambios aplicados.
      */
     public StaffEntity update(StaffEntity staffEntity) {
-        LOGGER.log(Level.INFO, "Actualizando el miembro del staff con id={0}", staffEntity.getId());
+        LOGGER.log(Level.INFO, "Actualizando el miembro del staff con id = {0}", staffEntity.getId());
         return em.merge(staffEntity);
     }
 
@@ -71,7 +71,7 @@ public class StaffPersistence {
      * @param id id del miembro del staff.
      */
     public void delete(Long id) {
-        LOGGER.log(Level.INFO, "Borrando el miembro del staff con id={0}", id);
+        LOGGER.log(Level.INFO, "Borrando el miembro del staff con id = {0}", id);
         StaffEntity staffEntity = find(id);
         em.remove(staffEntity);
     }
