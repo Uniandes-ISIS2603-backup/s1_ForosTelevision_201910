@@ -121,7 +121,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de las emisiones de la producción.
      * @return lista con las entidades de las emisiones de la producción.
      */
-    public List<EmisionEntity> darEmisiones() {
+    public List<EmisionEntity> getEmisiones() {
         return emisiones;
     }
 
@@ -129,7 +129,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de las emisiones de la producción.
      * @param emisiones las nuevas emisiones.
      */
-    public void editartEmisiones(List<EmisionEntity> emisiones) {
+    public void setEmisiones(List<EmisionEntity> emisiones) {
         this.emisiones = emisiones;
     }
     
@@ -137,7 +137,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del staff de la producción.
      * @return lista con las entidades de los miembros del staff de la producción.
      */
-    public List<StaffEntity> darStaff() {
+    public List<StaffEntity> getStaff() {
         return staff;
     }
     
@@ -145,7 +145,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del staff de la producción.
      * @param staff los nuevos miembros del staff.
      */
-    private void editarStaff(List<StaffEntity> staff) {
+    private void setStaff(List<StaffEntity> staff) {
         this.staff = staff;
     }
     
@@ -153,7 +153,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de los capítulos de la producción.
      * @return lista con las entidades de los capítulos de la producción.
      */
-    public List<CapituloEntity> darCapitulos() {
+    public List<CapituloEntity> getCapitulos() {
         return capitulos;
     }
 
@@ -161,7 +161,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de los capítulos de la producción.
      * @param capitulos los nuevos capitulos.
      */
-    public void editarCapitulos(List<CapituloEntity> capitulos) {
+    public void setCapitulos(List<CapituloEntity> capitulos) {
         this.capitulos = capitulos;
     }
     
@@ -169,7 +169,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de las categorías de la producción.
      * @return lista con las entidades de las categorías de la producción.
      */
-    public List<CategoriaEntity> darCategorias() {
+    public List<CategoriaEntity> getCategorias() {
         return categorias;
     }
 
@@ -177,7 +177,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de las categorías de la producción.
      * @param categorias las nuevas categorías.
      */
-    public void editarCategorias(List<CategoriaEntity> categorias) {
+    public void setCategorias(List<CategoriaEntity> categorias) {
         this.categorias = categorias;
     }
     
@@ -185,7 +185,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la multimedia de la producción.
      * @return entidad de la multimedia de la producción.
      */
-    public MultimediaEntity darMultimedia() {
+    public MultimediaEntity getMultimedia() {
         return multimedia;
     }
 
@@ -193,7 +193,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la multimedia de la producción.
      * @param multimedia las nueva multimedia.
      */
-    public void editarMultimedia(MultimediaEntity multimedia) {
+    public void setMultimedia(MultimediaEntity multimedia) {
         this.multimedia = multimedia;
     }
     
@@ -201,7 +201,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la productora de la producción.
      * @return la entidad de la productora de la producción.
      */
-    public ProductoraEntity darProductora() {
+    public ProductoraEntity getProductora() {
         return productora;
     }
 
@@ -209,7 +209,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la productora de la producción.
      * @param productora las nueva productora.
      */
-    public void editarProductora(ProductoraEntity productora) {
+    public void setProductora(ProductoraEntity productora) {
         this.productora = productora;
     }
     
@@ -217,7 +217,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter del estado de la producción.
      * @return entidad del estado de la producción.
      */
-    public EstadoEntity darEstado() {
+    public EstadoEntity getEstado() {
         return estado;
     }
 
@@ -225,7 +225,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del estado de la producción.
      * @param estado el nuevo estado.
      */
-    public void editarEstado(EstadoEntity estado) {
+    public void setEstado(EstadoEntity estado) {
         this.estado = estado;
     }
     
@@ -233,7 +233,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de las reseñas de la producción.
      * @return lista con las entidades de las reseñas de la producción.
      */
-    public List<ResenaEntity> darResenas() {
+    public List<ResenaEntity> getResenas() {
         return resenas;
     }
 
@@ -241,7 +241,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de las reseñas de la producción.
      * @param resenas las nuevas reseñas.
      */
-    public void editarResenas(List<ResenaEntity> resenas) {
+    public void setResenas(List<ResenaEntity> resenas) {
         this.resenas = resenas;
     }
     
