@@ -5,8 +5,8 @@
  */
 package co.edu.uniandes.csw.foros.test.persistence;
 
-import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
-import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
+import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,19 +26,18 @@ import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
- * Tests de la clase persistencia de una producción.
- *
+ * Test de la clase persistencia de un miembro del staff.
+ * 
  * @author jf.castaneda
  */
 @RunWith(Arquillian.class)
-public class ProduccionPersistenceTest {
-
+public class StaffPersistenceTest {
+    
     /**
-     * Inyección de la dependencia a la clase ProduccionPersistence cuyos
-     * métodos se van a probar.
+     * Inyección de la dependencia a la clase StaffPersistence cuyos métodos se van a probar.
      */
     @Inject
-    private ProduccionPersistence produccionPersistence;
+    private StaffPersistence staffPersistence;
 
     /**
      * Contexto de Persistencia que se va a utilizar para acceder a la Base de
@@ -57,21 +56,21 @@ public class ProduccionPersistenceTest {
     /**
      * Lista que tiene los datos de prueba.
      */
-    private final List<ProduccionEntity> data = new ArrayList<>();
+    private final List<StaffEntity> data = new ArrayList<>();
 
     /**
      * Método que despliega el ambiente de Arquillian y Glassfish.
      *
      * @return Devuelve el jar que Arquillian va a desplegar en el Glassfish
-     * embebido. El jar contiene las clases de Produccion, el descriptor de la
+     * embebido. El jar contiene las clases de Staff, el descriptor de la
      * base de datos y el archivo beans.xml para resolver la inyección de
      * dependencias.
      */
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(ProduccionEntity.class.getPackage())
-                .addPackage(ProduccionPersistence.class.getPackage())
+                .addPackage(StaffEntity.class.getPackage())
+                .addPackage(StaffPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -101,7 +100,7 @@ public class ProduccionPersistenceTest {
      * Método que limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("DELETE FROM ProduccionEntity").executeUpdate();
+        em.createQuery("DELETE FROM StaffEntity").executeUpdate();
     }
 
     /**
@@ -111,92 +110,91 @@ public class ProduccionPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            ProduccionEntity entity = factory.manufacturePojo(ProduccionEntity.class);
+            StaffEntity entity = factory.manufacturePojo(StaffEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
 
     /**
-     * Método que prueba crear una producción.
+     * Método que prueba crear un miembro del staff.
      */
     @Test
-    public void createProduccionTest() {
+    public void createStaffTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        ProduccionEntity nuevaEntidad = factory.manufacturePojo(ProduccionEntity.class);
-        ProduccionEntity resultado = produccionPersistence.create(nuevaEntidad);
+        StaffEntity nuevaEntidad = factory.manufacturePojo(StaffEntity.class);
+        StaffEntity resultado = staffPersistence.create(nuevaEntidad);
         int tamanoOriginal = data.size();
         data.add(nuevaEntidad);
         Assert.assertEquals(tamanoOriginal + 1, data.size());
         Assert.assertNotNull(resultado);
 
-        ProduccionEntity nuevaEntidadEnDB = em.find(ProduccionEntity.class, resultado.getId());
+        StaffEntity nuevaEntidadEnDB = em.find(StaffEntity.class, resultado.getId());
         Assert.assertEquals(nuevaEntidad.getNombre(), nuevaEntidadEnDB.getNombre());
     }
 
     /**
-     * Método que prueba eliminar una producción.
+     * Método que prueba eliminar un miembro del staff.
      */
     @Test
-    public void deleteProduccionTest() {
-        ProduccionEntity entidad = data.get(0);
-        produccionPersistence.delete(entidad.getId());
-        ProduccionEntity entidadBorrada = em.find(ProduccionEntity.class, entidad.getId());
-        ProduccionEntity remove = data.remove(0);
+    public void deleteStaffTest() {
+        StaffEntity entidad = data.get(0);
+        staffPersistence.delete(entidad.getId());
+        StaffEntity entidadBorrada = em.find(StaffEntity.class, entidad.getId());
+        StaffEntity remove = data.remove(0);
         Assert.assertFalse(data.contains(remove));
         Assert.assertNull(entidadBorrada);
     }
 
     /**
-     * Método que prueba encontrar una producción.
+     * Método que prueba encontrar un miembro del staff.
      */
     @Test
-    public void findProduccionTest() {
-        ProduccionEntity entidadEnData = data.get(0);
-        ProduccionEntity entidadEnDB = produccionPersistence.find(entidadEnData.getId());
+    public void findStaffTest() {
+        StaffEntity entidadEnData = data.get(0);
+        StaffEntity entidadEnDB = staffPersistence.find(entidadEnData.getId());
         Assert.assertNotNull(entidadEnDB);
         Assert.assertEquals(entidadEnData.getId(), entidadEnDB.getId());
         Assert.assertEquals(entidadEnData.getNombre(), entidadEnDB.getNombre());
         Assert.assertEquals(entidadEnData.getDescripcion(), entidadEnDB.getDescripcion());
-        Assert.assertEquals(entidadEnData.getClasificacionAudiencia(), entidadEnDB.getClasificacionAudiencia());
-        Assert.assertEquals(entidadEnData.getCalificacionPromedio(), entidadEnDB.getCalificacionPromedio());
+        Assert.assertEquals(entidadEnData.getRol(), entidadEnDB.getRol());
+        Assert.assertEquals(entidadEnData.getFoto(), entidadEnDB.getFoto());
     }
-
+    
     /**
-     * Método que prueba retornar todas las producciones.
+     * Método que prueba retornar todos los miembros del staff.
      */
     @Test
-    public void getAllProduccionTest() {
-        List<ProduccionEntity> produccionesEnDB = produccionPersistence.getAll();
-        Iterator<ProduccionEntity> iteradorProduccionesEnDB = produccionesEnDB.iterator();
-        while (iteradorProduccionesEnDB.hasNext()) {
-            Assert.assertTrue(data.contains(iteradorProduccionesEnDB.next()));
+    public void getAllStaffTest() {
+        List<StaffEntity> staffesEnDB = staffPersistence.getAll();
+        Iterator<StaffEntity> iteradorStaffesEnDB = staffesEnDB.iterator();
+        while(iteradorStaffesEnDB.hasNext()) {
+            Assert.assertTrue(data.contains(iteradorStaffesEnDB.next()));
         }
     }
 
     /**
-     * Método que prueba actualizar una producción.
+     * Método que prueba actualizar un miembro del staff.
      */
     @Test
-    public void updateProduccionTest() {
-        ProduccionEntity entidadEnData = data.get(0);
-        ProduccionEntity entidadDuplicada = new ProduccionEntity();
-        entidadDuplicada.setCalificacionPromedio(entidadEnData.getCalificacionPromedio());
+    public void updateStaffTest() {
+        StaffEntity entidadEnData = data.get(0);
+        StaffEntity entidadDuplicada = new StaffEntity();
+        entidadDuplicada.setRol(entidadEnData.getRol());
         entidadDuplicada.setDescripcion(entidadEnData.getDescripcion());
         entidadDuplicada.setNombre(entidadEnData.getNombre());
-        entidadDuplicada.setClasificacionAudiencia(entidadEnData.getClasificacionAudiencia());
+        entidadDuplicada.setFoto(entidadEnData.getFoto());
         PodamFactory factory = new PodamFactoryImpl();
-        ProduccionEntity nuevaEntidad = factory.manufacturePojo(ProduccionEntity.class);
-        entidadEnData.setCalificacionPromedio(nuevaEntidad.getCalificacionPromedio());
+        StaffEntity nuevaEntidad = factory.manufacturePojo(StaffEntity.class);
+        entidadEnData.setRol(nuevaEntidad.getRol());
         entidadEnData.setDescripcion(nuevaEntidad.getDescripcion());
         entidadEnData.setNombre(nuevaEntidad.getNombre());
-        entidadEnData.setClasificacionAudiencia(nuevaEntidad.getClasificacionAudiencia());
-
-        ProduccionEntity entidadActualizada = produccionPersistence.update(entidadEnData);
-
+        entidadEnData.setFoto(nuevaEntidad.getFoto());
+        
+        StaffEntity entidadActualizada = staffPersistence.update(entidadEnData);
+        
         Assert.assertNotEquals(entidadDuplicada.getNombre(), entidadActualizada.getNombre());
         Assert.assertNotEquals(entidadDuplicada.getDescripcion(), entidadActualizada.getDescripcion());
-        Assert.assertNotEquals(entidadDuplicada.getCalificacionPromedio(), entidadActualizada.getCalificacionPromedio());
+        Assert.assertNotEquals(entidadDuplicada.getFoto(), entidadActualizada.getFoto());
     }
-
 }
