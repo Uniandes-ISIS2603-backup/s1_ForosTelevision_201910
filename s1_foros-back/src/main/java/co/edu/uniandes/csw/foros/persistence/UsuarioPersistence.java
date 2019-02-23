@@ -49,6 +49,27 @@ public class UsuarioPersistence {
         TypedQuery<UsuarioEntity> tp=em.createQuery("SELECT u FROM UsuarioEntity u ORDER BY u.nombre ASC",UsuarioEntity.class);
         return tp.getResultList();
     }
+    /**
+     * Busca los usuarios por nombre
+     * @param nombre registrado
+     * @return  usuarios con el mismo nombre
+     */
+    public List<UsuarioEntity>findName(String nombre){
+        TypedQuery<UsuarioEntity> tp=em.createQuery("SELECT u FROM UsuarioEntity u WHERE u.nombre = :name",UsuarioEntity.class);
+        tp.setParameter("name",nombre);
+        return tp.getResultList();
+    }
+    /**
+     * Busca un usuario por email
+     * @param email registrado por usuario
+     * @return usuarios con el mismo email
+     */
+    
+     public List<UsuarioEntity>findEmail(String email){
+        TypedQuery<UsuarioEntity> tp=em.createQuery("SELECT u FROM UsuarioEntity u WHERE u.email = :email",UsuarioEntity.class);
+        tp.setParameter("email",email);
+        return tp.getResultList();
+    }
     
      /**
      * Actualiza un usuario.

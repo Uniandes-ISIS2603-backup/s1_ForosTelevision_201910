@@ -1,18 +1,18 @@
 package co.edu.uniandes.csw.foros.test.persistence;
 
-import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
-import co.edu.uniandes.csw.foros.persistence.MultimediaPersistence;
+import co.edu.uniandes.csw.foros.entities.ArchivoEntity;
+import co.edu.uniandes.csw.foros.persistence.ArchivoPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,10 +25,9 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 
-public class MultimediaPersistenceTest {
-    
-    @Inject
-    private MultimediaPersistence MultimediaPersistence;
+public class ArchivoPersistenceTest {
+        @Inject
+    private ArchivoPersistence archivoPersistence;
 
     @PersistenceContext
     private EntityManager em;
@@ -36,7 +35,7 @@ public class MultimediaPersistenceTest {
     @Inject
     UserTransaction utx;
 
-    private List<MultimediaEntity> data = new ArrayList<>();
+    private List<ArchivoEntity> data = new ArrayList<>();
     
      /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -46,8 +45,8 @@ public class MultimediaPersistenceTest {
     @Deployment
     public static JavaArchive createDeployment() {
         return ShrinkWrap.create(JavaArchive.class)
-                .addPackage(MultimediaEntity.class.getPackage())
-                .addPackage(MultimediaPersistence.class.getPackage())
+                .addPackage(ArchivoEntity.class.getPackage())
+                .addPackage(ArchivoPersistence.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -77,7 +76,7 @@ public class MultimediaPersistenceTest {
      * Limpia las tablas que están implicadas en la prueba.
      */
     private void clearData() {
-        em.createQuery("delete from MultimediaEntity").executeUpdate();
+        em.createQuery("delete from ArchivoEntity").executeUpdate();
     }
 
     /**
@@ -87,76 +86,47 @@ public class MultimediaPersistenceTest {
     private void insertData() {
         PodamFactory factory = new PodamFactoryImpl();
         for (int i = 0; i < 3; i++) {
-            MultimediaEntity entity = factory.manufacturePojo(MultimediaEntity.class);
+            ArchivoEntity entity = factory.manufacturePojo(ArchivoEntity.class);
             em.persist(entity);
             data.add(entity);
         }
     }
 
     /**
-     * Prueba para crear un recurso Multimedia.
+     * Prueba para crear un archivo.
      */
     @Test
     public void createUsuarioTest() {
         PodamFactory factory = new PodamFactoryImpl();
-        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        MultimediaEntity result = MultimediaPersistence.create(newEntity);
+        ArchivoEntity newEntity = factory.manufacturePojo(ArchivoEntity.class);
+        ArchivoEntity result = archivoPersistence.create(newEntity);
         Assert.assertNotNull(result);
-        MultimediaEntity entity = em.find(MultimediaEntity.class, result.getId());
+        ArchivoEntity entity = em.find(ArchivoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
 
     /**
-     * Prueba para consultar la lista de recursos.
-     */
-    @Test
-    public void getAllTest() {
-        List<MultimediaEntity> list = MultimediaPersistence.getAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (MultimediaEntity ent : list) {
-            boolean found = false;
-            for (MultimediaEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-
-    /**
-     * Prueba para consultar un Recurso.
-     */
-    @Test
-    public void getAuthorTest() {
-        MultimediaEntity entity = data.get(0);
-        MultimediaEntity newEntity = MultimediaPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
-    }
-
-    /**
-     * Prueba para actualizar un recurso.
+     * Prueba para actualizar un archivo.
      */
     @Test
     public void updateAuthorTest() {
-        MultimediaEntity entity = data.get(0);
+        ArchivoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
-        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        ArchivoEntity newEntity = factory.manufacturePojo(ArchivoEntity.class);
         newEntity.setId(entity.getId());
-        MultimediaPersistence.update(newEntity);
-        MultimediaEntity resp = em.find(MultimediaEntity.class, entity.getId());
+        archivoPersistence.update(newEntity);
+        ArchivoEntity resp = em.find(ArchivoEntity.class, entity.getId());
         Assert.assertEquals(newEntity.getId(), resp.getId());
     }
     
     /**
-     * Prueba para eliminar un recurso.
+     * Prueba para eliminar un archivo.
      */
     @Test
     public void deleteAuthorTest() {
-        MultimediaEntity entity = data.get(0);
-        MultimediaPersistence.delete(entity.getId());
-        MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
+        ArchivoEntity entity = data.get(0);
+        archivoPersistence.delete(entity.getId());
+        ArchivoEntity deleted = em.find(ArchivoEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
 }

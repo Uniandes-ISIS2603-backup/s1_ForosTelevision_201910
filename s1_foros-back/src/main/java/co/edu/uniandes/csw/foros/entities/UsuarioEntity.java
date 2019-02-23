@@ -61,8 +61,10 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      */
     private String clave;
     /**
-     * Nivel de acceso en la plataforma
+     * Correo electronico de usuario
      */
+    private String email;
+
     private Acceso privilegio;
     
     public List<UsuarioEntity> getSeguidos() {
@@ -75,6 +77,13 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
 
     public List<ProductoraEntity> getProductorasFav() {
         return productorasFav;
+    }
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setProductorasFav(List<ProductoraEntity> productorasFav) {
