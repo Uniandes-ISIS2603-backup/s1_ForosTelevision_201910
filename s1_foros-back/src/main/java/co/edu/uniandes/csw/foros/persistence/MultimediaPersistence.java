@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 /**
  *
  * @author bsrincon
@@ -21,6 +22,7 @@ public class MultimediaPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(UsuarioPersistence.class.getName());
     
+   
     /**
      * Crea un nuevo registro de multimedia
      * @param multimedia instancia a persistir
@@ -69,8 +71,5 @@ public class MultimediaPersistence {
         LOGGER.log(Level.INFO, "Borrando el recurso multimedia con id={0}", recursoId);
         MultimediaEntity mlEntity = find(recursoId);
         em.remove(mlEntity);
-    }
-    
-    
-    
+    }   
 }

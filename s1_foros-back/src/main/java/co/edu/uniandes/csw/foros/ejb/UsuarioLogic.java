@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.foros.ejb;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.UsuarioPersistence;
-import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.ejb.Stateless;
