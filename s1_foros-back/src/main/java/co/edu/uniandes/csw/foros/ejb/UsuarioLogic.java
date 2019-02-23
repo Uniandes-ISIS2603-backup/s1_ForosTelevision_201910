@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.ejb;
 
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
@@ -24,8 +19,8 @@ public class UsuarioLogic {
     
     public UsuarioEntity crearUsuario(UsuarioEntity usuario)throws BusinessLogicException{
         String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
-        String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
-        Pattern patternpas = Pattern.compile(passwordPattern);
+        String pasPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        Pattern patternpas = Pattern.compile(pasPattern);
         Pattern pattern = Pattern.compile(emailPattern);
         if(usuario.getNombre()==null){
             throw new BusinessLogicException("Debe registrase con un nombre");
