@@ -95,7 +95,7 @@ public class UsuarioPersistenceTest {
     }
 
     /**
-     * Prueba para crear un Author.
+     * Prueba para crear un nuevo usuario.
      */
     @Test
     public void createUsuarioTest() {
@@ -164,3 +164,4 @@ public class UsuarioPersistenceTest {
         Assert.assertNull(deleted);
     }
 }
+
