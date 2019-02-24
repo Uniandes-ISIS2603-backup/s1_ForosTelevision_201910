@@ -22,8 +22,14 @@ import javax.persistence.TypedQuery;
  *
  * @author mi.carrascal
  */
+
+
+
 @Stateless
 public class ResenaPersistence {
+        
+        
+    private static final Logger LOGGER = Logger.getLogger(ResenaPersistence.class.getName());
     
     @PersistenceContext(unitName = "forosPU")
     protected EntityManager em;
@@ -65,9 +71,9 @@ public class ResenaPersistence {
      * @param id id de la resena.
      */
     public void delete(Long id) {
-//        LOGGER.log(Level.INFO, "Borrando la reseña con id={0}", id);
-//        ResenaEntity resenaEntity = find(id);
-//        em.remove(resenaEntity);
+        LOGGER.log(Level.INFO, "Borrando la reseña con id={0}", id);
+        ResenaEntity resenaEntity = find(id);
+        em.remove(resenaEntity);
     }
    
     

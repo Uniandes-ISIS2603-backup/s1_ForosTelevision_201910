@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.foros.entities;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.EAGER;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -22,7 +23,7 @@ public class CanalEntity extends BaseEntity implements Serializable {
     private Double rating;
     
     @PodamExclude
-    @OneToOne(fetch=EAGER)
+    @OneToOne(fetch=LAZY)
     private EmisionEntity emision;
     
     public CanalEntity(){
