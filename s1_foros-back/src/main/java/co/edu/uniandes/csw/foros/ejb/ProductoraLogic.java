@@ -31,7 +31,7 @@ public class ProductoraLogic {
      * registrada.
      */
     public ProductoraEntity crearProductora(ProductoraEntity entity) throws BusinessLogicException {
-        if (productoraPersitence.findByName(entity.getNombre()) != null) {
+        if (productoraPersitence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
         }
         productoraPersitence.create(entity);
