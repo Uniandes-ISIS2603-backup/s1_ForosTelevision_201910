@@ -1,6 +1,8 @@
-package co.edu.uniandes.csw.foros.test.persistence;
+package co.edu.uniandes.csw.foros.test.logic;
 
+import co.edu.uniandes.csw.foros.ejb.MultimediaLogic;
 import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
+import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.MultimediaPersistence;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,11 +10,11 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
-import org.junit.Assert;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,11 +26,12 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  * @author bsrincon
  */
 @RunWith(Arquillian.class)
-
-public class MultimediaPersistenceTest {
+public class MultimediaLogicTest {
     
     @Inject
     private MultimediaPersistence MultimediaPersistence;
+    @Inject
+    private MultimediaLogic logic;
 
     @PersistenceContext
     private EntityManager em;
@@ -48,6 +51,7 @@ public class MultimediaPersistenceTest {
         return ShrinkWrap.create(JavaArchive.class)
                 .addPackage(MultimediaEntity.class.getPackage())
                 .addPackage(MultimediaPersistence.class.getPackage())
+                .addPackage(MultimediaLogic.class.getPackage())
                 .addAsManifestResource("META-INF/persistence.xml", "persistence.xml")
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
@@ -97,66 +101,48 @@ public class MultimediaPersistenceTest {
      * Prueba para crear un recurso Multimedia.
      */
     @Test
-    public void createUsuarioTest() {
+    public void createMultimediaTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        MultimediaEntity result = MultimediaPersistence.create(newEntity);
+        newEntity.setPortada(newEntity.getPortada()+".png");
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
         Assert.assertNotNull(result);
         MultimediaEntity entity = em.find(MultimediaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
-
+    
     /**
-     * Prueba para consultar la lista de recursos.
+     * Prueba para crear un recurso multimedia null.
      */
-    @Test
-    public void getAllTest() {
-        List<MultimediaEntity> list = MultimediaPersistence.getAll();
-        Assert.assertEquals(data.size(), list.size());
-        for (MultimediaEntity ent : list) {
-            boolean found = false;
-            for (MultimediaEntity entity : data) {
-                if (ent.getId().equals(entity.getId())) {
-                    found = true;
-                }
-            }
-            Assert.assertTrue(found);
-        }
-    }
-
-    /**
-     * Prueba para consultar un Recurso.
-     */
-    @Test
-    public void getAuthorTest() {
-        MultimediaEntity entity = data.get(0);
-        MultimediaEntity newEntity = MultimediaPersistence.find(entity.getId());
-        Assert.assertNotNull(newEntity);
-        Assert.assertEquals(entity.getId(), newEntity.getId());
-    }
-
-    /**
-     * Prueba para actualizar un recurso.
-     */
-    @Test
-    public void updateAuthorTest() {
-        MultimediaEntity entity = data.get(0);
+    @Test(expected=BusinessLogicException.class)
+    public void createMultimediaTestFileNull() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        newEntity.setId(entity.getId());
-        MultimediaPersistence.update(newEntity);
-        MultimediaEntity resp = em.find(MultimediaEntity.class, entity.getId());
-        Assert.assertEquals(newEntity.getId(), resp.getId());
+        newEntity.setPortada(null);
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
     }
     
     /**
-     * Prueba para eliminar un recurso.
+     * Prueba para crear un recurso multimedia null.
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void createMultimediaTestFile() throws BusinessLogicException {
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
+    } 
+    
+    /**
+     * Prueba para crear un recurso un archivo de formato  soportado y agregarlo
+     * a multimedia.
      */
     @Test
-    public void deleteAuthorTest() {
-        MultimediaEntity entity = data.get(0);
-        MultimediaPersistence.delete(entity.getId());
-        MultimediaEntity deleted = em.find(MultimediaEntity.class, entity.getId());
-        Assert.assertNull(deleted);
-    }
+    public void createMultimediaTestFileAddImg() throws BusinessLogicException {
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        newEntity.setPortada(newEntity.getPortada()+".png");
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
+        logic.adicionarVideo(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.pp4");
+    } 
 }
+
