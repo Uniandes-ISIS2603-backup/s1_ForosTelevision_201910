@@ -63,31 +63,26 @@ public class CanalLogicTest {
                 .addAsManifestResource("META-INF/beans.xml", "beans.xml");
     }
     
-    /**
-     * Configuración inicial de la prueba
-     * 
+   /**
+     * Configuración inicial de la prueba.
      */
-     @Before
-     public void configTest()
-     {
-         try
-         {
-             utx.begin();
-             clearData();
-             insertData();
-             utx.commit();
- }
-        catch(Exception e)
-         {
-             e.printStackTrace();
-             try{
-                 utx.rollback();
-             }catch(Exception e1)
-             {
-                 e1.printStackTrace();
-             }
-         }
-     }
+    @Before
+    public void configTest() {
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            insertData();
+            utx.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            try {
+                utx.rollback();
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+    }
 //    
        /**
      * Limpia las tablas que están implicadas en la prueba.
@@ -128,14 +123,14 @@ public class CanalLogicTest {
 //        Assert.assertEquals(newCanalEntity.getNombre(),entity.getNombre());
   }
 //    
-//    @Test(expected=BusinessLogicException.class)
-//    public void createCanalConNombre() throws BusinessLogicException
-//    {
-//       PodamFactory factory = new PodamFactoryImpl();
-//        CanalEntity newCanalEntity =factory.manufacturePojo(CanalEntity.class);
-//         newCanalEntity.setNombre(data.get(0).getNombre());
-//        canalLogic.createCanal(newCanalEntity);
-//    }
+    @Test(expected=BusinessLogicException.class)
+    public void createCanalConNombre() throws BusinessLogicException
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+        CanalEntity newCanalEntity =factory.manufacturePojo(CanalEntity.class);
+         newCanalEntity.setNombre(data.get(0).getNombre());
+        canalLogic.createCanal(newCanalEntity);
+    }
     
 //  
   
