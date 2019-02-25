@@ -6,6 +6,8 @@ package co.edu.uniandes.csw.foros.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -19,9 +21,11 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     /**
      * Niveles de acceso en la plataforma
      */
+     
     public enum Acceso{
             ADMINISTRADOR, USUARIO
     }
+    
     /**
      * Relacion entre usuarios seguidos
      */
@@ -64,7 +68,8 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
      * Correo electronico de usuario
      */
     private String email;
-
+    
+    @Enumerated(EnumType.STRING)
     private Acceso privilegio;
     
     public List<UsuarioEntity> getSeguidos() {

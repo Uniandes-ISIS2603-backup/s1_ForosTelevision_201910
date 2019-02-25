@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.foros.ejb;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.UsuarioPersistence;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.ejb.Stateless;
@@ -24,7 +25,7 @@ public class UsuarioLogic {
     
     public UsuarioEntity crearUsuario(UsuarioEntity usuario)throws BusinessLogicException{
         String emailPattern = "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@" + "[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
-        String passwordPattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+        String passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
         Pattern patternpas = Pattern.compile(passwordPattern);
         Pattern pattern = Pattern.compile(emailPattern);
         if(usuario.getNombre()==null){
@@ -46,17 +47,17 @@ public class UsuarioLogic {
         }
        
         if (usuario.getClave()==null){
-            throw new BusinessLogicException("Debe ingresar una clave  valida");
+            throw new BusinessLogicException("Debe ingresar una clave");
         }
         Matcher matcherpas = patternpas.matcher(usuario.getClave());
         if (!matcherpas.matches()){
             throw new BusinessLogicException("Debe ingresar una clave  valida");
         }
         if (usuario.getPrivilegio()==null){
-            throw new BusinessLogicException("Debe seleccionar un rol valido");
+            throw new BusinessLogicException("Debe seleccionar algun rol");
         }
-        if(!(usuario.getPrivilegio()==(UsuarioEntity.Acceso.ADMINISTRADOR) ||
-                usuario.getPrivilegio()==(UsuarioEntity.Acceso.USUARIO))){
+        if(!(( usuario.getPrivilegio().ordinal()==UsuarioEntity.Acceso.ADMINISTRADOR.ordinal()) ||
+             (usuario.getPrivilegio().ordinal()==UsuarioEntity.Acceso.USUARIO.ordinal()))){
          throw new BusinessLogicException("Debe seleccionar un rol valido");
         }
         usuarioPersistence.create(usuario);
@@ -84,5 +85,41 @@ public class UsuarioLogic {
         userMaster.getSeguidos().add(userSeguido);
         usuarioPersistence.update(userMaster);
     }
+    
+    public List<UsuarioEntity> getAll()throws BusinessLogicException{
+        List<UsuarioEntity> users=usuarioPersistence.getAll();
+        if(users.size()==0) throw new BusinessLogicException("No hay usuarios registrados");
+        return users;
+    }
+
+    public UsuarioEntity find(Long user)throws BusinessLogicException
+    {
+        UsuarioEntity u= usuarioPersistence.find(user);
+        if (u==null ) throw new BusinessLogicException("No existe el usuario");
+        return u;
+    }
+
+    public UsuarioEntity update(UsuarioEntity entity){
+        return usuarioPersistence.update(entity);
+    }
+
+    public void  delete(Long id){
+        usuarioPersistence.delete(id);
+    }
+
+    public UsuarioEntity login(String email, String pass) throws BusinessLogicException{
+        UsuarioEntity l=usuarioPersistence.findEmail(email).get(0);
+        if(l==null) throw new BusinessLogicException("Email no registrado");
+        if(l.getClave().compareTo(pass)!=0){
+            throw new BusinessLogicException("Email o contraseña incorrectas");
+        }
+        return l;
+    }
+    
+    public List<UsuarioEntity> usuariosSeguidos(Long userId){
+        UsuarioEntity user=usuarioPersistence.find(userId);
+        return user.getSeguidos();
+    }
+    
     
 }

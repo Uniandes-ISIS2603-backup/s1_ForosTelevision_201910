@@ -100,7 +100,8 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
         newEntity.setEmail("local.name@gmail.com");
-        newEntity.setClave("fLoe232$dlWq");
+        newEntity.setClave("Claveformal1212");
+        newEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         UsuarioEntity result = usuarioLogic.crearUsuario(newEntity);
         Assert.assertNotNull(result);
         UsuarioEntity entity = em.find(UsuarioEntity.class, result.getId());
@@ -191,7 +192,7 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
         newEntity.setEmail("local.clave@gmail.com");
-        newEntity.setClave("1234");
+        newEntity.setClave("123");
         usuarioLogic.crearUsuario(newEntity);
     }
     
@@ -204,11 +205,11 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
         masterEntity.setEmail("local.master@gmail.com");
-        masterEntity.setClave("sfLoe232$dlWq");
+        masterEntity.setClave("asloa12");
         UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
         UsuarioEntity seguidorEntity = factory.manufacturePojo(UsuarioEntity.class);
         seguidorEntity.setEmail("seguidor.master@gmail.com");
-        seguidorEntity.setClave("seguirfLoe232$dlWq");
+        seguidorEntity.setClave("asloa12segu");
         UsuarioEntity per2=usuarioLogic.crearUsuario(seguidorEntity);
         usuarioLogic.seguirUsuario(per1.getId(), per1.getId());  
     }
@@ -222,17 +223,13 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
         masterEntity.setEmail("local.master@gmail.com");
-        masterEntity.setClave("sfLoe232$dlWq");
+        masterEntity.setClave("Molada10001dlWq");
         UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
         UsuarioEntity seguidorEntity = factory.manufacturePojo(UsuarioEntity.class);
         seguidorEntity.setEmail("seguidor.master@gmail.com");
-        seguidorEntity.setClave("seguirfLoe232$dlWq");
+        seguidorEntity.setClave("Moladals2aqs000");
+        seguidorEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         UsuarioEntity per2=usuarioLogic.crearUsuario(seguidorEntity);
         usuarioLogic.seguirUsuario(per1.getId(), per2.getId());  
-    }
-   
-    
-    
-    
-    
+    }  
 }

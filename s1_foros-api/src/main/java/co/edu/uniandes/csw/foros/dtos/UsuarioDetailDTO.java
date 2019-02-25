@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,9 +26,8 @@ public class UsuarioDetailDTO extends UsuarioDTO implements Serializable {
      */
     private List<ProduccionDTO> pendientes;
 
-
-    public UsuarioDetailDTO(){
-
+    public UsuarioDetailDTO(UsuarioEntity user) {
+        super(user);
     }
 
     public List<UsuarioDTO> getSeguidos() {
