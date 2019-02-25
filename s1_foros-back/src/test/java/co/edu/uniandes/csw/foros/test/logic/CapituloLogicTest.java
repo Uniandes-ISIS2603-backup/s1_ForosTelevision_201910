@@ -95,6 +95,7 @@ public class CapituloLogicTest {
     @Test
     public void crearCapituloTest() throws BusinessLogicException{
         CapituloEntity nuevo = factory.manufacturePojo(CapituloEntity.class);
+        nuevo.setDuracion(10);
         CapituloEntity resultado = logic.createCapitulo(nuevo);
         Assert.assertNotNull(resultado);
         CapituloEntity capitulo = em.find(CapituloEntity.class, resultado.getId());
