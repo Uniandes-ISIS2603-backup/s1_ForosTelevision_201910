@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.foros.test.logic;
 
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
@@ -63,7 +64,12 @@ public class StaffLogicTest {
     /**
      * Lista que tiene los datos de prueba.
      */
-    private List<StaffEntity> data = new ArrayList<StaffEntity>();
+    private List<StaffEntity> data = new ArrayList<>();
+
+    /**
+     * Lista que tiene las producciones de prueba.
+     */
+    private List<ProduccionEntity> dataProducciones = new ArrayList<>();
 
     /**
      * @return Devuelve el jar que Arquillian va a desplegar en Payara embebido.
@@ -117,6 +123,14 @@ public class StaffLogicTest {
             em.persist(entity);
             data.add(entity);
         }
+        for (int i = 0; i < 3; i++) {
+            ProduccionEntity entity = factory.manufacturePojo(ProduccionEntity.class);
+            em.persist(entity);
+            dataProducciones.add(entity);
+        }
+        List<ProduccionEntity> nuevasProducciones = new ArrayList<>();
+        nuevasProducciones.add(dataProducciones.get(0));
+        data.get(1).setProducciones(nuevasProducciones);
     }
 
     /**
@@ -286,16 +300,17 @@ public class StaffLogicTest {
         }
         Assert.assertTrue(pruebaExitosa);
     }
-    
+
     /**
-     * Método que prueba que la lógica cumpla cuando un miembro del staff cambia su rol.
+     * Método que prueba que la lógica cumpla cuando un miembro del staff cambia
+     * su rol.
      */
     @Test
     public void cambiarRolTest() {
         StaffEntity staffEntity = data.get(0);
         StaffEntity.RolStaff viejoRol = staffEntity.getRol();
         StaffEntity.RolStaff nuevoRol;
-        if(staffEntity.getRol() == StaffEntity.RolStaff.ACTOR) {
+        if (staffEntity.getRol() == StaffEntity.RolStaff.ACTOR) {
             nuevoRol = StaffEntity.RolStaff.ACTORYDIRECTOR;
         } else {
             nuevoRol = StaffEntity.RolStaff.ACTOR;
@@ -308,9 +323,10 @@ public class StaffLogicTest {
         }
         Assert.assertNotEquals(staffEntity.getRol(), viejoRol);
     }
-    
+
     /**
-     * Método que prueba que la lógica cumpla cuando un miembro del staff cambia su rol a algo nulo.
+     * Método que prueba que la lógica cumpla cuando un miembro del staff cambia
+     * su rol a algo nulo.
      */
     @Test
     public void cambiarRolNullTest() {
@@ -322,9 +338,10 @@ public class StaffLogicTest {
         }
         Assert.assertNotNull(staffEntity.getRol());
     }
-    
+
     /**
-     * Método que prueba que la lógica cumpla cuando un miembro del staff que no existe cambia su rol.
+     * Método que prueba que la lógica cumpla cuando un miembro del staff que no
+     * existe cambia su rol.
      */
     @Test
     public void cambiarRolStaffNoExistenteTest() {
@@ -337,6 +354,88 @@ public class StaffLogicTest {
         }
         Assert.assertTrue(pruebaExitosa);
     }
-    
-    
+
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * nombre.
+     */
+    @Test
+    public void cambiarNombreStaffTest() {
+        String generada = "Juan Fernandito Castaneda";
+        StaffEntity entidadEnDB = data.get(0);
+        try {
+            entidadEnDB.setNombre(generada);
+            entidadEnDB = staffLogic.cambiarNombreStaff(entidadEnDB.getId(), generada);
+        } catch (BusinessLogicException ble) {
+            // El método funcionó
+        }
+        Assert.assertEquals(entidadEnDB.getNombre(), generada);
+    }
+
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * descripción.
+     */
+    @Test
+    public void cambiarDescripcionStaffTest() {
+        String generada = "ASDKFJLAJSDFAFASD\n AJSDKLFHAJSDFKLASDJ. Faksdfjlkajsdflkñ LAKJFASDLÑFKLKaksdfjl";
+        StaffEntity entidadEnDB = data.get(0);
+        try {
+            entidadEnDB.setDescripcion(generada);
+            entidadEnDB = staffLogic.cambiarDescripcionStaff(entidadEnDB.getId(), generada);
+        } catch (BusinessLogicException ble) {
+            // El método funcionó
+        }
+        Assert.assertEquals(entidadEnDB.getDescripcion(), generada);
+    }
+
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * foto.
+     */
+    @Test
+    public void cambiarFotoStaffTest() {
+        String generada = "cópula perineal.png";
+        StaffEntity entidadEnDB = data.get(0);
+        try {
+            entidadEnDB.setFoto(generada);
+            entidadEnDB = staffLogic.cambiarFotoStaff(entidadEnDB.getId(), generada);
+        } catch (BusinessLogicException ble) {
+            // El método funcionó.
+        }
+        Assert.assertEquals(entidadEnDB.getFoto(), generada);
+    }
+
+    /**
+     * Método que prueba la lógica cuando a un miembro del staff se le agrega
+     * una producción.
+     */
+    @Test
+    public void agregarProduccionTest() {
+        StaffEntity staffEntity = data.get(0);
+        int tamano = staffEntity.getProducciones().size();
+        try {
+            staffEntity = staffLogic.agregarProduccionStaff(staffEntity.getId(), dataProducciones.get(0).getId());
+        } catch (BusinessLogicException ble) {
+            // El método funcionó.
+        }
+        Assert.assertEquals(tamano + 1, staffEntity.getProducciones().size());
+    }
+
+    /**
+     * Método que prueba la lógica cuando a un miembro del staff se le elimina
+     * una producción.
+     */
+    @Test
+    public void eliminarProduccionTest() {
+        StaffEntity staffEntity = data.get(1);
+        int tamano = staffEntity.getProducciones().size();
+        try {
+            staffEntity = staffLogic.eliminarProduccionStaff(staffEntity.getId(), dataProducciones.get(0).getId());
+        } catch (BusinessLogicException ble) {
+            // El método funcionó.
+        }
+        Assert.assertEquals(tamano - 1, staffEntity.getProducciones().size());
+    }
+
 }

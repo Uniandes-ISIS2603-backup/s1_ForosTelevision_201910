@@ -10,6 +10,8 @@ import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
@@ -235,7 +237,7 @@ public class StaffLogic {
      * id | no existe una producción con ese id | ya existe una producción con
      * ese id en la lista de producciones del miembro del staff.
      */
-    public ProduccionEntity agregarProducciontaff(Long idStaff, Long idProduccion) throws BusinessLogicException {
+    public StaffEntity agregarProduccionStaff(Long idStaff, Long idProduccion) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia el proceso de agregación de una producción en la que fue partícipe un miembro del staff");
         StaffEntity staffEntity = staffPersistence.find(idStaff);
         if (staffEntity == null) {
@@ -248,10 +250,12 @@ public class StaffLogic {
         if (staffEntity.getProducciones().contains(produccionEntity)) {
             throw new BusinessLogicException("Esa producción ya está dentro de las producciones en las que participó el miembro del staff");
         }
-        staffEntity.getProducciones().add(produccionEntity);
-        staffPersistence.update(staffEntity);
+        List<ProduccionEntity> nuevaLista = new ArrayList(staffEntity.getProducciones());
+        nuevaLista.add(produccionEntity);
+        staffEntity.setProducciones(nuevaLista);
+        staffEntity = staffPersistence.update(staffEntity);
         LOGGER.log(Level.INFO, "Termina el proceso de agregación de una producción en la que fue partícipe un miembro del staff");
-        return produccionEntity;
+        return staffEntity;
     }
 
     /**
@@ -267,7 +271,7 @@ public class StaffLogic {
      * id | no existe una producción con ese id | no existe una producción con
      * ese id en la lista de producciones del miembro del staff.
      */
-    public ProduccionEntity eliminarProduccionStaff(Long idStaff, Long idProduccion) throws BusinessLogicException {
+    public StaffEntity eliminarProduccionStaff(Long idStaff, Long idProduccion) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia el proceso de eliminación de una producción en la que no fue partícipe un miembro del staff");
         StaffEntity staffEntity = staffPersistence.find(idStaff);
         if (staffEntity == null) {
@@ -280,9 +284,11 @@ public class StaffLogic {
         if (!staffEntity.getProducciones().contains(produccionEntity)) {
             throw new BusinessLogicException("Esa producción no está dentro de las producciones en las que participó el miembro del staff");
         }
-        staffEntity.getProducciones().remove(produccionEntity);
-        staffPersistence.update(staffEntity);
+        List<ProduccionEntity> nuevaLista = new ArrayList(staffEntity.getProducciones());
+        nuevaLista.remove(produccionEntity);
+        staffEntity.setProducciones(nuevaLista);
+        staffEntity = staffPersistence.update(staffEntity);
         LOGGER.log(Level.INFO, "Termina el proceso de eliminación de una producción en la que no fue partícipe un miembro del staff");
-        return produccionEntity;
+        return staffEntity;
     }
 }
