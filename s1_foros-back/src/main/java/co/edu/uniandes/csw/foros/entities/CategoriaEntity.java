@@ -6,12 +6,14 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
 
 
 /**
  *
- * @author estudiante
+ * @author Jhonattan Fonseca
  */
+@Entity
 public class CategoriaEntity extends BaseEntity implements Serializable {
 
     private String nombre;

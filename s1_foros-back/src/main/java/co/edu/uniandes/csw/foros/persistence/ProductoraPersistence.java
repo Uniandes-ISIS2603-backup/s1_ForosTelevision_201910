@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.persistence;
 
+import co.edu.uniandes.csw.foros.entities.EmisionEntity;
 import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import java.util.List;
 import java.util.logging.Level;
@@ -50,6 +51,18 @@ public class ProductoraPersistence {
     }
 
     /**
+     * Busca las productoras por nombre
+     *
+     * @param nombre registrado
+     * @return productoras con el mismo nombre
+     */
+    public List<ProductoraEntity> findByName(String nombre) {
+        TypedQuery<ProductoraEntity> tp = em.createQuery("SELECT u FROM ProductoraEntity u WHERE u.nombre = :name", ProductoraEntity.class);
+        tp.setParameter("name", nombre);
+        return tp.getResultList();
+    }
+
+    /**
      * Lista las productoras.
      *
      * @return
@@ -80,6 +93,11 @@ public class ProductoraPersistence {
         LOGGER.log(Level.INFO, "Borrando la productora con id=[0]", id);
         ProductoraEntity entity = find(id);
         em.remove(entity);
+    }
+
+    public List<ProductoraEntity> findAll() {
+        TypedQuery query = em.createQuery("select u from ProductoraEntity u", ProductoraEntity.class);
+        return query.getResultList();
     }
 
 }

@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.foros.persistence;
 
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
+import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,6 +73,18 @@ public class CategoriaPersistence {
     }
 
     /**
+     * Busca las productoras por nombre
+     *
+     * @param nombre registrado
+     * @return productoras con el mismo nombre
+     */
+    public List<CategoriaEntity> findByName(String nombre) {
+        TypedQuery<CategoriaEntity> tp = em.createQuery("SELECT u FROM CategoriaEntity u WHERE u.nombre = :name", CategoriaEntity.class);
+        tp.setParameter("name", nombre);
+        return tp.getResultList();
+    }
+
+    /**
      * Borra una categoria en la base de datos por medio de su id.
      *
      * @param id id de la categoria a eliminar.
@@ -81,4 +94,10 @@ public class CategoriaPersistence {
         CategoriaEntity entity = find(id);
         em.remove(entity);
     }
+
+    public List<CategoriaEntity> findAll() {
+        TypedQuery query = em.createQuery("select u from CategoriaEntity u", CategoriaEntity.class);
+        return query.getResultList();
+    }
+
 }
