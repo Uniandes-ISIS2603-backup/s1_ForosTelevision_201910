@@ -132,6 +132,7 @@ public class CanalLogicTest {
         canalLogic.createCanal(newCanalEntity);
     }
     
+    
 //  
   
 

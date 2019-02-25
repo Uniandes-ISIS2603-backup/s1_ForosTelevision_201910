@@ -40,9 +40,9 @@ public class CanalPersistence {
      * @param nombre del canal
      * @return Canal con el nombre
      */
-    public CanalEntity findByName(String pNombre){
-        TypedQuery<CanalEntity> query=em.createQuery("SELECT u FROM CanalEntity u WHERE u.name = :pNombre",CanalEntity.class);
-        query=query.setParameter("name",pNombre);
+    public CanalEntity findByName(String nombre){
+        TypedQuery<CanalEntity> query=em.createQuery("SELECT u FROM CanalEntity u WHERE u.nombre = :nombre",CanalEntity.class);
+        query=query.setParameter("nombre",nombre);
         List<CanalEntity> lista =query.getResultList();
         CanalEntity resultado;
         if(lista==null)

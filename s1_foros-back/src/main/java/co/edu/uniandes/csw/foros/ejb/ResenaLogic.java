@@ -32,7 +32,7 @@ public class ResenaLogic {
     public ResenaEntity createResena(ResenaEntity resena) throws BusinessLogicException
     {
         
-        if(resenaPersistence.find(resena.getId()).getDescripcion().length()>800)
+        if((resena.getDescripcion().length()>800))
         {
             throw new BusinessLogicException("La descripcion no puede ser mayor a 800 caracteres ");
         }

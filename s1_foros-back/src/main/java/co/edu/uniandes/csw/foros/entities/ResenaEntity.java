@@ -26,7 +26,7 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     private boolean recomendada;
     private Date fecha;
     private Integer calificacionResena;
-    private Long id;
+  
     
     
     
@@ -116,19 +116,7 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
         this.calificacionResena = calificacionResena;
     }
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return id;
-    }
 
-    /**
-     * @param id the id to set
-     */
-    public void setId(Long id) {
-        this.id = id;
-    }
 
    
     
