@@ -71,10 +71,10 @@ public class StaffEntity extends BaseEntity implements Serializable{
     
     /**
      * Setter de las producciones en las que ha participado un miembro del staff.
-     * @param producción producción en las que ha participado un miembro del staff.
+     * @param producciones producción en las que ha participado un miembro del staff.
      */
-    public void setProducciones(List<ProduccionEntity> producción) {
-        this.producciones = producción;
+    public void setProducciones(List<ProduccionEntity> producciones) {
+        this.producciones = producciones;
     }
 
     /**

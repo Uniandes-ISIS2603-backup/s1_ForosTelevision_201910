@@ -64,7 +64,8 @@ public class StaffLogic {
      * @throws BusinessLogicException cuando alguno de los atributos de la
      * entidad que entra parámetro cumple con alguna de las siguientes
      * propiedades: rol = null | nombre = (null | "") | foto = null | foto no
-     * sigue los estándares de RUTA_IMAGENES | descripción = (null | "").
+     * sigue los estándares de RUTA_IMAGENES | descripción = (null | "") |
+     * producciones = null.
      */
     public StaffEntity crearStaff(StaffEntity staffEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del miembro del staff.");
@@ -92,6 +93,10 @@ public class StaffLogic {
         }
         if (staffEntity.getDescripcion().equals("")) {
             throw new BusinessLogicException("La descripción del miembro del staff no puede ser vacía.");
+        }
+        // Validación relación con producción.
+        if (staffEntity.getProducciones() == null) {
+            throw new BusinessLogicException("Las producciones de un miembro del staff deben exisitir.");
         }
 
         staffPersistence.create(staffEntity);
