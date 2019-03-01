@@ -100,7 +100,7 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity newEntity = factory.manufacturePojo(UsuarioEntity.class);
         newEntity.setEmail("local.name@gmail.com");
-        newEntity.setClave("Claveformal1212");
+        newEntity.setClave("claveUser2020201");
         newEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         UsuarioEntity result = usuarioLogic.crearUsuario(newEntity);
         Assert.assertNotNull(result);
@@ -223,7 +223,7 @@ public class UsusarioLogicTest {
         PodamFactory factory = new PodamFactoryImpl();
         UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
         masterEntity.setEmail("local.master@gmail.com");
-        masterEntity.setClave("Molada10001dlWq");
+        masterEntity.setClave("claveUser2020");
         UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
         UsuarioEntity seguidorEntity = factory.manufacturePojo(UsuarioEntity.class);
         seguidorEntity.setEmail("seguidor.master@gmail.com");
