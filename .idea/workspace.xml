@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fe75308a-3d64-479e-b7b7-3c972344e37b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/arquillianContainers.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/s1_foros_api_war_exploded.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/s1_foros_api_war_exploded.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/s1_foros-api.iml" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/s1_foros-api.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/sql/s1_foros.sql" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/sql/s1_foros.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/UsuarioResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/UsuarioResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProductoraLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProductoraLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/UsuarioLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/UsuarioLogic.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/UsuarioEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/UsuarioEntity.java" afterDir="false" />
-    </list>
+    <list default="true" id="fe75308a-3d64-479e-b7b7-3c972344e37b" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/s1_foros-back/target/" />
     <ignored path="$PROJECT_DIR$/s1_foros-api/target/" />
@@ -42,8 +30,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/UsuarioResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-2973">
-              <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+            <state relative-caret-position="-2667">
+              <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -52,14 +40,12 @@
         <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/UsuarioLogic.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="886">
-              <caret line="206" lean-forward="true" selection-start-line="206" selection-end-line="206" />
+              <caret line="247" selection-start-line="247" selection-end-line="247" />
               <folding>
-                <element signature="method#crearUsuario#0;class#UsuarioLogic#0" />
-                <element signature="method#getAll#0;class#UsuarioLogic#0" />
-                <element signature="e#5102#5103#0" expanded="true" />
-                <element signature="e#5158#5159#0" expanded="true" />
-                <element signature="e#5193#5194#0" expanded="true" />
-                <element signature="e#5238#5239#0" expanded="true" />
+                <element signature="e#5363#5364#0" expanded="true" />
+                <element signature="e#5419#5420#0" expanded="true" />
+                <element signature="e#5454#5455#0" expanded="true" />
+                <element signature="e#5499#5500#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -185,7 +171,7 @@
       <updated>1550951246742</updated>
       <workItem from="1550951248459" duration="2920000" />
       <workItem from="1551378812676" duration="40000" />
-      <workItem from="1551494116196" duration="3566000" />
+      <workItem from="1551494116196" duration="4153000" />
     </task>
     <servers />
   </component>
@@ -195,11 +181,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6526000" />
+    <option name="totallyTimeSpent" value="7113000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20842217" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -272,8 +257,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/UsuarioResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2973">
-          <caret line="27" column="11" selection-start-line="27" selection-start-column="11" selection-end-line="27" selection-end-column="11" />
+        <state relative-caret-position="-2667">
+          <caret line="29" column="11" selection-start-line="29" selection-start-column="11" selection-end-line="29" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -294,14 +279,12 @@
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/UsuarioLogic.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="886">
-          <caret line="206" lean-forward="true" selection-start-line="206" selection-end-line="206" />
+          <caret line="247" selection-start-line="247" selection-end-line="247" />
           <folding>
-            <element signature="method#crearUsuario#0;class#UsuarioLogic#0" />
-            <element signature="method#getAll#0;class#UsuarioLogic#0" />
-            <element signature="e#5102#5103#0" expanded="true" />
-            <element signature="e#5158#5159#0" expanded="true" />
-            <element signature="e#5193#5194#0" expanded="true" />
-            <element signature="e#5238#5239#0" expanded="true" />
+            <element signature="e#5363#5364#0" expanded="true" />
+            <element signature="e#5419#5420#0" expanded="true" />
+            <element signature="e#5454#5455#0" expanded="true" />
+            <element signature="e#5499#5500#0" expanded="true" />
           </folding>
         </state>
       </provider>
