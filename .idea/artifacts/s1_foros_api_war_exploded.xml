@@ -24,6 +24,7 @@
           <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.moxy:2.6.5" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.core:2.6.5" />
           <element id="library" level="project" name="Maven: org.eclipse.persistence:org.eclipse.persistence.asm:2.6.5" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.6.2" />
           <element id="library" level="project" name="Maven: org.apache.commons:commons-lang3:3.7" />
           <element id="library" level="project" name="Maven: uk.co.jemos.podam:podam:6.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: net.jcip:jcip-annotations:1.0" />
