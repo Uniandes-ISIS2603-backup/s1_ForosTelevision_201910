@@ -276,9 +276,10 @@ public class StaffLogicTest {
         }
         Assert.assertNull(em.find(StaffEntity.class, staffEntity.getId()));
     }
-    
+
     /**
-     * Método que prueba que la lógica cumpla cuando la lista de producciones de un Staff es null. 
+     * Método que prueba que la lógica cumpla cuando la lista de producciones de
+     * un Staff es null.
      */
     @Test
     public void crearStaffProduccionesNullTest() {
@@ -286,7 +287,7 @@ public class StaffLogicTest {
         try {
             staffLogic.crearStaff(staffEntity);
             data.add(staffEntity);
-        } catch(BusinessLogicException ble) {
+        } catch (BusinessLogicException ble) {
             // El método funcionó.
         }
         Assert.assertNull(staffEntity.getProducciones());
@@ -313,7 +314,7 @@ public class StaffLogicTest {
      * eliminar no existe.
      */
     @Test
-    public void eliminarStaffNoExistenteTest() {
+    public void eliminarStaffNullTest() {
         StaffEntity staffEntity = factory.manufacturePojo(StaffEntity.class);
         boolean pruebaExitosa = false;
         try {
@@ -368,7 +369,7 @@ public class StaffLogicTest {
      * existe cambia su rol.
      */
     @Test
-    public void cambiarRolStaffNoExistenteTest() {
+    public void cambiarRolStaffNullTest() {
         StaffEntity staffEntity = factory.manufacturePojo(StaffEntity.class);
         boolean pruebaExitosa = false;
         try {
@@ -398,10 +399,77 @@ public class StaffLogicTest {
 
     /**
      * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * nombre a uno null.
+     */
+    @Test
+    public void cambiarNombreNullStaffTest() {
+        StaffEntity entidadEnDB = data.get(0);
+        String nombreAntiguo = entidadEnDB.getNombre();
+        try {
+            entidadEnDB.setNombre(null);
+            entidadEnDB = staffLogic.cambiarNombreStaff(entidadEnDB.getId(), null);
+        } catch (BusinessLogicException ble) {
+            entidadEnDB.setNombre(nombreAntiguo);
+        }
+        Assert.assertNotEquals(entidadEnDB.getNombre(), null);
+    }
+
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * nombre a uno vacío.
+     */
+    @Test
+    public void cambiarNombreVacioStaffTest() {
+        StaffEntity entidadEnDB = data.get(0);
+        String nombreAntiguo = entidadEnDB.getNombre();
+        try {
+            entidadEnDB.setNombre("");
+            entidadEnDB = staffLogic.cambiarNombreStaff(entidadEnDB.getId(), "");
+        } catch (BusinessLogicException ble) {
+            entidadEnDB.setNombre(nombreAntiguo);
+        }
+        Assert.assertNotEquals(entidadEnDB.getNombre(), "");
+    }
+
+    /**
+     * Método que prueba que la lógica cuando no existe el miembro del staff al
+     * que se le cambia su nombre.
+     */
+    @Test
+    public void cambiarNombreStaffNullTest() {
+        StaffEntity entidadNoExistente = factory.manufacturePojo(StaffEntity.class);
+        boolean pruebaExitosa = false;
+        try {
+            staffLogic.cambiarNombreStaff(entidadNoExistente.getId(), "Jojo");
+        } catch (BusinessLogicException ble) {
+            pruebaExitosa = true;
+        }
+        Assert.assertTrue(pruebaExitosa);
+    }
+
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
      * descripción.
      */
     @Test
     public void cambiarDescripcionStaffTest() {
+        String generada = "ASDKFJLAJSDFAFASD\n AJSDKLFHAJSDFKLASDJ. Faksdfjlkajsdflkñ LAKJFASDLÑFKLKaksdfjl";
+        StaffEntity entidadEnDB = data.get(0);
+        try {
+            entidadEnDB.setDescripcion(generada);
+            entidadEnDB = staffLogic.cambiarDescripcionStaff(entidadEnDB.getId(), generada);
+        } catch (BusinessLogicException ble) {
+            // El método funcionó
+        }
+        Assert.assertEquals(entidadEnDB.getDescripcion(), generada);
+    }
+    
+    /**
+     * Método que prueba que la lógica cuando un miembro del staff cambia su
+     * descripción a una null.
+     */
+    @Test
+    public void cambiarDescripcionNullStaffTest() {
         String generada = "ASDKFJLAJSDFAFASD\n AJSDKLFHAJSDFKLASDJ. Faksdfjlkajsdflkñ LAKJFASDLÑFKLKaksdfjl";
         StaffEntity entidadEnDB = data.get(0);
         try {
