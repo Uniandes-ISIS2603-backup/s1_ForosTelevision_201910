@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.EmisionEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -24,6 +25,13 @@ public class EmisionDTO implements Serializable{
 
     public EmisionDTO(){
         
+    }
+
+    public EmisionDTO(EmisionEntity ent) {
+        this.id=ent.getId();
+        this.fechaInicio=ent.getFechaInicio();
+        this.fechaFin=ent.getFechaFin();
+        this.rating=ent.getRating();
     }
     /**
      * @return the id

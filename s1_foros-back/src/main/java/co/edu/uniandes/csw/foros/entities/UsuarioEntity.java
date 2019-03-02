@@ -39,12 +39,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
     @OneToMany(fetch=LAZY)
     private List<ProductoraEntity> productorasFav;
     /**
-     * Series Favoritas
-     */
-    @PodamExclude
-    @OneToMany(fetch=LAZY)
-    private List<ProduccionEntity> series;
-    /**
      * Parrila de programacion
      */
     @PodamExclude
@@ -93,14 +87,6 @@ public class UsuarioEntity extends BaseEntity implements Serializable{
 
     public void setProductorasFav(List<ProductoraEntity> productorasFav) {
         this.productorasFav = productorasFav;
-    }
-
-    public List<ProduccionEntity> getSeries() {
-        return series;
-    }
-
-    public void setSeries(List<ProduccionEntity> series) {
-        this.series = series;
     }
 
     public List<EmisionEntity> getParrilla() {
