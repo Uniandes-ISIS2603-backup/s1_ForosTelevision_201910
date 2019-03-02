@@ -117,7 +117,7 @@ public class EmisionLogicTest {
     }
     
     @Test
-    public void obtenerEmision(){
+    public void obtenerEmision() throws BusinessLogicException{
         EmisionEntity emisionData = data.get(0);
         EmisionEntity emision = logic.getEmisionPorId(emisionData.getId());
         Assert.assertNotNull(emision);
@@ -150,6 +150,7 @@ public class EmisionLogicTest {
     @Test(expected=BusinessLogicException.class)
     public void reglasDeNegocio() throws BusinessLogicException{
         EmisionEntity emision = data.get(0);
+        
         logic.createEmision(emision);
     }
     

@@ -32,9 +32,8 @@ public class EmisionLogic {
      * @return entidad creada.
      */
     public EmisionEntity createEmision(EmisionEntity entidad) throws BusinessLogicException{
-        if(getEmisionPorId(entidad.getId())!=null){
-            throw new BusinessLogicException("No pueden haber dos emisiones iguales");
-        }
+        if(persistence.find(entidad.getId())!=null)
+              throw new BusinessLogicException("No pueden haber dos emisiones iguales");
         EmisionEntity emision = persistence.create(entidad);
         return emision;
     }
@@ -53,13 +52,13 @@ public class EmisionLogic {
      * @param id - id de la emision a buscar
      * @return emision - emision que tiene ese id.
      */
-    public EmisionEntity getEmisionPorId(Long id){
+    public EmisionEntity getEmisionPorId(Long id) throws BusinessLogicException{
         EmisionEntity emision = persistence.find(id);
         if(emision!=null){
             return emision;
         }
         else{
-            return null;
+           throw new BusinessLogicException("El recurso no existe");
         }   
     }
       

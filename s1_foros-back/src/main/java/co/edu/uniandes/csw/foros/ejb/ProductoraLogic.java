@@ -51,5 +51,11 @@ public class ProductoraLogic {
         productoraPersitence.delete(productoraId);
 
     }
+    
+    public ProductoraEntity find(Long  idProduccion)throws BusinessLogicException{
+        ProductoraEntity prod=productoraPersitence.find(idProduccion);
+        if(prod==null) throw new BusinessLogicException("Produccion no registrada");
+        return prod;
+     }
 
 }
