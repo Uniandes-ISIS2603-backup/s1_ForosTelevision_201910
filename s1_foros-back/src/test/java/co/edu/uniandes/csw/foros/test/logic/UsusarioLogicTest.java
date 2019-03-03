@@ -11,6 +11,11 @@ import java.util.logging.Logger;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
@@ -231,5 +236,226 @@ public class UsusarioLogicTest {
         seguidorEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         UsuarioEntity per2=usuarioLogic.crearUsuario(seguidorEntity);
         usuarioLogic.seguirUsuario(per1.getId(), per2.getId());  
-    }  
+    }
+    
+      /**
+     * Metodo que verifica seguir usuario nulo
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void crearUsuarioSeguirMasterNullTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity seguidorEntity = factory.manufacturePojo(UsuarioEntity.class);
+        seguidorEntity.setEmail("seguidor.master@gmail.com");
+        seguidorEntity.setClave("Moladals2aqs000");
+        seguidorEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
+        UsuarioEntity per2=usuarioLogic.crearUsuario(seguidorEntity);
+        usuarioLogic.seguirUsuario(-1L, per2.getId());  
+    } 
+    
+     /**
+     * Metodo que verifica seguir seguidor
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void crearUsuarioSeguirSeguidorNullTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        masterEntity.setId(Long.MIN_VALUE);
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.seguirUsuario(per1.getId(),-1L);  
+    }
+    
+     /**
+     * Metodo que verifica darUsuarios
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void darUsuariosTest() throws BusinessLogicException{
+        try {
+            utx.begin();
+            em.joinTransaction();
+            clearData();
+            utx.commit();
+           List<UsuarioEntity> l= usuarioLogic.getAll();
+           l.isEmpty();
+        } catch (Exception ex) {
+            throw new BusinessLogicException("Error");
+        }
+        
+    }
+    
+     /**
+     * Metodo que verifica buscar usuario nulo
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void crearUsuarioFindTest() throws BusinessLogicException{
+        usuarioLogic.find(-1L);
+    }
+    
+    /**
+     * Metodo que verifica la actualizacion de usuario
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void updateUsuarioTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        String email="forma.update@gmail.com";
+        per1.setEmail(email);
+        per1=usuarioLogic.update(per1);
+        Assert.assertEquals(per1.getEmail(),email);
+    }
+    
+    /**
+     * Metodo que verifica la eliminacion
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void deleteUsuarioTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.delete(per1.getId());
+        usuarioLogic.find(-1L);
+    }
+    
+    /**
+     * Metodo que verifica el ingreso a plataforma por clave
+     * @throws BusinessLogicException contraseña incorrecta
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void logibUsuarioTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.login(per1.getEmail(),per1.getClave()+"fk");
+    }
+    
+     /**
+     * Metodo que verifica el ingreso a plataforma por correo
+     * @throws BusinessLogicException correo no registrado
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void logibUsuarioCorreoTest() throws BusinessLogicException{
+        PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.login(per1.getEmail()+"fk",per1.getClave());
+    }
+    
+      /**
+     * Metodo que verifica seguir seguidor
+     * @throws BusinessLogicException 
+     */
+    @Test
+    public void usuarioSeguidos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        UsuarioEntity seguidorEntity = factory.manufacturePojo(UsuarioEntity.class);
+        seguidorEntity.setEmail("seguidor.master@gmail.com");
+        seguidorEntity.setClave("Moladals2aqs000");
+        seguidorEntity.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
+        UsuarioEntity per2=usuarioLogic.crearUsuario(seguidorEntity);
+        usuarioLogic.seguirUsuario(per1.getId(), per2.getId());
+        List<UsuarioEntity> seguidos= usuarioLogic.darUsuariosFavoritos(per1.getId());
+        Assert.assertNotNull(seguidos.get(0));
+    }
+     /**
+     * Metodo registrar productores favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void registrarProductoraFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.registrarProductoraFavorito(per1.getId(),-1L);
+    }
+    
+     /**
+     * Metodo eliminar productores favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void eliminarProductoraFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.eliminarProductoraFavorito(per1.getId(),-1L);
+    }
+    
+     /**
+     * Metodo retorna productores favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void darProductoraFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.darProductoraFavoritas(per1.getId());
+    }
+     /**
+     * Metodo registrar emisiones favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void registrarEmisionFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.registrarEmision(per1.getId(),-1L);
+    }
+    
+     /**
+     * Metodo eliminar emisiones favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void eliminarEmisionesFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.eliminarEmision(per1.getId(),-1L);
+    }
+    
+     /**
+     * Metodo retorna productores favoritos
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void darEmisionesFavoritos() throws BusinessLogicException{
+       PodamFactory factory = new PodamFactoryImpl();
+        UsuarioEntity masterEntity = factory.manufacturePojo(UsuarioEntity.class);
+        masterEntity.setEmail("local.master@gmail.com");
+        masterEntity.setClave("claveUser2020");
+        UsuarioEntity per1=usuarioLogic.crearUsuario(masterEntity);
+        usuarioLogic.darEmisiones(per1.getId());
+    }
 }
