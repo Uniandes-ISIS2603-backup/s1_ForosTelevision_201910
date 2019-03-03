@@ -96,7 +96,7 @@ public class ArchivoPersistenceTest {
      * Prueba para crear un archivo.
      */
     @Test
-    public void createUsuarioTest() {
+    public void createArchivoTest() {
         PodamFactory factory = new PodamFactoryImpl();
         ArchivoEntity newEntity = factory.manufacturePojo(ArchivoEntity.class);
         ArchivoEntity result = archivoPersistence.create(newEntity);
@@ -104,12 +104,26 @@ public class ArchivoPersistenceTest {
         ArchivoEntity entity = em.find(ArchivoEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
+    
+    /**
+     * Prueba para crear un archivo.
+     */
+    @Test
+    public void createArchivoUrlTest() {
+        PodamFactory factory = new PodamFactoryImpl();
+        ArchivoEntity newEntity = factory.manufacturePojo(ArchivoEntity.class);
+        ArchivoEntity result = archivoPersistence.create(newEntity);
+        Assert.assertNotNull(result);
+        ArchivoEntity entity = em.find(ArchivoEntity.class, result.getId());
+        Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getUrl(), entity.getUrl());
+    }
 
     /**
      * Prueba para actualizar un archivo.
      */
     @Test
-    public void updateAuthorTest() {
+    public void updateArchivoTest() {
         ArchivoEntity entity = data.get(0);
         PodamFactory factory = new PodamFactoryImpl();
         ArchivoEntity newEntity = factory.manufacturePojo(ArchivoEntity.class);
@@ -123,7 +137,7 @@ public class ArchivoPersistenceTest {
      * Prueba para eliminar un archivo.
      */
     @Test
-    public void deleteAuthorTest() {
+    public void deleteArchivoTest() {
         ArchivoEntity entity = data.get(0);
         archivoPersistence.delete(entity.getId());
         ArchivoEntity deleted = em.find(ArchivoEntity.class, entity.getId());

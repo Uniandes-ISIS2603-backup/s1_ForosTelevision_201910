@@ -153,7 +153,9 @@ public class UsuarioLogic {
      */
 
     public UsuarioEntity login(String email, String pass) throws BusinessLogicException {
-        UsuarioEntity l = usuarioPersistence.findEmail(email).get(0);
+        List<UsuarioEntity> lista=usuarioPersistence.findEmail(email);
+        if(lista.isEmpty()) throw new BusinessLogicException("Email no registrado");
+        UsuarioEntity l = lista.get(0);
         if (l == null) throw new BusinessLogicException("Email no registrado");
         if (l.getClave().compareTo(pass) != 0) {
             throw new BusinessLogicException("Email o contraseña incorrectas");
@@ -190,11 +192,14 @@ public class UsuarioLogic {
     public void eliminarProductoraFavorito(Long user, Long idProduccion) throws BusinessLogicException {
         UsuarioEntity us = this.find(user);
         List<ProductoraEntity> ls = us.getProductorasFav();
+        boolean estado=false;
         for (ProductoraEntity cl : ls) {
             if (Objects.equals(cl.getId(), idProduccion)) {
                 ls.remove(cl);
+                estado=true;
             }
         }
+        if(!estado) throw new BusinessLogicException("Recurso de produccion no eliminado");
         this.update(us);
     }
     /**
@@ -204,7 +209,9 @@ public class UsuarioLogic {
      * @throws BusinessLogicException el usuario no esta registrado 
      */
     public List<EmisionEntity> darEmisiones(Long user) throws BusinessLogicException{
-     return this.find(user).getParrilla();
+        List<EmisionEntity> dat= this.find(user).getParrilla();
+        if(dat.isEmpty()) throw  new BusinessLogicException("No hay Emsiones registradas");
+     return dat;
     }
     
     /**
@@ -216,11 +223,14 @@ public class UsuarioLogic {
     public void eliminarEmision(Long user, Long emisionId) throws BusinessLogicException{
      UsuarioEntity us = this.find(user);
         List<EmisionEntity> ls = us.getParrilla();
+        boolean find=false;
         for (EmisionEntity cl : ls) {
             if (Objects.equals(cl.getId(), emisionId)) {
                 ls.remove(cl);
+                find=true;
             }
         }
+        if(!find) throw  new BusinessLogicException("No existe el recurso de emision");
         this.update(us);
     }
     /**
@@ -243,7 +253,9 @@ public class UsuarioLogic {
      * @throws BusinessLogicException
      */
     public List<ProductoraEntity> darProductoraFavoritas(Long id) throws BusinessLogicException {
-        return this.find(id).getProductorasFav();
+         List<ProductoraEntity> dat=this.find(id).getProductorasFav();
+         if(dat.isEmpty()) throw  new BusinessLogicException("No hay producciones registradas");
+        return dat;
     }
 
     /**
@@ -254,6 +266,8 @@ public class UsuarioLogic {
      * @throws BusinessLogicException
      */
     public List<UsuarioEntity> darUsuariosFavoritos(Long id) throws BusinessLogicException {
-        return this.find(id).getSeguidos();
+        List<UsuarioEntity>  data=this.find(id).getSeguidos();
+         if(data.isEmpty()) throw  new BusinessLogicException("No hay usuarios favoritos");
+        return data;
     }
 }
