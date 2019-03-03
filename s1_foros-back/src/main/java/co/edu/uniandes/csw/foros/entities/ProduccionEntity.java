@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.entities;
 
+import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -80,13 +81,6 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     private List<ResenaEntity> resenas;
     
     /**
-     * Clasificacion de audiencias para las producciones.
-     */
-    public enum ClasificacionAudiencia {
-        FAMILIAR, INFANTIL, ADOLESCENTES, ADULTOS
-    }
-    
-    /**
      * Id de la producción
      */
     private long idProduccion;
@@ -112,10 +106,10 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     private int calificacionPromedio; 
    
     /**
-     * Constructor de la entidad de una producción.
+     * Constructor vacío de la entidad de una producción.
      */ 
     public ProduccionEntity(){
-        
+        // Constructor vacío.
     }
 
     /**

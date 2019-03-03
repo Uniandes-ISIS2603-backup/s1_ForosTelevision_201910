@@ -36,25 +36,27 @@ public class StaffDTO implements Serializable {
      * Descripción dle miembro del staff de al menos una película.
      */
     private String descripcion;
-    
+
     /**
      * Relación del staff con las producciones en que ha participado.
      */
     private List<ProduccionDTO> producciones;
 
     /**
-     * Constructor vacío del DTO de un miembro del staff de al menos una película.
+     * Constructor vacío del DTO de un miembro del staff de al menos una
+     * película.
      */
     public StaffDTO() {
         // Hecho para inicializar un DTO vacío
     }
-    
+
     /**
      * Constructor del DTO que recibe una entidad por parámetro.
+     *
      * @param staffEntity entidad con la información del miembro del staff.
      */
     public StaffDTO(StaffEntity staffEntity) {
-        if(staffEntity != null) {
+        if (staffEntity != null) {
             this.idStaff = staffEntity.getId();
             this.rol = staffEntity.getRol();
             this.descripcion = staffEntity.getDescripcion();
@@ -62,7 +64,22 @@ public class StaffDTO implements Serializable {
             this.foto = staffEntity.getFoto();
         }
     }
-            
+
+    /**
+     * Método para transformar el DTO en una entidad.
+     *
+     * @return entidad del miembro del staff.
+     */
+    public StaffEntity toEntity() {
+        StaffEntity staffEntity = new StaffEntity();
+        staffEntity.setId(this.idStaff);
+        staffEntity.setRol(this.rol);
+        staffEntity.setDescripcion(this.descripcion);
+        staffEntity.setNombre(this.nombre);
+        staffEntity.setFoto(this.foto);
+        return staffEntity;
+    }
+
     /**
      * Getter del id del miembro del staff.
      *

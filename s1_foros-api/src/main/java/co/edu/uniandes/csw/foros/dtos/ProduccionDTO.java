@@ -1,6 +1,7 @@
 package co.edu.uniandes.csw.foros.dtos;
 
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
+import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import java.io.Serializable;
 
 /**
@@ -9,7 +10,6 @@ import java.io.Serializable;
  * @author jf.castaneda
  */
 public class ProduccionDTO implements Serializable {
-
 
     /**
      * Id de la producción
@@ -29,7 +29,7 @@ public class ProduccionDTO implements Serializable {
     /**
      * Clasificación de audiencia de la producción.
      */
-    private ProduccionEntity.ClasificacionAudiencia clasificacionAudiencia;
+    private ClasificacionAudiencia clasificacionAudiencia;
 
     /**
      * Calificación promedio de la producción.
@@ -37,18 +37,37 @@ public class ProduccionDTO implements Serializable {
     private int calificacionPromedio;
 
     /**
-     * Constructor del DTO de una producción.
+     * Constructor vacío del DTO de una producción.
      */
     public ProduccionDTO() {
-
+        // Constructor vacío.
     }
-    
-    public ProduccionDTO(ProduccionEntity ent){
-       this.nombre=ent.getNombre();
-       this.descripcion=ent.getDescripcion();
-       this.clasificacionAudiencia=ent.getClasificacionAudiencia();
-       this.idProduccion=ent.getId();
-       this.calificacionPromedio=ent.getCalificacionPromedio();
+
+    /**
+     * Constructor del DTO que recibe una entidad por parámetro.
+     *
+     * @param produccionEntity entidad de la producción.
+     */
+    public ProduccionDTO(ProduccionEntity produccionEntity) {
+        this.nombre = produccionEntity.getNombre();
+        this.descripcion = produccionEntity.getDescripcion();
+        this.clasificacionAudiencia = produccionEntity.getClasificacionAudiencia();
+        this.idProduccion = produccionEntity.getId();
+        this.calificacionPromedio = produccionEntity.getCalificacionPromedio();
+    }
+
+    /**
+     * Método que convierte el DTO en una entidad.
+     *
+     * @return entidad de la producción.
+     */
+    public ProduccionEntity toEntity() {
+        ProduccionEntity produccionEntity = new ProduccionEntity();
+        produccionEntity.setCalificacionPromedio(this.calificacionPromedio);
+        produccionEntity.setDescripcion(this.descripcion);
+        produccionEntity.setId(this.idProduccion);
+        produccionEntity.setNombre(this.nombre);
+        return produccionEntity;
     }
 
     /**
