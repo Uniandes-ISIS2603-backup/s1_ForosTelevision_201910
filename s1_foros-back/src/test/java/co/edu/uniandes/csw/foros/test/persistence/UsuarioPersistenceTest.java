@@ -163,5 +163,6 @@ public class UsuarioPersistenceTest {
         UsuarioEntity deleted = em.find(UsuarioEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+   
 }
 
