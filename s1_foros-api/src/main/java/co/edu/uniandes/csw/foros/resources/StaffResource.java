@@ -42,8 +42,10 @@ public class StaffResource {
      */
     @POST
     public String crearStaff(String jsonString) {
-        return "staff creado";
-    }
+        LOGGER.log(Level.INFO, "StaffResource crear staff: input: {0}", book.toString());
+        BookDTO nuevoBookDTO = new BookDTO(bookLogic.createBook(book.toEntity()));
+        LOGGER.log(Level.INFO, "BookResource createBook: output: {0}", nuevoBookDTO.toString());
+        return nuevoBookDTO;    }
 
     /**
      * Método que actualiza la información de un miembro del staff.

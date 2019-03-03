@@ -1,6 +1,9 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.enums.RolStaff;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * DTO que representa un miembro del staff.
@@ -8,13 +11,6 @@ import java.io.Serializable;
  * @author jf.castaneda
  */
 public class StaffDTO implements Serializable {
-
-    /**
-     * Rol que el miembro del staff puede cumplir.
-     */
-    public enum RolStaff {
-        ACTOR, DIRECTOR, ACTORYDIRECTOR
-    }
 
     /**
      * Id del miembro del staff de al menos una película.
@@ -40,14 +36,33 @@ public class StaffDTO implements Serializable {
      * Descripción dle miembro del staff de al menos una película.
      */
     private String descripcion;
+    
+    /**
+     * Relación del staff con las producciones en que ha participado.
+     */
+    private List<ProduccionDTO> producciones;
 
     /**
-     * Constructor del DTO de un miembro del staff de al menos una película.
+     * Constructor vacío del DTO de un miembro del staff de al menos una película.
      */
     public StaffDTO() {
-
+        // Hecho para inicializar un DTO vacío
     }
-
+    
+    /**
+     * Constructor del DTO que recibe una entidad por parámetro.
+     * @param staffEntity entidad con la información del miembro del staff.
+     */
+    public StaffDTO(StaffEntity staffEntity) {
+        if(staffEntity != null) {
+            this.idStaff = staffEntity.getId();
+            this.rol = staffEntity.getRol();
+            this.descripcion = staffEntity.getDescripcion();
+            this.nombre = staffEntity.getNombre();
+            this.foto = staffEntity.getFoto();
+        }
+    }
+            
     /**
      * Getter del id del miembro del staff.
      *
