@@ -1,7 +1,9 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
+
 import java.io.Serializable;
 
 /**
@@ -14,7 +16,7 @@ public class ProduccionDTO implements Serializable {
     /**
      * Id de la producción
      */
-    private long idProduccion;
+    private Long idProduccion;
 
     /**
      * Nombre de la producción.
@@ -34,7 +36,17 @@ public class ProduccionDTO implements Serializable {
     /**
      * Calificación promedio de la producción.
      */
-    private int calificacionPromedio;
+    private Integer calificacionPromedio;
+
+    /**
+     * Relación de una producción con su multimedia.
+     */
+    private MultimediaDTO multimedia;
+
+    /**
+     * Relación de una producción con su productora.
+     */
+    private ProductoraDTO productora;
 
     /**
      * Constructor vacío del DTO de una producción.
@@ -49,11 +61,23 @@ public class ProduccionDTO implements Serializable {
      * @param produccionEntity entidad de la producción.
      */
     public ProduccionDTO(ProduccionEntity produccionEntity) {
-        this.nombre = produccionEntity.getNombre();
-        this.descripcion = produccionEntity.getDescripcion();
-        this.clasificacionAudiencia = produccionEntity.getClasificacionAudiencia();
-        this.idProduccion = produccionEntity.getId();
-        this.calificacionPromedio = produccionEntity.getCalificacionPromedio();
+        if(produccionEntity != null) {
+            this.nombre = produccionEntity.getNombre();
+            this.descripcion = produccionEntity.getDescripcion();
+            this.clasificacionAudiencia = produccionEntity.getClasificacionAudiencia();
+            this.idProduccion = produccionEntity.getId();
+            this.calificacionPromedio = produccionEntity.getCalificacionPromedio();
+            if(produccionEntity.getMultimedia() != null) {
+                this.multimedia = new MultimediaDTO(produccionEntity.getMultimedia());
+            } else {
+                this.multimedia = null;
+            }
+            if(produccionEntity.getProductora() != null) {
+                this.productora = new ProductoraDTO(produccionEntity.getProductora());
+            } else {
+                this.productora = null;
+            }
+        }
     }
 
     /**
@@ -67,6 +91,9 @@ public class ProduccionDTO implements Serializable {
         produccionEntity.setDescripcion(this.descripcion);
         produccionEntity.setId(this.idProduccion);
         produccionEntity.setNombre(this.nombre);
+        produccionEntity.setMultimedia(this.multimedia.toEntity());
+        produccionEntity.setClasificacionAudiencia(this.clasificacionAudiencia);
+        produccionEntity.setProductora(this.productora.toEntity());
         return produccionEntity;
     }
 
@@ -75,7 +102,7 @@ public class ProduccionDTO implements Serializable {
      *
      * @return id de la producción.
      */
-    public long darIdProduccion() {
+    public Long darIdProduccion() {
         return idProduccion;
     }
 
@@ -130,7 +157,7 @@ public class ProduccionDTO implements Serializable {
      * @return clasificacionAudiencia clasificación de audiencia de la
      * producción.
      */
-    public ProduccionEntity.ClasificacionAudiencia darClasificacionAudiencia() {
+    public ClasificacionAudiencia darClasificacionAudiencia() {
         return clasificacionAudiencia;
     }
 
@@ -140,7 +167,7 @@ public class ProduccionDTO implements Serializable {
      * @param clasificacionAudiencia nueva clasificación de audiencia de la
      * producción.
      */
-    public void setClasificacionAudiencia(ProduccionEntity.ClasificacionAudiencia clasificacionAudiencia) {
+    public void setClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
         this.clasificacionAudiencia = clasificacionAudiencia;
     }
 
@@ -149,7 +176,7 @@ public class ProduccionDTO implements Serializable {
      *
      * @return calificacionPromedio calificación promedio de la producción.
      */
-    public int getCalificacionPromedio() {
+    public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
@@ -162,4 +189,39 @@ public class ProduccionDTO implements Serializable {
         this.calificacionPromedio = calificacionPromedio;
     }
 
+    /**
+     * Getter de la multimedia de la producción.
+     *
+     * @return DTO de multimedia de la producción
+     */
+    public MultimediaDTO getMultimedia() {
+        return multimedia;
+    }
+
+    /**
+     * Setter de la multimedia de una producción.
+     *
+     * @param multimedia nueva multimedia de la producción.
+     */
+    public void setMultimedia(MultimediaDTO multimedia) {
+        this.multimedia = multimedia;
+    }
+
+    /**
+     * Getter de la productora de una producción.
+     *
+     * @return DTO de productora de la producción.
+     */
+    public ProductoraDTO getProductora() {
+        return productora;
+    }
+
+    /**
+     * Setter de la productora de una producción.
+     *
+     * @param productora nueva productora de la producción.
+     */
+    public void setProductora(ProductoraDTO productora) {
+        this.productora = productora;
+    }
 }

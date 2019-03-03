@@ -67,23 +67,11 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     private ProductoraEntity productora;
     
     /**
-     * Relación entre producción y estado.
-     */
-    @PodamExclude
-    @OneToOne
-    private EstadoEntity estado;
-    
-    /**
      * Relación entre producción y reseña.
      */
     @PodamExclude
     @OneToMany(fetch=LAZY)
     private List<ResenaEntity> resenas;
-    
-    /**
-     * Id de la producción
-     */
-    private long idProduccion;
     
     /**
      * Nombre de la producción.
@@ -103,7 +91,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     /**
      * Calificación promedio de la producción.
      */
-    private int calificacionPromedio; 
+    private Integer calificacionPromedio;
    
     /**
      * Constructor vacío de la entidad de una producción.
@@ -209,22 +197,6 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     }
     
     /**
-     * Getter del estado de la producción.
-     * @return entidad del estado de la producción.
-     */
-    public EstadoEntity getEstado() {
-        return estado;
-    }
-
-    /**
-     * Setter del estado de la producción.
-     * @param estado el nuevo estado.
-     */
-    public void setEstado(EstadoEntity estado) {
-        this.estado = estado;
-    }
-    
-    /**
      * Getter de las reseñas de la producción.
      * @return lista con las entidades de las reseñas de la producción.
      */
@@ -238,22 +210,6 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      */
     public void setResenas(List<ResenaEntity> resenas) {
         this.resenas = resenas;
-    }
-    
-    /**
-     * Getter del id de la producción.
-     * @return id de la producción.
-     */
-    public long getIdProduccion() {
-        return idProduccion;
-    }
-
-    /**
-     * Setter del id de la producción.
-     * @param idProduccion nuevo id de la producción.
-     */
-    public void setIdProduccion(long idProduccion) {
-        this.idProduccion = idProduccion;
     }
 
     /**
@@ -308,7 +264,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la calificación promedio de la producción.
      * @return calificacionPromedio calificación promedio de la producción.
      */
-    public int getCalificacionPromedio() {
+    public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
 

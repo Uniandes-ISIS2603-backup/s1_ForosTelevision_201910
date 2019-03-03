@@ -15,7 +15,7 @@ public class StaffDTO implements Serializable {
     /**
      * Id del miembro del staff de al menos una película.
      */
-    private long idStaff;
+    private Long idStaff;
 
     /**
      * Rol que cumple el staff dentro de la producción.
@@ -85,7 +85,7 @@ public class StaffDTO implements Serializable {
      *
      * @return id del miembro del staff.
      */
-    public long darIdStaff() {
+    public Long darIdStaff() {
         return idStaff;
     }
 

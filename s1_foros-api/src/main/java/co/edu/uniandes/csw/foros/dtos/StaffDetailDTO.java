@@ -26,7 +26,7 @@ public class StaffDetailDTO extends StaffDTO {
      * Constructor vacío de la clase.
      */
     public StaffDetailDTO() {
-        // Constructor vacío.
+        super();
     }
 
     /**
