@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.edu.uniandes.csw.foros.test.persistence;
 
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
@@ -108,6 +104,8 @@ public class ResenaPersistenceTest {
         Assert.assertNotNull(result);
         ResenaEntity entity = em.find(ResenaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
+        Assert.assertEquals(newEntity.getFecha(), entity.getFecha());
+        Assert.assertEquals(newEntity.getCalificacionProduccion(), entity.getCalificacionProduccion());
     }
     
      /**

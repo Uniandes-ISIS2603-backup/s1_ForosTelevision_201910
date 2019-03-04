@@ -1,16 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.edu.uniandes.csw.foros.persistence;
 
 
 import static co.edu.uniandes.csw.foros.ejb.MultimediaLogic.validateFileExtn;
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
 import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
+
+
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
-import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -23,8 +20,6 @@ import javax.persistence.TypedQuery;
  *
  * @author mi.carrascal
  */
-
-
 
 @Stateless
 public class ResenaPersistence {
