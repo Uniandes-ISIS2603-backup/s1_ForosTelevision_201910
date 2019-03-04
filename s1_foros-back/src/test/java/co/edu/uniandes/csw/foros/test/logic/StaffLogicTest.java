@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.foros.test.logic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.enums.RolStaff;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
 import java.util.ArrayList;
@@ -333,12 +334,12 @@ public class StaffLogicTest {
     @Test
     public void cambiarRolTest() {
         StaffEntity staffEntity = data.get(0);
-        StaffEntity.RolStaff viejoRol = staffEntity.getRol();
-        StaffEntity.RolStaff nuevoRol;
-        if (staffEntity.getRol() == StaffEntity.RolStaff.ACTOR) {
-            nuevoRol = StaffEntity.RolStaff.ACTORYDIRECTOR;
+        RolStaff viejoRol = staffEntity.getRol();
+        RolStaff nuevoRol;
+        if (staffEntity.getRol() == RolStaff.ACTOR) {
+            nuevoRol = RolStaff.ACTORYDIRECTOR;
         } else {
-            nuevoRol = StaffEntity.RolStaff.ACTOR;
+            nuevoRol = RolStaff.ACTOR;
         }
         try {
             staffEntity.setRol(nuevoRol);
@@ -373,7 +374,7 @@ public class StaffLogicTest {
         StaffEntity staffEntity = factory.manufacturePojo(StaffEntity.class);
         boolean pruebaExitosa = false;
         try {
-            staffLogic.cambiarRolStaff(staffEntity.getId(), StaffEntity.RolStaff.ACTOR);
+            staffLogic.cambiarRolStaff(staffEntity.getId(), RolStaff.ACTOR);
         } catch (BusinessLogicException ble) {
             pruebaExitosa = true;
         }

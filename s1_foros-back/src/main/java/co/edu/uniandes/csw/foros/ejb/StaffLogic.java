@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.foros.ejb;
 
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.enums.RolStaff;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
@@ -132,7 +133,7 @@ public class StaffLogic {
      * @throws BusinessLogicException cuando no existe un miembro del staff con
      * idStaff | nuevoRol = null.
      */
-    public StaffEntity cambiarRolStaff(Long idStaff, StaffEntity.RolStaff nuevoRol) throws BusinessLogicException {
+    public StaffEntity cambiarRolStaff(Long idStaff, RolStaff nuevoRol) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia el proceso de cambio de rol del miembro del staff");
         StaffEntity entidadEnDB = staffPersistence.find(idStaff);
         if (entidadEnDB == null) {
