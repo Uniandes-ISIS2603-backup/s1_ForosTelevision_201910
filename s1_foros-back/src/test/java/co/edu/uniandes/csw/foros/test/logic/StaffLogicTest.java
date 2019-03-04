@@ -375,6 +375,10 @@ public class StaffLogicTest {
         boolean pruebaExitosa = false;
         try {
             staffLogic.cambiarRolStaff(staffEntity.getId(), RolStaff.ACTOR);
+<<<<<<< Updated upstream
+=======
+            staffLogic.cambiarRolStaff(staffEntity.getId(), RolStaff.ACTOR);
+>>>>>>> Stashed changes
         } catch (BusinessLogicException ble) {
             pruebaExitosa = true;
         }

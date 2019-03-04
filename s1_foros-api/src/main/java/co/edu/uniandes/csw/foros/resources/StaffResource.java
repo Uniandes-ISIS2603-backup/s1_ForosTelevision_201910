@@ -2,61 +2,109 @@ package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
 import co.edu.uniandes.csw.foros.dtos.StaffDTO;
+import co.edu.uniandes.csw.foros.dtos.StaffDetailDTO;
+import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
+import co.edu.uniandes.csw.foros.ejb.StaffLogic;
+import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.inject.Inject;
+import javax.ws.rs.*;
 
 /**
  * Recurso de un miembro del staff.
  *
  * @author jf.castaneda
  */
+@Path("staff")
+@Produces("application/json")
+@Consumes("application/json")
 public class StaffResource {
 
-    private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(StaffResource.class.getName());
+
+    /**
+     * Variable para acceder a la lógica de la aplicación.
+     */
+    @Inject
+    private StaffLogic staffLogic;
+
+    /**
+     * Variable para acceder a la lógica de la producción.
+     */
+    @Inject
+    private ProduccionLogic produccionLogic;
 
     /**
      * Método que retorna un miembro del staff.
      *
      * @param id id del miembro del staff a retornar.
      * @return el DTO con la información del miembro del staff.
+     * @throws BusinessLogicException cuando no se encuentra algún atributo o la entidad es nula.
      */
     @GET
-    @Path("/staff/{id: \\d+}")
-    public StaffDTO darStaff(@PathParam("id") Long id) {
-        return new StaffDTO();
+    @Path("{id: \\d+}")
+    public StaffDTO getStaff(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "StaffResource getStaff: input: {0}", id);
+        StaffEntity staffEntity = null;
+        try {
+            staffLogic.darStaff(id);
+        } catch(BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        if (staffEntity == null) {
+            throw new WebApplicationException("El recurso /books/" + id + " no existe.", 404);
+        }
+        StaffDetailDTO staffDetailDTO = new StaffDetailDTO(staffEntity);
+        LOGGER.log(Level.INFO, "StaffResource getStaff: output: {0}", staffDetailDTO.toString());
+        return staffDetailDTO;
     }
 
     /**
      * Método que crea un miembro de staff.
      *
-     * @param jsonString string en formato json con la información del miembro
-     * del staff.
+     * @param staffDTO DTO del miembro del staff a crear
      * @return mensaje de éxito.
      */
     @POST
-    public String crearStaff(String jsonString) {
-        LOGGER.log(Level.INFO, "StaffResource crear staff: input: {0}", book.toString());
-        BookDTO nuevoBookDTO = new BookDTO(bookLogic.createBook(book.toEntity()));
-        LOGGER.log(Level.INFO, "BookResource createBook: output: {0}", nuevoBookDTO.toString());
-        return nuevoBookDTO;    }
+    public StaffDTO crearStaff(StaffDTO staffDTO) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "StaffResource crearStaff: input: {0}", staffDTO.toString());
+        StaffDTO nuevoStaffDTO;
+        try {
+            nuevoStaffDTO = new StaffDTO(staffLogic.crearStaff(staffDTO.toEntity()));
+        } catch (BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        LOGGER.log(Level.INFO, "StaffResource crearStaff: output: {0}", nuevoStaffDTO.toString());
+        return nuevoStaffDTO;
+    }
 
     /**
      * Método que actualiza la información de un miembro del staff.
      *
-     * @param jsonString string en formato json con la nueva información del
-     * miembro del staff.
-     * @return mensaje de éxito.
+     * @param id id del staff a editar.
+     * @return entidad del staff editado.
      */
     @PUT
-    public String editarStaff(String jsonString) {
-        return "staff editado";
+    @Path("{id: \\d+}")
+    public StaffDTO editarStaff(Long id, StaffDTO staffDTO) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "StaffResource editarStaff: input: id: {0} , staff: {1}", new Object[]{id, staffDTO.toString()});
+        staffDTO.editarIdStaff(id);
+        if(staffLogic.darStaff(id) == null) {
+            throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
+        }
+        StaffDetailDTO staffDetailDTO;
+        try {
+            staffDetailDTO = new StaffDetailDTO(staffLogic.editarStaff(id, staffDTO.toEntity()));
+        } catch (BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        LOGGER.log(Level.INFO, "BookResource updateBook: output: {0}", staffDetailDTO.toString());
+        return staffDetailDTO;
     }
 
     /**
@@ -66,21 +114,45 @@ public class StaffResource {
      * @return mensaje de éxito.
      */
     @DELETE
-    @Path("/staff/eliminar/{id: \\d+}")
-    public String eliminarStaff(@PathParam("id") Long id) {
-        return "staff eliminado";
+    @Path("{id: \\d+}")
+    public void eliminarStaff(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "StaffResource eliminarStaff: input: {0}", id);
+        StaffEntity entity = staffLogic.darStaff(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
+        }
+        produccionLogic.eliminarStaff(id);
+        LOGGER.info("StaffResource eliminarStaff: output: void");
     }
-
     /**
      * Método que retorna las producciones en las que ha participado el miembro
      * del staff.
      *
-     * @param id id del staff a retornar sus producciones.
      * @return lista con los DTO de las producciones donde ha participado.
      */
     @GET
-    @Path("/staff/{id: \\d+}/producciones")
-    public List<ProduccionDTO> darProduccionesStaff(@PathParam("id") Long id) {
-        return new ArrayList<>();
+    public List<StaffDetailDTO> darTodosStaff() {
+        LOGGER.info("StaffResource darTodosStaff: input: void");
+        List<StaffDetailDTO> listaStaffDetailDTO = listEntity2DetailDTO(staffLogic.darTodosStaff());
+        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", listaStaffDetailDTO.toString());
+        return listaStaffDetailDTO;
+    }
+
+    /**
+     * Convierte una lista de entidades a DTO.
+     *
+     * Este método convierte una lista de objetos BookEntity a una lista de
+     * objetos BookDetailDTO (json)
+     *
+     * @param entityList corresponde a la lista de libros de tipo Entity que
+     * vamos a convertir a DTO.
+     * @return la lista de libros en forma DTO (json)
+     */
+    private List<StaffDetailDTO> listEntity2DetailDTO(List<StaffEntity> entityList) {
+        List<StaffDetailDTO> list = new ArrayList<>();
+        for (StaffEntity entity : entityList) {
+            list.add(new StaffDetailDTO(entity));
+        }
+        return list;
     }
 }
