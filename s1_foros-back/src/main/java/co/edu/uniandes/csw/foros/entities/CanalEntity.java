@@ -14,7 +14,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author 
+ * @author mi.carrascal
  */
 @Entity
 public class CanalEntity extends BaseEntity implements Serializable {
