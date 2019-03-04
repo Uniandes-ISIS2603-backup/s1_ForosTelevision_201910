@@ -3,6 +3,8 @@ package co.edu.uniandes.csw.foros.ejb;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
+import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -22,6 +24,12 @@ public class ProduccionLogic {
      */
     @Inject
     private ProduccionPersistence produccionPersistence;
+
+    /**
+     * Inyección de los miembros del staff.
+     */
+    @Inject
+    private StaffPersistence staffPersistence;
     
     public void crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del una producción.");
@@ -53,9 +61,19 @@ public class ProduccionLogic {
         // Validación relación multimedia.
     }
     
-     public ProduccionEntity find(Long  idProduccion)throws BusinessLogicException{
+     public ProduccionEntity find(Long idProduccion)throws BusinessLogicException{
         ProduccionEntity prod=produccionPersistence.find(idProduccion);
         if(prod==null) throw new BusinessLogicException("Produccion no registrada");
         return prod;
+     }
+
+     public void eliminarStaff(Long idProduccion, Long idStaff) throws BusinessLogicException {
+        if(idProduccion == null) {
+            throw new BusinessLogicException("El id de la producción debe existir.");
+        }
+        if(idStaff == null) {
+            throw new BusinessLogicException("El id del staff debe exisir.");
+        }
+        ProduccionEntity produccionEntity = produccionPersistence.find(idProduccion);
      }
 }

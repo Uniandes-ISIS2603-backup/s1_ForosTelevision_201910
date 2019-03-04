@@ -40,6 +40,12 @@ public class StaffResource {
     private ProduccionLogic produccionLogic;
 
     /**
+     * Variable para acceder a la lógica de la relación entre staff y producción.
+     */
+    @Inject
+    private StaffProduccionesResource staffProduccionesResource;
+
+    /**
      * Método que retorna un miembro del staff.
      *
      * @param id id del miembro del staff a retornar.
@@ -48,7 +54,7 @@ public class StaffResource {
      */
     @GET
     @Path("{id: \\d+}")
-    public StaffDTO getStaff(@PathParam("id") Long id) throws BusinessLogicException {
+    public StaffDTO darStaff(@PathParam("id") Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "StaffResource getStaff: input: {0}", id);
         StaffEntity staffEntity = null;
         try {
@@ -121,7 +127,8 @@ public class StaffResource {
         if (entity == null) {
             throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
         }
-        produccionLogic.eliminarStaff(id);
+        staffProduccionesResource.eliminarProducciones();
+        staffLogic.eliminarStaff(id);
         LOGGER.info("StaffResource eliminarStaff: output: void");
     }
     /**

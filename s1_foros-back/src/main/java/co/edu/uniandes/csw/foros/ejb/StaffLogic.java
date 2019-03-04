@@ -51,7 +51,7 @@ public class StaffLogic {
      * @param url ruta de la imagen a agregar.
      * @return true si es correcta, false si no.
      */
-    public boolean rutaImagenCorrecta(String url) {
+    private boolean rutaImagenCorrecta(String url) {
         Matcher mtch = RUTA_IMAGENES.matcher(url);
         return mtch.matches();
     }
