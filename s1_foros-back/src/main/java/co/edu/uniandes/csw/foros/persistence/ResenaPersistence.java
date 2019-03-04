@@ -1,6 +1,12 @@
 
 package co.edu.uniandes.csw.foros.persistence;
 
+
+import static co.edu.uniandes.csw.foros.ejb.MultimediaLogic.validateFileExtn;
+import co.edu.uniandes.csw.foros.entities.CanalEntity;
+import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
+
+
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import java.util.List;
 import java.util.logging.Logger;
@@ -55,6 +61,15 @@ public class ResenaPersistence {
         return query.getResultList();
     }
     
+    
+       /**
+     * Actualiza una reseña
+     * @return una reseña con los cambios aplicados.
+     */
+    public ResenaEntity update(ResenaEntity resenaEntity) {
+        LOGGER.log(Level.INFO, "Actualizando el canal con id={0}", resenaEntity.getId());
+        return em.merge(resenaEntity);
+    }
     
     /**
      * Método que borra una reseña.

@@ -32,13 +32,13 @@ public class CanalLogic {
  
     }
     
-    public CanalEntity agregarRating(Double rating,Long idCanal) throws BusinessLogicException
+    public CanalEntity agregarRating(CanalEntity canal,Double rating ) throws BusinessLogicException
     {
         if(rating<0)
         {
             throw new BusinessLogicException("El rating no puede ser negativo");
         }
-        CanalEntity canal=canalPersistence.find(idCanal);
+        CanalEntity canal1=canalPersistence.create(canal);
         return canal;
     }
     
