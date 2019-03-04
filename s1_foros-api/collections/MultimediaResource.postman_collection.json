@@ -1,0 +1,148 @@
+{
+	"info": {
+		"_postman_id": "60f759f4-c830-4b36-9839-6f7c5d8d53d1",
+		"name": "MultimediaUsuario",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Multimedia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91a19b6b-0c74-4109-8caa-1ed5855a6f94",
+						"exec": [
+							"var response=JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"new_id\",response.data.id);",
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\":201,\r\n\"portada\": \"https://aws.amazon.com/s3/file/e43l33a/portada.jpg\",\r\n\"video\":\"https://www.youtube.com/watch?v=Z3F9DHpuPS8&t=497s\",\r\n\"imagenes\":[\r\n   {\r\n     \"url\":\"https://aws.amazon.com/s3/file/e43l33a/portada2.jpg\"\r\n   },\r\n   {\r\n     \"url\":\"https://aws.amazon.com/s3/file/e43l33a/portada2.jpg\"\r\n   }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/multimedia/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"multimedia",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Multimedia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "38a2b013-f352-41ca-bc44-8bd31291c383",
+						"exec": [
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_multimedia\":{{new_id}},\n\t\"imagen\":\"https://aws.amazon.com/s3/file/e43l33a/portada2.jpg\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/multimedia/cambiar/imagen",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"multimedia",
+						"cambiar",
+						"imagen"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ModificarVideo",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1440e106-d309-49b5-9c0f-e51f2387a265",
+						"exec": [
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_multimedia\":{{new_id}},\n\t\"video\":\"https://www.youtube.com/watch?v=wHLshgKr8ms\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/multimedia/cambiar/video",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"multimedia",
+						"cambiar",
+						"video"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
