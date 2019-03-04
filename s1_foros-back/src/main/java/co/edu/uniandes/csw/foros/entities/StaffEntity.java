@@ -6,9 +6,10 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -20,11 +21,11 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class StaffEntity extends BaseEntity implements Serializable{
     
     /**
-     * Relación del miembro del staff con una producción.
+     * Relación de un miembro del staff con sus producciones.
      */
     @PodamExclude
-    @ManyToOne(fetch=LAZY)
-    private ProduccionEntity produccion;
+    @ManyToMany(fetch = LAZY)
+    private List<ProduccionEntity> producciones;
     
     /**
      * Rol que el miembro del staff puede cumplir.
@@ -62,18 +63,18 @@ public class StaffEntity extends BaseEntity implements Serializable{
     
     /**
      * Getter de las producciones con las que está relacionada un miembro del staff.
-     * @return lista con las producciones en las que ha participado el miembro del staff.
+     * @return lista con las producción en las que ha participado el miembro del staff.
      */
-    public ProduccionEntity getProducciones() {
-        return produccion;
+    public List<ProduccionEntity> getProducciones() {
+        return producciones;
     }
     
     /**
      * Setter de las producciones en las que ha participado un miembro del staff.
-     * @param producciones producciones en las que ha participado un miembro del staff.
+     * @param producción producción en las que ha participado un miembro del staff.
      */
-    public void setProducciones(ProduccionEntity producciones) {
-        this.produccion = producciones;
+    public void setProducciones(List<ProduccionEntity> producción) {
+        this.producciones = producción;
     }
 
     /**

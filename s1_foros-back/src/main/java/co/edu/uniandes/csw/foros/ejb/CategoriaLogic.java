@@ -31,7 +31,7 @@ public class CategoriaLogic {
      * registrada.
      */
     public CategoriaEntity crearProductora(CategoriaEntity entity) throws BusinessLogicException {
-        if (persitence.findByName(entity.getNombre()) != null) {
+        if (persitence.find(entity.getId()) != null) {
             throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
         }
         persitence.create(entity);

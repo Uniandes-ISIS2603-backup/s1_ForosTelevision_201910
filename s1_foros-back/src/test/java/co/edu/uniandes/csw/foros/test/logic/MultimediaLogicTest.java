@@ -29,8 +29,6 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
 public class MultimediaLogicTest {
     
     @Inject
-    private MultimediaPersistence MultimediaPersistence;
-    @Inject
     private MultimediaLogic logic;
 
     @PersistenceContext
@@ -133,7 +131,19 @@ public class MultimediaLogicTest {
     } 
     
     /**
-     * Prueba para crear un recurso un archivo de formato  soportado y agregarlo
+     * Prueba para crear un recurso video un archivo de formato  soportado y agregarlo
+     * a multimedia.
+     */
+    @Test
+    public void createMultimediaTestFileAddVideo() throws BusinessLogicException {
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        newEntity.setPortada(newEntity.getPortada()+".png");
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
+        logic.adicionarVideo(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.pp4");
+    }
+     /**
+     * Prueba para crear un recurso imagen un archivo de formato  soportado y agregarlo
      * a multimedia.
      */
     @Test
@@ -142,7 +152,37 @@ public class MultimediaLogicTest {
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
         newEntity.setPortada(newEntity.getPortada()+".png");
         MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
-        logic.adicionarVideo(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.pp4");
+        logic.adicionarImagen(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.jpg");
+    } 
+     /**
+     * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
+     * a multimedia.
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void createMultimediaTestFileAddImgInvalid() throws BusinessLogicException {
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        newEntity.setPortada(newEntity.getPortada()+".png");
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
+        logic.adicionarImagen(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.slsls");
+    } 
+    
+     /**
+     * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
+     * a multimedia.
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void createMultimediaTestFileAddVideoInvalid() throws BusinessLogicException {
+        logic.adicionarVideo(-1L, "https://s3-sa-east-1.amazonaws.com/forostv/game.slsls");
+    }
+    
+    @Test(expected=BusinessLogicException.class)
+    public void darRecursosTest() throws BusinessLogicException {
+        PodamFactory factory = new PodamFactoryImpl();
+        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
+        newEntity.setPortada(newEntity.getPortada()+".png");
+        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
+        Assert.assertNull(logic.darRecursosMultimediaProduccion(result.getId()));
     } 
 }
 

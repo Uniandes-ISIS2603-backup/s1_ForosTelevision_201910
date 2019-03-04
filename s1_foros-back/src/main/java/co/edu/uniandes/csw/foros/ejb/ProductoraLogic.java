@@ -37,7 +37,9 @@ public class ProductoraLogic {
      * registrada.
      */
     public ProductoraEntity crearProductora(ProductoraEntity entity) throws BusinessLogicException {
+
         if (productoraPersistence.findByName(entity.getNombre()).size()!=0) {
+
             throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
         }
        productoraPersistence.create(entity);
@@ -79,5 +81,11 @@ public class ProductoraLogic {
         productoraPersistence.delete(productoraId);
 
     }
+    
+    public ProductoraEntity find(Long  idProduccion)throws BusinessLogicException{
+        ProductoraEntity prod=productoraPersitence.find(idProduccion);
+        if(prod==null) throw new BusinessLogicException("Produccion no registrada");
+        return prod;
+     }
 
 }

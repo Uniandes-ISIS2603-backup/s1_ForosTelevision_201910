@@ -3,6 +3,7 @@ package co.edu.uniandes.csw.foros.ejb;
 
 import co.edu.uniandes.csw.foros.entities.ArchivoEntity;
 import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ArchivoPersistence;
 import co.edu.uniandes.csw.foros.persistence.MultimediaPersistence;
@@ -23,6 +24,8 @@ public class MultimediaLogic {
     
     @Inject
     private ArchivoPersistence ap;
+    
+    @Inject ProduccionLogic produccion;
     
     private static Pattern fileExtnPtrn = Pattern.compile("([^\\s]+(\\.(?i)(png|jpg))$)");
      
@@ -68,4 +71,11 @@ public class MultimediaLogic {
         ent.setVideos(url);
         return mp.update(ent);
     }
+    
+    public MultimediaEntity darRecursosMultimediaProduccion(Long idProduccion) throws BusinessLogicException{
+        ProduccionEntity entProd=produccion.find(idProduccion);
+        return entProd.getMultimedia();
+    }
+    
+    
 }

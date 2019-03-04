@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import java.io.Serializable;
 
 /**
@@ -9,12 +10,6 @@ import java.io.Serializable;
  */
 public class ProduccionDTO implements Serializable {
 
-    /**
-     * Clasificacion de audiencias para las producciones.
-     */
-    public enum ClasificacionAudiencia {
-        FAMILIAR, INFANTIL, ADOLESCENTES, ADULTOS
-    }
 
     /**
      * Id de la producción
@@ -34,7 +29,7 @@ public class ProduccionDTO implements Serializable {
     /**
      * Clasificación de audiencia de la producción.
      */
-    private ClasificacionAudiencia clasificacionAudiencia;
+    private ProduccionEntity.ClasificacionAudiencia clasificacionAudiencia;
 
     /**
      * Calificación promedio de la producción.
@@ -46,6 +41,14 @@ public class ProduccionDTO implements Serializable {
      */
     public ProduccionDTO() {
 
+    }
+    
+    public ProduccionDTO(ProduccionEntity ent){
+       this.nombre=ent.getNombre();
+       this.descripcion=ent.getDescripcion();
+       this.clasificacionAudiencia=ent.getClasificacionAudiencia();
+       this.idProduccion=ent.getId();
+       this.calificacionPromedio=ent.getCalificacionPromedio();
     }
 
     /**
@@ -108,7 +111,7 @@ public class ProduccionDTO implements Serializable {
      * @return clasificacionAudiencia clasificación de audiencia de la
      * producción.
      */
-    public ClasificacionAudiencia darClasificacionAudiencia() {
+    public ProduccionEntity.ClasificacionAudiencia darClasificacionAudiencia() {
         return clasificacionAudiencia;
     }
 
@@ -118,7 +121,7 @@ public class ProduccionDTO implements Serializable {
      * @param clasificacionAudiencia nueva clasificación de audiencia de la
      * producción.
      */
-    public void setClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
+    public void setClasificacionAudiencia(ProduccionEntity.ClasificacionAudiencia clasificacionAudiencia) {
         this.clasificacionAudiencia = clasificacionAudiencia;
     }
 

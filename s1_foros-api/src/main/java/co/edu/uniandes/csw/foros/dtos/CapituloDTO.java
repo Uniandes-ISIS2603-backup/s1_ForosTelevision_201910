@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.dtos;
 
 import java.io.Serializable;
@@ -41,42 +36,42 @@ public class CapituloDTO implements Serializable {
     }
     
     /**
-     * @return the id
+     * @return el identificador de Capitulo
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * @param id modifica el identificador de recurso
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the duracion
+     * @return duracion del capitulo
      */
     public int getDuracion() {
         return duracion;
     }
 
     /**
-     * @param duracion the duracion to set
+     * @param duracion en minutos de capitulo
      */
     public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
     /**
-     * @return the nombre
+     * @return nombre del capitulo
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param nombre representativo de capitulo
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;

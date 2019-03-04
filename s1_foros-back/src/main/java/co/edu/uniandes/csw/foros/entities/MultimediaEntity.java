@@ -5,7 +5,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 /**
  *

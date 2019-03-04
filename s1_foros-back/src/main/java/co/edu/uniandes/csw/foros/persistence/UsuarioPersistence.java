@@ -66,8 +66,8 @@ public class UsuarioPersistence {
      */
     
      public List<UsuarioEntity>findEmail(String email){
-        TypedQuery<UsuarioEntity> tp=em.createQuery("SELECT u FROM UsuarioEntity u WHERE u.email = :email",UsuarioEntity.class);
-        tp.setParameter("email",email);
+        TypedQuery<UsuarioEntity> tp=em.createQuery("SELECT u FROM UsuarioEntity u WHERE u.email LIKE :em",UsuarioEntity.class);
+        tp.setParameter("em","%"+email+"%");
         return tp.getResultList();
     }
     

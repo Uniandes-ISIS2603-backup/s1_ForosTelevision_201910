@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.LAZY;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -33,7 +34,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Relación entre producción y staff.
      */
     @PodamExclude
-    @OneToMany(mappedBy="produccion", fetch=LAZY)
+    @ManyToMany(fetch=LAZY)
     private List<StaffEntity> staff;
     
     /**
@@ -145,7 +146,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter del staff de la producción.
      * @param staff los nuevos miembros del staff.
      */
-    private void setStaff(List<StaffEntity> staff) {
+    public void setStaff(List<StaffEntity> staff) {
         this.staff = staff;
     }
     
