@@ -6,13 +6,9 @@
 package co.edu.uniandes.csw.foros.test.logic;
 
 import co.edu.uniandes.csw.foros.ejb.CategoriaLogic;
-import co.edu.uniandes.csw.foros.ejb.ProductoraLogic;
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
-import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CategoriaPersistence;
-import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
-import co.edu.uniandes.csw.foros.persistence.ProductoraPersistence;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
@@ -36,10 +32,10 @@ import uk.co.jemos.podam.api.PodamFactoryImpl;
  */
 @RunWith(Arquillian.class)
 public class CategoriaLogicTest {
-    
-    
-     @Inject
+
+    @Inject
     private CategoriaPersistence persitence;
+   
     @Inject
     private CategoriaLogic logic;
 
@@ -120,6 +116,4 @@ public class CategoriaLogicTest {
         Assert.assertEquals(newEntity.getId(), entity.getId());
     }
 
-  
-    
 }

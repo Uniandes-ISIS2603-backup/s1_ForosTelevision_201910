@@ -119,5 +119,34 @@ public class ProductoraLogicTest {
 
   
 
-  
+  /**
+     * Prueba para consultar la lista de Productoras.
+     */
+    @Test
+    public void getProductorasTest() {
+        List<ProductoraEntity> list = logic.getProductoras();
+        Assert.assertEquals(data.size(), list.size());
+        for (ProductoraEntity entity : list) {
+            boolean found = false;
+            for (ProductoraEntity storedEntity : data) {
+                if (entity.getId().equals(storedEntity.getId())) {
+                    found = true;
+                }
+            }
+            Assert.assertTrue(found);
+        }
+    }
+
+    /**
+     * Prueba para consultar un Productora.
+     */
+    @Test
+    public void getProductoraTest() {
+        ProductoraEntity entity = data.get(0);
+        ProductoraEntity resultEntity = logic.getProductora(entity.getId());
+        Assert.assertNotNull(resultEntity);
+        Assert.assertEquals(entity.getId(), resultEntity.getId());
+        Assert.assertEquals(entity.getNombre(), resultEntity.getNombre());
+    }
+
 }
