@@ -43,9 +43,8 @@ public class MultimediaResource {
      * @throws BusinessLogicException si el formato de archivos no es adecuado
      */
     @POST
-    public UtilRespuesta<String> crearMultimedia(MultimediaDTO multimediaDTO) throws BusinessLogicException{
-        logicMultimedia.crearRecursoMultimedia(multimediaDTO.toEntity());
-        return new UtilRespuesta<>(200,"Recurso multimedia creado");
+    public UtilRespuesta<MultimediaDTO> crearMultimedia(MultimediaDTO multimediaDTO) throws BusinessLogicException{
+        return new UtilRespuesta<>(200,new MultimediaDTO(logicMultimedia.crearRecursoMultimedia(multimediaDTO.toEntity())));
     }
     
     /**
@@ -55,7 +54,7 @@ public class MultimediaResource {
      * @throws BusinessLogicException ulr o recurso no encontrado 
      */
     @POST
-    @Path("cambiar/imagen")
+    @Path("/cambiar/imagen")
     public UtilRespuesta<String> adicionarImagenMultimedia(String json) throws BusinessLogicException{
         JsonElement jelement = new JsonParser().parse(json);
         JsonObject inobj = jelement.getAsJsonObject();
@@ -70,7 +69,7 @@ public class MultimediaResource {
      * @throws BusinessLogicException url de formato no valido 
      */
     @POST
-    @Path("cambiar/video")
+    @Path("/cambiar/video")
     public UtilRespuesta<String> cambiarVideoMultimedia(String json) throws BusinessLogicException{
         JsonElement jelement = new JsonParser().parse(json);
         JsonObject inobj = jelement.getAsJsonObject();

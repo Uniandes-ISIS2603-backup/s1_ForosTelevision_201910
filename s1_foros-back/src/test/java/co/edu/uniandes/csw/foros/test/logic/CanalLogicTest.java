@@ -132,6 +132,17 @@ public class CanalLogicTest {
         canalLogic.createCanal(newCanalEntity);
     }
     
+     @Test
+    public void agregarRatingTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        CanalEntity newCanalEntity=factory.manufacturePojo(CanalEntity.class);
+        CanalEntity result= canalLogic.agregarRating(newCanalEntity,newCanalEntity.getRating());
+        Assert.assertNotNull(result);
+        CanalEntity entity=em.find(CanalEntity.class,result.getId());
+        Assert.assertEquals(newCanalEntity.getId(),entity.getId());
+        Assert.assertEquals(newCanalEntity.getRating(),entity.getRating());
+  }
     
 //  
   
