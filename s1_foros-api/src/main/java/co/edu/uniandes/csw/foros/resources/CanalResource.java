@@ -9,7 +9,9 @@ import co.edu.uniandes.csw.foros.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.foros.ejb.CanalLogic;
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
+import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -22,20 +24,22 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author mi.carrascal
  */
 @Path("canales")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
 public class CanalResource {
-    
+    @Inject
     private CanalLogic logica;
+     private static final Logger LOGGER= Logger.getLogger(UsuarioResource.class.getName());
     
+    //Prueba postman
     @POST
     public CanalDTO crearCanal(CanalDTO canalDTO) throws BusinessLogicException
     {
-       
+    
         CanalEntity canalEntity=canalDTO.toEntity();
         canalEntity =logica.createCanal(canalEntity);
         return new CanalDTO (canalEntity);
