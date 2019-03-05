@@ -29,10 +29,10 @@ public class ProduccionStaffLogic {
     public void eliminarStaff(Long staffId) {
         LOGGER.log(Level.INFO, "Inicia proceso de borrar el staff con id = {0}", staffId);
         StaffEntity staffEntity = staffPersistence.find(staffId);
-        ProduccionEntity produccionEntity = produccionPersistence.find(staffEntity.getEditorial().getId());
-        bookEntity.setEditorial(null);
-        editorialEntity.getBooks().remove(bookEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de borrar la Editorial del libro con id = {0}", bookEntity.getId());
+        //ProduccionEntity produccionEntity = produccionPersistence.find(staffEntity.getEditorial().getId());
+        //bookEntity.setEditorial(null);
+        //editorialEntity.getBooks().remove(bookEntity);
+        //LOGGER.log(Level.INFO, "Termina proceso de borrar la Editorial del libro con id = {0}", bookEntity.getId());
     }
 
 }

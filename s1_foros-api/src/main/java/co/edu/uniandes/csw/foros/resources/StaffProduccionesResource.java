@@ -32,12 +32,13 @@ public class StaffProduccionesResource {
     @Path("{idStaff: \\d+}/{idProduccion: \\d+}")
     public ProduccionDetailDTO addProduccion(@PathParam("idStaff") Long idStaff, @PathParam("idProduccion") Long idProduccion) {
         LOGGER.log(Level.INFO, "StaffProduccionesResource addProduccion: input: booksId {0} , authorsId {1}", new Object[]{idStaff, idProduccion});
-        if (produccionLogic.darProduccion(idProduccion) == null) {
-            throw new WebApplicationException("El recurso /producciones/" + idProduccion + " no existe.", 404);
-        }
-        ProduccionDetailDTO detailDTO = new ProduccionDetailDTO(staffProduccionesLogic.addProduccion(idStaff, idProduccion));
-        LOGGER.log(Level.INFO, "StaffProduccionesResource addProduccion: output: {0}", detailDTO.toString());
-        return detailDTO;
+        //if (produccionLogic.darProduccion(idProduccion) == null) {
+            //throw new WebApplicationException("El recurso /producciones/" + idProduccion + " no existe.", 404);
+        //}
+        //ProduccionDetailDTO detailDTO = new ProduccionDetailDTO(staffProduccionesLogic.addProduccion(idStaff, idProduccion));
+        //LOGGER.log(Level.INFO, "StaffProduccionesResource addProduccion: output: {0}", detailDTO.toString());
+        //return detailDTO;
+        return null;
     }
 
 }

@@ -13,24 +13,29 @@ import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
 import co.edu.uniandes.csw.foros.dtos.ProductoraDTO;
 import co.edu.uniandes.csw.foros.dtos.ResenaDTO;
 import co.edu.uniandes.csw.foros.dtos.StaffDTO;
+import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
+import co.edu.uniandes.csw.foros.ejb.StaffLogic;
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
+import javax.ws.rs.*;
 
 /**
  * Recurso de una producción.
  *
  * @author jf.castaneda
  */
+@Path("producciones")
+@Produces("application/json")
+@Consumes("application/json")
 public class ProduccionResource {
 
-    private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProduccionResource.class.getName());
+
+    private ProduccionLogic produccionLogic;
 
     /**
      * Método que retorna una producción.
@@ -39,9 +44,21 @@ public class ProduccionResource {
      * @return el DTO con la información de la producción.
      */
     @GET
-    @Path("/producciones/{id: \\d+}")
+    @Path("{id: \\d+}")
     public ProduccionDTO darProduccion(@PathParam("id") Long id) {
-        return new ProduccionDTO();
+        LOGGER.log(Level.INFO, "ProduccionResource darProduccion: input: {0}", id);
+        ProduccionEntity produccionEntity = null;
+        try {
+            produccionLogic.darProduccion(id);
+        } catch(BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        if (staffEntity == null) {
+            throw new WebApplicationException("El recurso /books/" + id + " no existe.", 404);
+        }
+        StaffDetailDTO staffDetailDTO = new StaffDetailDTO(staffEntity);
+        LOGGER.log(Level.INFO, "StaffResource getStaff: output: {0}", staffDetailDTO.toString());
+        return staffDetailDTO;
     }
 
     /**

@@ -70,6 +70,7 @@ public class StaffLogic {
         return staffPersistence.find(id);
     }
 
+
     public List<StaffEntity> darTodosStaff() {
         LOGGER.log(Level.INFO, "Inicia proceso de búsqueda de los miembros del staff");
         return staffPersistence.getAll();
@@ -89,7 +90,57 @@ public class StaffLogic {
      */
     public StaffEntity crearStaff(StaffEntity staffEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación del miembro del staff.");
-        // Validación atributo rol.
+        comprobarReglasDeNegocio(staffEntity);
+        staffEntity = staffPersistence.create(staffEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de creación del miembro del staff");
+        return staffEntity;
+    }
+
+    /**
+     * Método que edita un staff.
+     *
+     * @param idStaff id del staff a modificar.
+     * @param nuevaStaffEntity entidad del staff con la nueva información.
+     * @return entidad modificada.
+     * @throws BusinessLogicException cuando algún atributo es erróneo.
+     */
+    public StaffEntity editarStaff(Long idStaff, StaffEntity nuevaStaffEntity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el staff con id = {0}", idStaff);
+        if(idStaff == null) {
+            throw new BusinessLogicException("El id del staff debe existir");
+        }
+        comprobarReglasDeNegocio(nuevaStaffEntity);
+        StaffEntity staffEntity = staffPersistence.update(nuevaStaffEntity);
+        return staffEntity;
+    }
+
+    /**
+     * Método que elimina un miembro del staff.
+     *
+     * @param idStaff id del staff a eliminar.
+     * @return entidad del staff que se eliminó.
+     * @throws BusinessLogicException si no existe un miembro del staff con ese
+     * id.
+     */
+    public StaffEntity eliminarStaff(Long idStaff) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de eliminación del miembro del staff.");
+        StaffEntity staffEntity = staffPersistence.find(idStaff);
+        if (staffEntity == null) {
+            throw new BusinessLogicException("No existe un miembro del staff con ese id.");
+        }
+        staffPersistence.delete(idStaff);
+        LOGGER.log(Level.INFO, "Termina proceso de eliminación del miembro del staff.");
+        return staffEntity;
+    }
+
+    /**
+     * Método que comprueba las reglas de negocio.
+     *
+     * @param staffEntity entidad a comprobar.
+     * @throws BusinessLogicException cuando alguno de los atributos no cumple con una regla de negocio.
+     */
+    private void comprobarReglasDeNegocio(StaffEntity staffEntity) throws BusinessLogicException {
+        // Validación atributo staff.
         if (staffEntity.getRol() == null) {
             throw new BusinessLogicException("El rol de un miembro del staff debe existir.");
         }
@@ -118,68 +169,5 @@ public class StaffLogic {
         if (staffEntity.getProducciones() == null) {
             throw new BusinessLogicException("Las producciones de un miembro del staff deben exisitir.");
         }
-        staffPersistence.create(staffEntity);
-        LOGGER.log(Level.INFO, "Termina proceso de creación del miembro del staff");
-        return staffEntity;
-    }
-
-    /**
-     * Método que edita un staff.
-     *
-     * @param idStaff id del staff a modificar.
-     * @param nuevaStaffEntity entidad del staff con la nueva información.
-     * @return entidad modificada.
-     * @throws BusinessLogicException cuando algún atributo es erróneo.
-     */
-    public StaffEntity editarStaff(Long idStaff, StaffEntity nuevaStaffEntity) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de actualizar el staff con id = {0}", idStaff);
-        if(idStaff == null) {
-            throw new BusinessLogicException("El id del staff a actualizar debe existir");
-        }
-        if (nuevaStaffEntity.getRol() == null) {
-            throw new BusinessLogicException("El nuevo rol no existe");
-        }
-        if (nuevaStaffEntity.getNombre() == null) {
-            throw new BusinessLogicException("El nuevo nombre no existe");
-        }
-        if (nuevaStaffEntity.getNombre().equals("")) {
-            throw new BusinessLogicException("El nuevo nombre es vacío");
-        }
-        if (nuevaStaffEntity.getDescripcion() == null) {
-            throw new BusinessLogicException("La nueva descripcion no existe");
-        }
-        if (nuevaStaffEntity.getDescripcion().equals("")) {
-            throw new BusinessLogicException("La nueva descripcion es vacía");
-        }
-        if (nuevaStaffEntity.getFoto() == null) {
-            throw new BusinessLogicException("La nueva foto no existe");
-        }
-        if (!rutaImagenCorrecta(nuevaStaffEntity.getFoto())) {
-            throw new BusinessLogicException("La nueva foto es vacía");
-        }
-        if(nuevaStaffEntity.getProducciones() == null) {
-            throw new BusinessLogicException("Las nuevas producciones no existen");
-        }
-        StaffEntity staffEntity = staffPersistence.update(nuevaStaffEntity);
-        return staffEntity;
-    }
-
-    /**
-     * Método que elimina un miembro del staff.
-     *
-     * @param idStaff id del staff a eliminar.
-     * @return entidad del staff que se eliminó.
-     * @throws BusinessLogicException si no existe un miembro del staff con ese
-     * id.
-     */
-    public StaffEntity eliminarStaff(Long idStaff) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "Inicia proceso de eliminación del miembro del staff.");
-        StaffEntity staffEntity = staffPersistence.find(idStaff);
-        if (staffEntity == null) {
-            throw new BusinessLogicException("No existe un miembro del staff con ese id.");
-        }
-        staffPersistence.delete(idStaff);
-        LOGGER.log(Level.INFO, "Termina proceso de eliminación del miembro del staff.");
-        return staffEntity;
     }
 }
