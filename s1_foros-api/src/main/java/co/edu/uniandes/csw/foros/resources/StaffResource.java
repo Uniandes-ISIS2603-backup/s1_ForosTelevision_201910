@@ -55,18 +55,18 @@ public class StaffResource {
     @GET
     @Path("{id: \\d+}")
     public StaffDTO darStaff(@PathParam("id") Long id) throws BusinessLogicException {
-        LOGGER.log(Level.INFO, "StaffResource getStaff: input: {0}", id);
+        LOGGER.log(Level.INFO, "StaffResource darStaff: input: {0}", id);
         StaffEntity staffEntity = null;
         try {
-            staffLogic.darStaff(id);
+            staffEntity = staffLogic.darStaff(id);
+            if (staffEntity == null) {
+                throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
+            }
         } catch(BusinessLogicException ble) {
             throw new WebApplicationException(ble.getMessage(), 412);
         }
-        if (staffEntity == null) {
-            throw new WebApplicationException("El recurso /books/" + id + " no existe.", 404);
-        }
         StaffDetailDTO staffDetailDTO = new StaffDetailDTO(staffEntity);
-        LOGGER.log(Level.INFO, "StaffResource getStaff: output: {0}", staffDetailDTO.toString());
+        LOGGER.log(Level.INFO, "StaffResource darStaff: output: {0}", staffDetailDTO.toString());
         return staffDetailDTO;
     }
 
@@ -74,7 +74,7 @@ public class StaffResource {
      * Método que crea un miembro de staff.
      *
      * @param staffDTO DTO del miembro del staff a crear
-     * @return mensaje de éxito.
+     * @return DTO del staff creado.
      */
     @POST
     public StaffDTO crearStaff(StaffDTO staffDTO) throws BusinessLogicException {
@@ -97,7 +97,7 @@ public class StaffResource {
      */
     @PUT
     @Path("{id: \\d+}")
-    public StaffDTO editarStaff(Long id, StaffDTO staffDTO) throws BusinessLogicException {
+    public StaffDTO editarStaff(@PathParam("id") Long id, StaffDTO staffDTO) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "StaffResource editarStaff: input: id: {0} , staff: {1}", new Object[]{id, staffDTO.toString()});
         staffDTO.editarIdStaff(id);
         if(staffLogic.darStaff(id) == null) {
@@ -109,7 +109,7 @@ public class StaffResource {
         } catch (BusinessLogicException ble) {
             throw new WebApplicationException(ble.getMessage(), 412);
         }
-        LOGGER.log(Level.INFO, "BookResource updateBook: output: {0}", staffDetailDTO.toString());
+        LOGGER.log(Level.INFO, "StaffResource editarStaff: output: {0}", staffDetailDTO.toString());
         return staffDetailDTO;
     }
 
@@ -127,10 +127,11 @@ public class StaffResource {
         if (entity == null) {
             throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
         }
-        staffProduccionesResource.eliminarProducciones();
+        //staffProduccionesResource.eliminarProducciones();
         staffLogic.eliminarStaff(id);
         LOGGER.info("StaffResource eliminarStaff: output: void");
     }
+
     /**
      * Método que retorna las producciones en las que ha participado el miembro
      * del staff.
@@ -141,7 +142,7 @@ public class StaffResource {
     public List<StaffDetailDTO> darTodosStaff() {
         LOGGER.info("StaffResource darTodosStaff: input: void");
         List<StaffDetailDTO> listaStaffDetailDTO = listEntity2DetailDTO(staffLogic.darTodosStaff());
-        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", listaStaffDetailDTO.toString());
+        LOGGER.log(Level.INFO, "StaffResource darTodosStaff: output: {0}", listaStaffDetailDTO.toString());
         return listaStaffDetailDTO;
     }
 

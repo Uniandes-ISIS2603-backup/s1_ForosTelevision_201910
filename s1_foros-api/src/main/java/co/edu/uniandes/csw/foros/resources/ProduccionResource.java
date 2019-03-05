@@ -5,17 +5,11 @@
  */
 package co.edu.uniandes.csw.foros.resources;
 
-import co.edu.uniandes.csw.foros.dtos.CapituloDTO;
-import co.edu.uniandes.csw.foros.dtos.CategoriaDTO;
-import co.edu.uniandes.csw.foros.dtos.EmisionDTO;
-import co.edu.uniandes.csw.foros.dtos.MultimediaDTO;
-import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
-import co.edu.uniandes.csw.foros.dtos.ProductoraDTO;
-import co.edu.uniandes.csw.foros.dtos.ResenaDTO;
-import co.edu.uniandes.csw.foros.dtos.StaffDTO;
+import co.edu.uniandes.csw.foros.dtos.*;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
+import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,136 +43,106 @@ public class ProduccionResource {
         LOGGER.log(Level.INFO, "ProduccionResource darProduccion: input: {0}", id);
         ProduccionEntity produccionEntity = null;
         try {
-            produccionLogic.darProduccion(id);
+            produccionEntity = produccionLogic.darProduccion(id);
+            if (produccionEntity == null) {
+                throw new WebApplicationException("El recurso /producciones/" + id + " no existe.", 404);
+            }
         } catch(BusinessLogicException ble) {
             throw new WebApplicationException(ble.getMessage(), 412);
         }
-        if (staffEntity == null) {
-            throw new WebApplicationException("El recurso /books/" + id + " no existe.", 404);
-        }
-        StaffDetailDTO staffDetailDTO = new StaffDetailDTO(staffEntity);
-        LOGGER.log(Level.INFO, "StaffResource getStaff: output: {0}", staffDetailDTO.toString());
+        ProduccionDetailDTO staffDetailDTO = new ProduccionDetailDTO(produccionEntity);
+        LOGGER.log(Level.INFO, "ProduccionResource darProduccion: output: {0}", staffDetailDTO.toString());
         return staffDetailDTO;
+    }
+
+    /**
+     * Método que retorna las producciones.
+     *
+     * @return lista con los DTO de las producciones.
+     */
+    @GET
+    public List<ProduccionDetailDTO> darTodasProducciones() {
+        LOGGER.info("ProduccionResource darTodosProducciones: input: void");
+        List<ProduccionDetailDTO> listaProduccionDetailDTO = listEntity2DetailDTO(produccionLogic.darTodasProducciones());
+        LOGGER.log(Level.INFO, "BookResource getBooks: output: {0}", listaProduccionDetailDTO.toString());
+        return listaProduccionDetailDTO;
     }
 
     /**
      * Método que crea una producción.
      *
-     * @param jsonString string en formato json con la información de la
-     * producción
-     * @return mensaje de éxito.
+     * @param produccionDTO DTO de la producción a crear.
+     * @return DTO de la producción creada.
      */
     @POST
-    public String crearProduccion(String jsonString) {
-        return "producción creada";
+    public ProduccionDTO crearProduccion(ProduccionDTO produccionDTO) {
+        LOGGER.log(Level.INFO, "ProduccionResource crearProduccion: input: {0}", produccionDTO.toString());
+        ProduccionDTO nuevaProduccionDTO;
+        try {
+            nuevaProduccionDTO = new ProduccionDTO(produccionLogic.crearProduccion(produccionDTO.toEntity()));
+        } catch (BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        LOGGER.log(Level.INFO, "ProduccionResource crearProduccion: output: {0}", nuevaProduccionDTO.toString());
+        return nuevaProduccionDTO;
     }
 
     /**
      * Método que actualiza la información de una producción.
      *
-     * @param jsonString string en formato json con la nueva información de la
-     * producción.
-     * @return mensaje de éxito.
+     * @param id id de la producción a editar.
+     * @return entidad de la producción editada.
      */
     @PUT
-    public String editarProduccion(String jsonString) {
-        return "producción editada";
+    @Path("{id: \\d+}")
+    public ProduccionDTO editarProduccion(@PathParam("id") Long id, ProduccionDTO produccionDTO) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ProduccionResource editarProduccion: input: id: {0} , produccion: {1}", new Object[]{id, produccionDTO.toString()});
+        produccionDTO.editarIdProduccion(id);
+        if(produccionLogic.darProduccion(id) == null) {
+            throw new WebApplicationException("El recurso /producciones/" + id + " no existe.", 404);
+        }
+        ProduccionDetailDTO produccionDetailDTO;
+        try {
+            produccionDetailDTO = new ProduccionDetailDTO(produccionLogic.editarProduccion(id, produccionDTO.toEntity()));
+        } catch (BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+        LOGGER.log(Level.INFO, "ProduccionResource editarProduccion: output: {0}", produccionDetailDTO.toString());
+        return produccionDetailDTO;
     }
 
     /**
      * Método que elimina una producción.
      *
      * @param id id de la producción a eliminar.
-     * @return mensaje de éxito.
      */
     @DELETE
-    @Path("/producciones/eliminar/{id: \\d+}")
-    public String eliminarProduccion(@PathParam("id") Long id) {
-        return "producción eliminada";
+    @Path("{id: \\d+}")
+    public void eliminarProduccion(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ProduccionResource eliminarProduccion: input: {0}", id);
+        ProduccionEntity entity = produccionLogic.darProduccion(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /producciones/" + id + " no existe.", 404);
+        }
+        produccionLogic.eliminarProduccion(id);
+        LOGGER.info("ProduccionResource eliminarProduccion: output: void");
     }
 
     /**
-     * Método que retorna el archivo multimedia asociado a la producción
+     * Convierte una lista de entidades a DTO.
      *
-     * @param id id de la producción a retornar su multimedia.
-     * @return el DTO con la multimedia de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/multimedia")
-    public MultimediaDTO darMultimediaProduccion(@PathParam("id") Long id) {
-        return new MultimediaDTO();
-    }
-
-    /**
-     * Método que retorna los miembros del staff de una producción.
+     * Este método convierte una lista de objetos BookEntity a una lista de
+     * objetos BookDetailDTO (json)
      *
-     * @param id id de la producción a retornar sus miembros del staff.
-     * @return una lista con los DTO de los miembros del staff de la producción.
+     * @param entityList corresponde a la lista de libros de tipo Entity que
+     * vamos a convertir a DTO.
+     * @return la lista de libros en forma DTO (json)
      */
-    @GET
-    @Path("/producciones/{id: \\d+}/staff")
-    public List<StaffDTO> darStaffProduccion(@PathParam("id") Long id) {
-        return new ArrayList<>();
+    private List<ProduccionDetailDTO> listEntity2DetailDTO(List<ProduccionEntity> entityList) {
+        List<ProduccionDetailDTO> list = new ArrayList<>();
+        for (ProduccionEntity entity : entityList) {
+            list.add(new ProduccionDetailDTO(entity));
+        }
+        return list;
     }
-
-    /**
-     * Método que retorna las categorías de una producción.
-     *
-     * @param id id de la producción a retornar sus categorías.
-     * @return una lista con los DTO de las categorías de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/categorias")
-    public List<CategoriaDTO> darCategoriasProduccion(@PathParam("id") Long id) {
-        return new ArrayList<>();
-    }
-
-    /**
-     * Método que retorna los capítulos de una producción.
-     *
-     * @param id id de la producción a retornar sus capítulos.
-     * @return una lista con los DTO de los capítulos de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/capitulos")
-    public List<CapituloDTO> darCapitulosProduccion(@PathParam("id") Long id) {
-        return new ArrayList<>();
-    }
-
-    /**
-     * Método que retorna las emisiones de una producción.
-     *
-     * @param id id de la producción a retornar sus emisiones.
-     * @return una lista con los DTO de las emisiones de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/emisiones")
-    public List<EmisionDTO> darEmisionesProduccion(@PathParam("id") Long id) {
-        return new ArrayList<>();
-    }
-
-    /**
-     * Método que retorna la productora de una producción.
-     *
-     * @param id de la producción a retornar su productora.
-     * @return el DTO con la productora de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/productora")
-    public ProductoraDTO darProductoraProduccion(@PathParam("id") Long id) {
-        return new ProductoraDTO();
-    }
-
-    /**
-     * Método que retorna las reseñas de una producción.
-     *
-     * @param id de la producción a retornar sus reseñas.
-     * @return una lista con los DTO de las reseñas de la producción.
-     */
-    @GET
-    @Path("/producciones/{id: \\d+}/resenas")
-    public List<ResenaDTO> darResenasProduccion(@PathParam("id") Long id) {
-        return new ArrayList<>();
-    }
-
 }
