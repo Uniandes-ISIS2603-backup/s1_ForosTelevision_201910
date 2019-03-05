@@ -61,13 +61,14 @@ public class ProduccionLogic {
         // Validación relación multimedia.
     }
     
-     public ProduccionEntity find(Long idProduccion)throws BusinessLogicException{
+     public ProduccionEntity darProduccion(Long idProduccion) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Retorna una producción.");
         ProduccionEntity prod=produccionPersistence.find(idProduccion);
         if(prod==null) throw new BusinessLogicException("Produccion no registrada");
         return prod;
      }
 
-     public void eliminarStaff(Long idProduccion, Long idStaff) throws BusinessLogicException {
+     public void darProduccion(Long idProduccion, Long idStaff) throws BusinessLogicException {
         if(idProduccion == null) {
             throw new BusinessLogicException("El id de la producción debe existir.");
         }
