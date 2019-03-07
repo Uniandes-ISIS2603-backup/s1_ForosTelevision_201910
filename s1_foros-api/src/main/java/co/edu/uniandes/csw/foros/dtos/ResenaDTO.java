@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -18,6 +19,15 @@ public class ResenaDTO implements Serializable {
     
     
     public ResenaDTO(){}
+    
+    public ResenaDTO(ResenaEntity ent){
+        this.calificacionProduccion=ent.getCalificacionProduccion();
+        this.calificacionResena=ent.getCalificacionResena();
+        this.id=ent.getId();
+        this.fecha=ent.getFecha();
+        this.descripcion=ent.getDescripcion();
+        this.recomendada=ent.isRecomendada();
+    }
     
     /**
      * @return la descripcion de la reseña
@@ -101,6 +111,17 @@ public class ResenaDTO implements Serializable {
      */
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ResenaEntity toEntity() {
+       ResenaEntity r=new ResenaEntity();
+       r.setCalificacionProduccion(calificacionProduccion);
+       r.setCalificacionResena(calificacionResena);
+       r.setDescripcion(descripcion);
+       r.setFecha(fecha);
+       r.setId(id);
+       r.setRecomendada(recomendada);
+       return r;
     }
     
 }

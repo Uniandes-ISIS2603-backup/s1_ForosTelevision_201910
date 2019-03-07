@@ -5,6 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.entities;
 
+import co.edu.uniandes.csw.foros.enums.RolStaff;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
@@ -26,13 +27,6 @@ public class StaffEntity extends BaseEntity implements Serializable{
     @PodamExclude
     @ManyToMany(fetch = LAZY)
     private List<ProduccionEntity> producciones;
-    
-    /**
-     * Rol que el miembro del staff puede cumplir.
-     */
-    public enum RolStaff {
-        ACTOR, DIRECTOR, ACTORYDIRECTOR
-    }
     
     /**
      * Nombre del miembro del staff.
@@ -71,10 +65,10 @@ public class StaffEntity extends BaseEntity implements Serializable{
     
     /**
      * Setter de las producciones en las que ha participado un miembro del staff.
-     * @param producción producción en las que ha participado un miembro del staff.
+     * @param producciones producción en las que ha participado un miembro del staff.
      */
-    public void setProducciones(List<ProduccionEntity> producción) {
-        this.producciones = producción;
+    public void setProducciones(List<ProduccionEntity> producciones) {
+        this.producciones = producciones;
     }
 
     /**

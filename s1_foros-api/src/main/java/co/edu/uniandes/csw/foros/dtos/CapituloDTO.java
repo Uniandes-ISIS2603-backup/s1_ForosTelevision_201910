@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.CapituloEntity;
 import java.io.Serializable;
 
 /**
@@ -33,6 +34,13 @@ public class CapituloDTO implements Serializable {
      */
     public CapituloDTO(){
         
+    }
+    
+    public CapituloDTO(CapituloEntity ent){
+            this.id=ent.getId();
+            this.descripcion=ent.getDescripcion();
+            this.nombre=ent.getNombre();
+            this.duracion=ent.getDuracion();
     }
     
     /**
@@ -89,6 +97,15 @@ public class CapituloDTO implements Serializable {
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    CapituloEntity toEntity() {
+        CapituloEntity cap=new CapituloEntity();
+        cap.setDescripcion(descripcion);
+        cap.setDuracion(duracion);
+        cap.setId(id);
+        cap.setNombre(nombre);
+        return cap;
     }
     
 }
