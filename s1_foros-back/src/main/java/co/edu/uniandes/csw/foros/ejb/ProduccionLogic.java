@@ -70,8 +70,11 @@ public class ProduccionLogic {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la producción con id = {0}", idProduccion);
         if (idProduccion == null) {
             LOGGER.log(Level.SEVERE, "La producción con el id = {0} no existe", idProduccion);
+            throw new BusinessLogicException( "Identificador no valido");
         }
         ProduccionEntity produccionEntity = produccionPersistence.find(idProduccion);
+        if(produccionEntity==null)
+            throw new BusinessLogicException( "La producción no existe");
         LOGGER.log(Level.INFO, "Termina proceso de consultar la producción con id = {0}", idProduccion);
         return produccionEntity;
     }
