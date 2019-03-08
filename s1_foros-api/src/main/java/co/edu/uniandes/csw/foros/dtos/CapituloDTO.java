@@ -33,7 +33,7 @@ public class CapituloDTO implements Serializable {
      * Constructor de la clase.
      */
     public CapituloDTO(){
-        
+        //Constructor vacío.
     }
     
     public CapituloDTO(CapituloEntity ent){
@@ -43,6 +43,14 @@ public class CapituloDTO implements Serializable {
             this.duracion=ent.getDuracion();
     }
     
+    public CapituloEntity toEntity(){
+        CapituloEntity entity = new CapituloEntity();
+        entity.setId(this.id);
+        entity.setDescripcion(this.descripcion);
+        entity.setNombre(this.nombre);
+        entity.setDuracion(this.duracion);
+        return entity;
+    }
     /**
      * @return el identificador de Capitulo
      */
@@ -98,14 +106,4 @@ public class CapituloDTO implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
-    CapituloEntity toEntity() {
-        CapituloEntity cap=new CapituloEntity();
-        cap.setDescripcion(descripcion);
-        cap.setDuracion(duracion);
-        cap.setId(id);
-        cap.setNombre(nombre);
-        return cap;
-    }
-    
 }

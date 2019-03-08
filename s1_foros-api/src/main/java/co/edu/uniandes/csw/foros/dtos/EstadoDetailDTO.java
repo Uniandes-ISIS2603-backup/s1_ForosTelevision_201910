@@ -1,7 +1,7 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.EstadoEntity;
 import java.io.Serializable;
-import java.util.List;
 
 /**
  *
@@ -10,28 +10,46 @@ import java.util.List;
 public class EstadoDetailDTO extends EstadoDTO implements Serializable{
     
     /**
-     * Producciones de este estado.
+     * Produccion de este estado.
      */
-    private List<ProduccionDTO> producciones;
+    private ProduccionDTO produccion;
     
     /**
      * Constructor del Estado.
      */
     public EstadoDetailDTO(){
-        
+        super();
+    }
+    
+    public EstadoDetailDTO(EstadoEntity entity){
+        super(entity);
+        if(entity!=null){
+            if(entity.getProduccion()!=null){
+                this.produccion = new ProduccionDTO(entity.getProduccion());
+            }
+        }
+    }
+    
+    @Override
+    public EstadoEntity toEntity(){
+        EstadoEntity entity = super.toEntity();
+        if(this.produccion!=null){
+            entity.setProduccion(this.produccion.toEntity());
+        }
+        return entity;
     }
 
     /**
      * @return the producciones
      */
-    public List<ProduccionDTO> getProducciones() {
-        return producciones;
+    public ProduccionDTO getProduccion() {
+        return produccion;
     }
 
     /**
-     * @param producciones the producciones to set
+     * @param produccion the producciones to set
      */
-    public void setProducciones(List<ProduccionDTO> producciones) {
-        this.producciones = producciones;
+    public void setProduccion(ProduccionDTO produccion) {
+        this.produccion = produccion;
     }
 }

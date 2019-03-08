@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.EstadoEntity;
 import java.io.Serializable;
 
 /**
@@ -22,7 +23,21 @@ public class EstadoDTO implements Serializable {
      * Constructor de la clase.
      */
     public EstadoDTO(){
-        
+        //Constructor vacío de la clase.
+    }
+    
+    public EstadoDTO(EstadoEntity entity){
+        if(entity!=null){
+            this.id = entity.getId();
+            this.estado = entity.getEstado();
+        }
+    }
+    
+    public EstadoEntity toEntity(){
+        EstadoEntity entity = new EstadoEntity();
+        entity.setId(this.getId());
+        entity.setEstado(this.getEstado());
+        return entity;
     }
     
     /**
