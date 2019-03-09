@@ -122,46 +122,89 @@ public class ResenaLogicTest {
     {
         PodamFactory factory = new PodamFactoryImpl();
         ResenaEntity newResenaEntity=factory.manufacturePojo(ResenaEntity.class);
-        ResenaEntity result= resenaLogic.createResenaDescripcion(newResenaEntity);
+        newResenaEntity.setCalificacionProduccion(1);
+         newResenaEntity.setCalificacionResena(1);
+        ResenaEntity result= resenaLogic.createResena(newResenaEntity);
         Assert.assertNotNull(result);
         ResenaEntity entity=em.find(ResenaEntity.class,result.getId());
         Assert.assertEquals(newResenaEntity.getId(),entity.getId());
         
   }
+    
+     @Test
+    public void updateResenaTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        ResenaEntity resenaEntity=factory.manufacturePojo(ResenaEntity.class);
+        long id= 2147483649L;
+         resenaEntity.setCalificacionProduccion(1);
+         resenaEntity.setCalificacionResena(1);
+        resenaEntity.setRecomendada(false);
+        resenaLogic.createResena(resenaEntity);
+        ResenaEntity actualizada=resenaLogic.update(resenaEntity);
+        Assert.assertFalse(actualizada.isRecomendada());
+        
+  }
+     @Test(expected=BusinessLogicException.class)
+    public void deleteResenaTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        ResenaEntity newResenaEntity=factory.manufacturePojo(ResenaEntity.class);
+         newResenaEntity.setCalificacionProduccion(1);
+         newResenaEntity.setCalificacionResena(1);
+        ResenaEntity result= resenaLogic.createResena(newResenaEntity);
+        resenaLogic.delete(result.getId());
+        resenaLogic.find(result.getId());
      
+  }
     
-    
-        @Test
-    public void createResenaCalificacionProduccion() throws BusinessLogicException
+     @Test
+    public void getAllResenaTest() throws BusinessLogicException
     {
+          List<ResenaEntity> resultado1=resenaLogic.getAll();
+          Integer aux=resultado1.size();
+           Integer tamL=aux+1;
+         List<ResenaEntity> lista=new ArrayList<ResenaEntity>();
         PodamFactory factory = new PodamFactoryImpl();
         ResenaEntity newResenaEntity=factory.manufacturePojo(ResenaEntity.class);
-        Integer calf=(Integer)Math.abs(newResenaEntity.getCalificacionProduccion());
-        ResenaEntity result= resenaLogic.createResenacalificacionProduccion(newResenaEntity,calf);
-        ResenaEntity entity=em.find(ResenaEntity.class,result.getId());
-        Assert.assertEquals(newResenaEntity.getId(),entity.getId());
-    }
-
+        lista.add(newResenaEntity);
+        newResenaEntity.setCalificacionProduccion(1);
+        newResenaEntity.setCalificacionResena(1);
+        ResenaEntity result= resenaLogic.createResena(newResenaEntity);
+        List<ResenaEntity> resultado=resenaLogic.getAll();
+        Integer tamR=resultado.size();
+        Assert.assertEquals(tamR.longValue(),tamL.longValue());
+//        Assert.assertEquals(result.getId(),primera.getId());
+  }
     
-    @Test
-    public void createResenaCalificacionResenaTest() throws BusinessLogicException
+    
+      @Test
+    public void getResenaTest() throws BusinessLogicException
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        ResenaEntity newResenaEntity=factory.manufacturePojo(ResenaEntity.class);
-        Integer calf=(Integer)Math.abs(newResenaEntity.getCalificacionProduccion());
-        ResenaEntity result= resenaLogic.createResenacalificacionResena(newResenaEntity,calf);
-        ResenaEntity entity=em.find(ResenaEntity.class,result.getId());
-        Assert.assertEquals(newResenaEntity.getId(),entity.getId());
+       PodamFactory factory = new PodamFactoryImpl();
+       ResenaEntity resenaEntity =factory.manufacturePojo(ResenaEntity.class);
+       resenaEntity.setCalificacionProduccion(1);
+        resenaEntity.setCalificacionResena(1);
+       ResenaEntity creada=resenaLogic.createResena(resenaEntity);
+       ResenaEntity resultado=resenaLogic.find(creada.getId());
+       Assert.assertEquals(resultado.getId(),creada.getId());
     }
     
-    @Test
-    public void createResenaFechaTest() throws BusinessLogicException
+     @Test(expected=BusinessLogicException.class)
+    public void agregarCalificacionProduccionNegativaTest() throws BusinessLogicException
     {
-        PodamFactory factory = new PodamFactoryImpl();
-        ResenaEntity newResenaEntity=factory.manufacturePojo(ResenaEntity.class);
-        Date fecha=newResenaEntity.getFecha();
-        ResenaEntity result= resenaLogic.createResenaFecha(newResenaEntity, fecha);
-        ResenaEntity entity=em.find(ResenaEntity.class,result.getId());
-        Assert.assertEquals(newResenaEntity.getId(),entity.getId());
+       PodamFactory factory = new PodamFactoryImpl();
+       ResenaEntity resenaEntity =factory.manufacturePojo(ResenaEntity.class);
+       resenaEntity.setCalificacionProduccion(-2);
+       resenaLogic.createResena(resenaEntity);
     }
+    @Test(expected=BusinessLogicException.class)
+    public void agregarCalificacionResenaNegativaTest() throws BusinessLogicException
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+       ResenaEntity resenaEntity =factory.manufacturePojo(ResenaEntity.class);
+       resenaEntity.setCalificacionResena(-2);
+       resenaLogic.createResena(resenaEntity);
+    }
+    
 }

@@ -97,6 +97,7 @@ public class MultimediaLogicTest {
 
     /**
      * Prueba para crear un recurso Multimedia.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test
     public void createMultimediaTest() throws BusinessLogicException {
@@ -111,6 +112,7 @@ public class MultimediaLogicTest {
     
     /**
      * Prueba para crear un recurso multimedia null.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test(expected=BusinessLogicException.class)
     public void createMultimediaTestFileNull() throws BusinessLogicException {
@@ -122,6 +124,7 @@ public class MultimediaLogicTest {
     
     /**
      * Prueba para crear un recurso multimedia null.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test(expected=BusinessLogicException.class)
     public void createMultimediaTestFile() throws BusinessLogicException {
@@ -133,6 +136,7 @@ public class MultimediaLogicTest {
     /**
      * Prueba para crear un recurso video un archivo de formato  soportado y agregarlo
      * a multimedia.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test
     public void createMultimediaTestFileAddVideo() throws BusinessLogicException {
@@ -145,6 +149,7 @@ public class MultimediaLogicTest {
      /**
      * Prueba para crear un recurso imagen un archivo de formato  soportado y agregarlo
      * a multimedia.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test
     public void createMultimediaTestFileAddImg() throws BusinessLogicException {
@@ -157,6 +162,7 @@ public class MultimediaLogicTest {
      /**
      * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
      * a multimedia.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test(expected=BusinessLogicException.class)
     public void createMultimediaTestFileAddImgInvalid() throws BusinessLogicException {
@@ -170,6 +176,7 @@ public class MultimediaLogicTest {
      /**
      * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
      * a multimedia.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @Test(expected=BusinessLogicException.class)
     public void createMultimediaTestFileAddVideoInvalid() throws BusinessLogicException {
@@ -180,7 +187,7 @@ public class MultimediaLogicTest {
     public void darRecursosTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        newEntity.setPortada(newEntity.getPortada()+".png");
+        newEntity.setPortada(newEntity.getPortada()+".jpg");
         MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
         Assert.assertNull(logic.darRecursosMultimediaProduccion(result.getId()));
     } 

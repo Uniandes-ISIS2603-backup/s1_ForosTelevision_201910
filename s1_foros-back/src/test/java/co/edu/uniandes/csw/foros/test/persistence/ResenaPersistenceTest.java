@@ -109,7 +109,7 @@ public class ResenaPersistenceTest {
     }
     
      /**
-     * Prueba para consultar un Author.
+     * Prueba para consultar una resena
      */
     @Test
     public void getResenaTest() {
@@ -126,7 +126,9 @@ public class ResenaPersistenceTest {
 //    @Test
 //    public void findAllTest() {
 //        List<ResenaEntity> list = rp.findAll();
-//        Assert.assertEquals(data.size(), list.size());
+//        Integer tam=list.size();
+//        Integer data1=data.size();
+//        Assert.assertEquals(data1, tam);
 //        for (ResenaEntity ent : list)+ {
 //            boolean found = false;++
 //            for (ResenaEntity entity : data) {
@@ -164,4 +166,6 @@ public class ResenaPersistenceTest {
         ResenaEntity deleted = em.find(ResenaEntity.class, entity.getId());
         Assert.assertNull(deleted);
     }
+    
+
 }
