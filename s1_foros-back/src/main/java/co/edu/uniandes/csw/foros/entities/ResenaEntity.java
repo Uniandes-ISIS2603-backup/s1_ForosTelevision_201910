@@ -28,13 +28,13 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     @ManyToOne(fetch=LAZY)
     private UsuarioEntity usuarioResena;
 
-    
-    /**
-     * Relación entre reseña y produccion.
-     */
-    @PodamExclude
-    @ManyToOne(fetch=LAZY)
-    private ProduccionEntity produccionResena;
+//    
+//    /**
+//     * Relación entre reseña y produccion.
+//     */
+//    @PodamExclude
+//    @ManyToOne(fetch=LAZY)
+//    private ProduccionEntity produccionResena;
 
     /**
      * @return the descripcion
@@ -105,6 +105,22 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     public void setCalificacionResena(Integer calificacionResena) {
         this.calificacionResena = calificacionResena;
     }
+
+    /**
+     * @return the usuarioResena
+     */
+    public UsuarioEntity getUsuarioResena() {
+        return usuarioResena;
+    }
+
+    /**
+     * @param usuarioResena the usuarioResena to set
+     */
+    public void setUsuarioResena(UsuarioEntity usuarioResena) {
+        this.usuarioResena = usuarioResena;
+    }
+
+   
 
 
 

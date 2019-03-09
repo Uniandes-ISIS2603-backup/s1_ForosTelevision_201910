@@ -53,6 +53,8 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     private Date fechaFin;
     
     /**
+<<<<<<< HEAD
+=======
      * Constructor de la clase.
      */
     public EmisionEntity(){
@@ -60,6 +62,7 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     }
 
     /**
+>>>>>>> dev
      * @return the rating
      */
     public int getRating() {
