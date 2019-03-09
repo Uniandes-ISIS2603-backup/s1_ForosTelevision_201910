@@ -1,6 +1,9 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.StaffEntity;
+import co.edu.uniandes.csw.foros.enums.RolStaff;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * DTO que representa un miembro del staff.
@@ -10,16 +13,9 @@ import java.io.Serializable;
 public class StaffDTO implements Serializable {
 
     /**
-     * Rol que el miembro del staff puede cumplir.
-     */
-    public enum RolStaff {
-        ACTOR, DIRECTOR, ACTORYDIRECTOR
-    }
-
-    /**
      * Id del miembro del staff de al menos una película.
      */
-    private long idStaff;
+    private Long idStaff;
 
     /**
      * Rol que cumple el staff dentro de la producción.
@@ -42,10 +38,46 @@ public class StaffDTO implements Serializable {
     private String descripcion;
 
     /**
-     * Constructor del DTO de un miembro del staff de al menos una película.
+     * Relación del staff con las producciones en que ha participado.
+     */
+    private List<ProduccionDTO> producciones;
+
+    /**
+     * Constructor vacío del DTO de un miembro del staff de al menos una
+     * película.
      */
     public StaffDTO() {
+        // Hecho para inicializar un DTO vacío
+    }
 
+    /**
+     * Constructor del DTO que recibe una entidad por parámetro.
+     *
+     * @param staffEntity entidad con la información del miembro del staff.
+     */
+    public StaffDTO(StaffEntity staffEntity) {
+        if (staffEntity != null) {
+            this.idStaff = staffEntity.getId();
+            this.rol = staffEntity.getRol();
+            this.descripcion = staffEntity.getDescripcion();
+            this.nombre = staffEntity.getNombre();
+            this.foto = staffEntity.getFoto();
+        }
+    }
+
+    /**
+     * Método para transformar el DTO en una entidad.
+     *
+     * @return entidad del miembro del staff.
+     */
+    public StaffEntity toEntity() {
+        StaffEntity staffEntity = new StaffEntity();
+        staffEntity.setId(this.idStaff);
+        staffEntity.setRol(this.rol);
+        staffEntity.setDescripcion(this.descripcion);
+        staffEntity.setNombre(this.nombre);
+        staffEntity.setFoto(this.foto);
+        return staffEntity;
     }
 
     /**
@@ -53,7 +85,7 @@ public class StaffDTO implements Serializable {
      *
      * @return id del miembro del staff.
      */
-    public long darIdStaff() {
+    public Long darIdStaff() {
         return idStaff;
     }
 

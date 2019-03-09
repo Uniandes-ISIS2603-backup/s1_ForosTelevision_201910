@@ -33,7 +33,7 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     private List<DiaEntity> dias;
     
     @PodamExclude
-    @ManyToOne(fetch=LAZY) 
+    @ManyToOne 
     private ProduccionEntity produccion;
     /**
      * Rating de la emision.
@@ -53,6 +53,16 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     private Date fechaFin;
     
     /**
+<<<<<<< HEAD
+=======
+     * Constructor de la clase.
+     */
+    public EmisionEntity(){
+        //Constructor vacío de la clase.
+    }
+
+    /**
+>>>>>>> dev
      * @return the rating
      */
     public int getRating() {
@@ -125,14 +135,14 @@ public class EmisionEntity extends BaseEntity implements Serializable {
     /**
      * @return the producciones
      */
-    public ProduccionEntity getProducciones() {
+    public ProduccionEntity getProduccion() {
         return produccion;
     }
 
     /**
      * @param produccion the producciones to set
      */
-    public void setProducciones(ProduccionEntity produccion) {
+    public void setProduccion(ProduccionEntity produccion) {
         this.produccion = produccion;
     }
 }

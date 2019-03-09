@@ -114,7 +114,7 @@ public class CategoriaLogicTest {
     public void creatCategoriaTest() throws BusinessLogicException {
         PodamFactory factory = new PodamFactoryImpl();
         CategoriaEntity newEntity = factory.manufacturePojo(CategoriaEntity.class);
-        CategoriaEntity result = logic.crearProductora(newEntity);
+        CategoriaEntity result = logic.crearCategoria(newEntity);
         Assert.assertNotNull(result);
         CategoriaEntity entity = em.find(CategoriaEntity.class, result.getId());
         Assert.assertEquals(newEntity.getId(), entity.getId());
