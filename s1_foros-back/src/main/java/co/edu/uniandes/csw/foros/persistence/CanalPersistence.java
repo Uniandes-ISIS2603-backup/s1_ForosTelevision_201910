@@ -6,6 +6,7 @@
 package co.edu.uniandes.csw.foros.persistence;
 
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
+import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,9 +26,7 @@ public class CanalPersistence {
     
     private static final Logger LOGGER = Logger.getLogger(UsuarioPersistence.class.getName());
     
-    
-    
-    
+  
     @PersistenceContext(unitName = "forosPU")
     protected EntityManager em;
     
@@ -72,12 +71,13 @@ public class CanalPersistence {
     
        /**
      * Actualiza un usuario.
-     * @return un usuario con los cambios aplicados.
+     * @return un canal con los cambios aplicados.
      */
     public CanalEntity update(CanalEntity canalEntity) {
         LOGGER.log(Level.INFO, "Actualizando el canal con id={0}", canalEntity.getId());
         return em.merge(canalEntity);
     }
+   
     
     
     public List<CanalEntity> findAll()
@@ -92,8 +92,10 @@ public class CanalPersistence {
      * @param canalId: id del canal a borrar
      */
     public void delete(Long resenaId) {
-        LOGGER.log(Level.INFO, "Borrando el usuario con id={0}", resenaId);
+        LOGGER.log(Level.INFO, "Borrando el canal con id={0}", resenaId);
         CanalEntity canalEntity = find(resenaId);
         em.remove(canalEntity);
     }
+    
+    
 }
