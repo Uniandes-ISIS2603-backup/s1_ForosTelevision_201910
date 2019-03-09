@@ -20,7 +20,8 @@ public class ResenaDTO implements Serializable {
     private Long id;
     private UsuarioDTO usuario;
     
-    public ResenaDTO(){}
+    public ResenaDTO()
+    {}
     
     public ResenaDTO(ResenaEntity resenaEntity)
     {
