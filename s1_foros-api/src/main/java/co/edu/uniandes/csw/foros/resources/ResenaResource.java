@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -22,7 +23,7 @@ import javax.ws.rs.Produces;
 
 /**
  *
- * @author estudiante
+ * @author mi.carrascal
  */
 @Path("resenas")
 @Produces("application/json")
@@ -31,20 +32,23 @@ import javax.ws.rs.Produces;
 public class ResenaResource {
     
     private static final Logger LOGGER= Logger.getLogger(ResenaResource.class.getName());
+    @Inject
     private ResenaLogic resenaLogic;
     
       
     @POST
     public ResenaDTO crearResena(ResenaDTO resenaDTO) throws BusinessLogicException
-    {
-    
+    {   
+        ResenaDTO aRetornar=null;
         ResenaEntity resenaEntity=resenaDTO.toEntity();
         resenaEntity =resenaLogic.createResena(resenaEntity);
-        return new ResenaDTO (resenaEntity);
+        aRetornar=new ResenaDTO(resenaEntity);
+        return aRetornar;
     }
-    
+        
     @PUT
-    public ResenaDTO updateResena(ResenaDTO resenaDTO, Long resenaId) throws BusinessLogicException
+     @Path("{id: \\d+}")
+    public ResenaDTO updateResena(ResenaDTO resenaDTO,@PathParam("id") Long resenaId) throws BusinessLogicException
     {
         //Busca el id del canal a actualizar
         ResenaEntity entity=resenaLogic.find(resenaId);

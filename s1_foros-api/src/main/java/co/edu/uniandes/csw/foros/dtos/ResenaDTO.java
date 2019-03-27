@@ -16,12 +16,12 @@ import java.util.Date;
  */
 public class ResenaDTO implements Serializable {
     
+     private Long id;
     private String descripcion;
     private Integer calificacionProduccion;
     private boolean recomendada;
     private Date fecha;
     private Integer calificacionResena;
-    private Long id;
     private UsuarioDTO usuario;
     
     public ResenaDTO()
@@ -32,11 +32,12 @@ public class ResenaDTO implements Serializable {
         this.id=resenaEntity.getId();
         this.descripcion=resenaEntity.getDescripcion();
         this.calificacionProduccion=resenaEntity.getCalificacionProduccion();
+        this.fecha=resenaEntity.getFecha();
          this.id=resenaEntity.getId();
-            UsuarioEntity usuario=resenaEntity.getUsuarioResena();
-            UsuarioDTO usuarioDTO=new UsuarioDTO(usuario);
+            UsuarioEntity usuarioResena=resenaEntity.getUsuarioResena();
+            UsuarioDTO usuarioDTO=new UsuarioDTO(usuarioResena);
           this.usuario=usuarioDTO;
-           this.calificacionProduccion=resenaEntity.getCalificacionProduccion();
+           this.calificacionResena=resenaEntity.getCalificacionResena();
            this.recomendada=resenaEntity.isRecomendada();
       
         
@@ -147,7 +148,6 @@ public class ResenaDTO implements Serializable {
         resenaEntity.setId( this.id);
         resenaEntity.setDescripcion(this.descripcion);
         resenaEntity.setCalificacionProduccion(this.calificacionProduccion);
-        resenaEntity.setId(this.id);
         UsuarioEntity usuarioEntity=usuario.toEntity();
         resenaEntity.setUsuarioResena(usuarioEntity);
         resenaEntity.setCalificacionResena(this.calificacionResena);

@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author mi.carrascal
  */
-    @Path("canal/{canalId: \\d+}/emision")
+//    @Path("canal/{canalId: \\d+}/emision")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 public class CanalEmisionResource {
@@ -45,7 +45,7 @@ public class CanalEmisionResource {
     
     @GET
     @Path("/emisiones")
-    public List<EmisionEntity> darEmisiones(Long idCanal)
+    public List<EmisionEntity> darEmisiones(@PathParam("id")Long idCanal)
     {
         return relacionLogic.darEmisiones(idCanal);
         
