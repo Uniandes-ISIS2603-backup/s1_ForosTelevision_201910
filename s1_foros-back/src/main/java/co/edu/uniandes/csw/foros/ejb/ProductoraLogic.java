@@ -10,6 +10,7 @@
  */
 package co.edu.uniandes.csw.foros.ejb;
 
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProductoraPersistence;
@@ -52,9 +53,9 @@ public class ProductoraLogic {
     }
 
    public List<ProductoraEntity> getProductoras() {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los autores");
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos las productoras");
         List<ProductoraEntity> lista = productoraPersistence.findAll();
-        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los autores");
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos las productoras");
         return lista;
     }
 
@@ -64,11 +65,12 @@ public class ProductoraLogic {
      * @param productorasId Identificador de la instancia a consultar
      * @return Instancia de ProductoraEntity con los datos del Productora consultado.
      */
-    public ProductoraEntity getProductora(Long productorasId) {
-        LOGGER.log(Level.INFO, "Inicia proceso de consultar el autor con id = {0}", productorasId);
+    public ProductoraEntity getProductora(Long productorasId) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar la productora con id = {0}", productorasId);
         ProductoraEntity productoraEntity = productoraPersistence.find(productorasId);
         if (productoraEntity == null) {
-            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", productorasId);
+            LOGGER.log(Level.SEVERE, "La prodcutora con el id = {0} no existe", productorasId);
+            throw new BusinessLogicException("Productora inexistente");
         }
         LOGGER.log(Level.INFO, "Termina proceso de consultar el autor con id = {0}", productorasId);
         return productoraEntity;
@@ -87,10 +89,40 @@ public class ProductoraLogic {
 
     }
     
+    /**
+     * Método que edita la información de una productora.
+     *
+     * @param idProductora el id de la productora a editar.
+     * @param productoraEntity la nueva información de la producción.
+     * @return la entidad de la producción editada.
+     * @throws BusinessLogicException cuando alguno de los atributos no cumple con las reglas de negocio.
+     */
+    public ProductoraEntity editarProduccion(Long idProductora, ProductoraEntity productoraEntity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Inicia proceso de actualizar la productora con id = {0}", idProductora);
+        if(idProductora == null) {
+            throw new BusinessLogicException("El id de la producción debe existir");
+        }
+        comprobarReglasDeNegocio(productoraEntity);
+        ProductoraEntity newEntity = productoraPersistence.update(productoraEntity);
+        LOGGER.log(Level.INFO, "Termina proceso de actualizar la productora con id = {0}", productoraEntity.getId());
+        return newEntity;
+    }
+    
+    
+    
     public ProductoraEntity find(Long  idProduccion)throws BusinessLogicException{
         ProductoraEntity prod=productoraPersistence.find(idProduccion);
         if(prod==null) throw new BusinessLogicException("Produccion no registrada");
         return prod;
      }
+
+    private void comprobarReglasDeNegocio(ProductoraEntity productoraEntity) throws BusinessLogicException {
+        
+        if(productoraEntity.getNombre() == null)
+        {
+            throw new BusinessLogicException("El nombre de la productora es null");
+        }
+   
+    }
 
 }
