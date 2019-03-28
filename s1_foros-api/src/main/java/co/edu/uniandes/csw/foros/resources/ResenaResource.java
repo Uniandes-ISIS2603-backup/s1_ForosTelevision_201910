@@ -1,10 +1,8 @@
 package co.edu.uniandes.csw.foros.resources;
 
-import co.edu.uniandes.csw.foros.dtos.CanalDTO;
 import co.edu.uniandes.csw.foros.dtos.ResenaDTO;
 import co.edu.uniandes.csw.foros.dtos.UtilRespuesta;
 import co.edu.uniandes.csw.foros.ejb.ResenaLogic;
-import co.edu.uniandes.csw.foros.entities.CanalEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import java.util.ArrayList;
@@ -37,11 +35,12 @@ public class ResenaResource {
     
       
     @POST
-    public ResenaDTO crearResena(ResenaDTO resenaDTO) throws BusinessLogicException
+    @Path("/{usuario_id: \\d+}/{produccion_id: \\d+}")
+    public ResenaDTO crearResena(@PathParam("usuario_id")Long user_id,@PathParam("produccion_id")Long produccion_id,ResenaDTO resenaDTO) throws BusinessLogicException
     {   
         ResenaDTO aRetornar=null;
         ResenaEntity resenaEntity=resenaDTO.toEntity();
-        resenaEntity =resenaLogic.createResena(resenaEntity);
+        resenaEntity =resenaLogic.createResena(user_id,produccion_id,resenaEntity);
         aRetornar=new ResenaDTO(resenaEntity);
         return aRetornar;
     }

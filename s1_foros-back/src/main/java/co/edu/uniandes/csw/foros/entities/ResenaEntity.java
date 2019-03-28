@@ -2,9 +2,11 @@ package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -17,24 +19,22 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     private String descripcion;
     private Integer calificacionProduccion;
     private boolean recomendada;
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private Integer calificacionResena;
-
-    
      /**
      * Relación entre reseña y usuario.
      */
     @PodamExclude
-    @ManyToOne(fetch=LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private UsuarioEntity usuarioResena;
-
-//    
-//    /**
-//     * Relación entre reseña y produccion.
-//     */
-//    @PodamExclude
-//    @ManyToOne(fetch=LAZY)
-//    private ProduccionEntity produccionResena;
+   
+   /**
+    * Relación entre reseña y produccion.
+    */
+   @PodamExclude
+   @ManyToOne(cascade = CascadeType.PERSIST)
+   private ProduccionEntity produccionResena;
 
     /**
      * @return the descripcion
@@ -118,6 +118,20 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
      */
     public void setUsuarioResena(UsuarioEntity usuarioResena) {
         this.usuarioResena = usuarioResena;
+    }
+
+    /**
+     * @return the produccionResena
+     */
+    public ProduccionEntity getProduccionResena() {
+        return produccionResena;
+    }
+
+    /**
+     * @param produccionResena the produccionResena to set
+     */
+    public void setProduccionResena(ProduccionEntity produccionResena) {
+        this.produccionResena = produccionResena;
     }
 
    
