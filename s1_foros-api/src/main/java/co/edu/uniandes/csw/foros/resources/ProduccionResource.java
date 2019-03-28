@@ -7,7 +7,6 @@ package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.*;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
-import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 

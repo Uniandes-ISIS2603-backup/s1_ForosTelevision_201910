@@ -1,8 +1,3 @@
-
-
-
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,7 +27,6 @@ public class ProductoraLogic {
     @Inject
     private ProductoraPersistence productoraPersistence;
 
-
     /**
      * Crea una productora y verifica los requisitos necesarios para su
      * creaci{on.
@@ -43,16 +37,17 @@ public class ProductoraLogic {
      * registrada.
      */
     public ProductoraEntity crearProductora(ProductoraEntity entity) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "Crear");
 
-        if (productoraPersistence.findByName(entity.getNombre()).size()!=0) {
+        if (productoraPersistence.findByName(entity.getNombre()).size() != 0) {
 
             throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
         }
-       productoraPersistence.create(entity);
+        productoraPersistence.create(entity);
         return entity;
     }
 
-   public List<ProductoraEntity> getProductoras() {
+    public List<ProductoraEntity> getProductoras() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todos las productoras");
         List<ProductoraEntity> lista = productoraPersistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos las productoras");
@@ -63,7 +58,8 @@ public class ProductoraLogic {
      * Obtiene los datos de una instancia de Productora a partir de su ID.
      *
      * @param productorasId Identificador de la instancia a consultar
-     * @return Instancia de ProductoraEntity con los datos del Productora consultado.
+     * @return Instancia de ProductoraEntity con los datos del Productora
+     * consultado.
      */
     public ProductoraEntity getProductora(Long productorasId) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la productora con id = {0}", productorasId);
@@ -75,6 +71,7 @@ public class ProductoraLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar el autor con id = {0}", productorasId);
         return productoraEntity;
     }
+
     /**
      * Borrar una Productora.
      *
@@ -82,24 +79,29 @@ public class ProductoraLogic {
      */
     public void borrarProductora(Long productoraId) throws BusinessLogicException {
 
-        if (productoraPersistence.find(productoraId) == null) {
-            throw new BusinessLogicException("La productora con id: " + productoraId + " no fue encontrada");
+        LOGGER.log(Level.INFO, "Inicia proceso de eliminación de una prodcutora");
+        ProductoraEntity productoraEntity = productoraPersistence.find(productoraId);
+        if (productoraEntity == null) {
+            throw new BusinessLogicException("No existe una productora con el id :" + productoraId);
         }
         productoraPersistence.delete(productoraId);
+        LOGGER.log(Level.INFO, "Termina proceso de eliminación del miembro del staff.");
+       
 
     }
-    
+
     /**
      * Método que edita la información de una productora.
      *
      * @param idProductora el id de la productora a editar.
      * @param productoraEntity la nueva información de la producción.
      * @return la entidad de la producción editada.
-     * @throws BusinessLogicException cuando alguno de los atributos no cumple con las reglas de negocio.
+     * @throws BusinessLogicException cuando alguno de los atributos no cumple
+     * con las reglas de negocio.
      */
     public ProductoraEntity editarProduccion(Long idProductora, ProductoraEntity productoraEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la productora con id = {0}", idProductora);
-        if(idProductora == null) {
+        if (idProductora == null) {
             throw new BusinessLogicException("El id de la producción debe existir");
         }
         comprobarReglasDeNegocio(productoraEntity);
@@ -107,22 +109,21 @@ public class ProductoraLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la productora con id = {0}", productoraEntity.getId());
         return newEntity;
     }
-    
-    
-    
-    public ProductoraEntity find(Long  idProduccion)throws BusinessLogicException{
-        ProductoraEntity prod=productoraPersistence.find(idProduccion);
-        if(prod==null) throw new BusinessLogicException("Produccion no registrada");
+
+    public ProductoraEntity find(Long idProduccion) throws BusinessLogicException {
+        ProductoraEntity prod = productoraPersistence.find(idProduccion);
+        if (prod == null) {
+            throw new BusinessLogicException("Produccion no registrada");
+        }
         return prod;
-     }
+    }
 
     private void comprobarReglasDeNegocio(ProductoraEntity productoraEntity) throws BusinessLogicException {
-        
-        if(productoraEntity.getNombre() == null)
-        {
+
+        if (productoraEntity.getNombre() == null) {
             throw new BusinessLogicException("El nombre de la productora es null");
         }
-   
+
     }
 
 }

@@ -3,28 +3,35 @@ package co.edu.uniandes.csw.foros.resources;
 import co.edu.uniandes.csw.foros.dtos.ProductoraDTO;
 import co.edu.uniandes.csw.foros.dtos.ProductoraDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.ProductoraLogic;
+import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
-import org.springframework.integration.handler.LoggingHandler;
 
 /**
  *
  * @author Jhonattan Fonseca.
  */
+@Path("productoras")
+@Produces("application/json")
+@Consumes("application/json")
 public class ProductoraResource {
 
     private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
 
+    @Inject
     private ProductoraLogic productoraLogic;
 
     /**
@@ -42,48 +49,39 @@ public class ProductoraResource {
     /**
      * Crea una productora con la información dada.
      *
-     * @param jsonString string en dormato json que contiene la informacion
-     * necesaria para crear una productora.
      * @return mensaje de éxito del proceso.
      */
     @POST
-    public String crearProductor(ProductoraDTO productoraDTO) {
+    public ProductoraDTO crearProductora(ProductoraDTO productoraDTO) {
         LOGGER.log(Level.INFO, "ProductoraResource crearProductora : input: {0}");
-        ProductoraDTO nuevaProductora;
+        ProductoraDTO nuevaProductora = null;
         try {
-            nuevaProductora = new ProductoraDTO(productoraLogic.crearProductora(productoraDTO.toEntity()));
+            ProductoraEntity entity = productoraLogic.crearProductora(productoraDTO.toEntity());
+            nuevaProductora = new ProductoraDTO(entity);
         } catch (BusinessLogicException e) {
             throw new WebApplicationException(e.getMessage(), 412);
         }
-        return "Productora creada";
+        return nuevaProductora;
     }
 
     /**
      * Modifica la informacion de una productora.
      *
-     * @param <error>
-     * @param <error>
-     * @param jsonString string en formato json con la nueva info de la
-     * productora.
-     * @return mensaje de éxito del proceso.
+     * @return ProductoraDTO la cual fue actualizada.
      */
     @PUT
     @Path("{id: \\d+}")
     public ProductoraDTO editarProductora(@PathParam("id") Long id, ProductoraDTO productoraDTO) throws BusinessLogicException {
-        
+
         LOGGER.log(Level.INFO, "ProductoraResource editarProductora: input: id: {0} , productora: {1}", new Object[]{id, productoraDTO.toString()});
         productoraDTO.setId(id);
-        if(productoraLogic.getProductora(id) == null)
-        {
+        if (productoraLogic.getProductora(id) == null) {
             throw new WebApplicationException("El recurso /productoras/" + id + " no existe.", 404);
         }
         ProductoraDetailDTO productoraDetailDTO;
-        try
-        {
+        try {
             productoraDetailDTO = new ProductoraDetailDTO(productoraLogic.editarProduccion(id, productoraDTO.toEntity()));
-        }
-        catch(BusinessLogicException e)
-        {
+        } catch (BusinessLogicException e) {
             throw new WebApplicationException(e.getMessage(), 412);
         }
         LOGGER.log(Level.INFO, "ProdcutoraREsource editarProductora: output: {0}", productoraDetailDTO.toString());
@@ -97,9 +95,15 @@ public class ProductoraResource {
      * @return
      */
     @DELETE
-    @Path("/productoras/eliminar/{id:\\d+}")
-    public String eliminarProductora(@PathParam("id") Long id) {
-        return "se eliminó la productora";
+    @Path("{id:\\d+}")
+    public void eliminarProductora(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ProdcutoraResource eliminarProductora: input: {0}", id);
+        ProductoraEntity entity = productoraLogic.getProductora(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /productoras/" + id + " no existe.", 404);
+        }
+        productoraLogic.borrarProductora(id);
+        LOGGER.info("ProduccionResource eliminarProduccion: output: void");
     }
 
     /**
