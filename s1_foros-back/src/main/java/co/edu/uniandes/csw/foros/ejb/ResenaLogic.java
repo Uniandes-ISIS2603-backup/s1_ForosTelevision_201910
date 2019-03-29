@@ -22,7 +22,7 @@ import javax.inject.Inject;
  */
 @Stateless
 public class ResenaLogic {
-    
+   
     @Inject
     private ResenaPersistence resenaPersistence;
     @Inject
