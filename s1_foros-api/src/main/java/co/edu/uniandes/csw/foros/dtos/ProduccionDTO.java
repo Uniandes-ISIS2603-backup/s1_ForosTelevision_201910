@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.foros.dtos;
 
-import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 

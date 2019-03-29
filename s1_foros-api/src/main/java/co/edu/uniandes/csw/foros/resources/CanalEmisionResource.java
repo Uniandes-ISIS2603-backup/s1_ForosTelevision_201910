@@ -61,7 +61,7 @@ public class CanalEmisionResource {
     
     @PUT
     @Path("{canalId: \\d+}")
-    public UtilRespuesta<String>  actualizarEmision(Long idEmision,EmisionEntity emision) throws BusinessLogicException
+    public UtilRespuesta<String>  actualizarEmision(@PathParam("canalId") Long idEmision,EmisionEntity emision) throws BusinessLogicException
     {
         relacionLogic.updateEmision(idEmision, idEmision, emision);
        return new UtilRespuesta(200,"se eliminó la emision");

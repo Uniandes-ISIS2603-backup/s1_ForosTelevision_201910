@@ -5,15 +5,10 @@
  */
 package co.edu.uniandes.csw.foros.resources;
 import co.edu.uniandes.csw.foros.dtos.CanalDTO;
-import co.edu.uniandes.csw.foros.dtos.UsuarioDTO;
 import co.edu.uniandes.csw.foros.dtos.UtilRespuesta;
 import co.edu.uniandes.csw.foros.ejb.CanalLogic;
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
-import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -45,8 +40,8 @@ public class CanalResource {
     
     @Inject
     private CanalLogic logica;
-     private static final Logger LOGGER= Logger.getLogger(UsuarioResource.class.getName());
     
+    private static final Logger LOGGER= Logger.getLogger(UsuarioResource.class.getName());
     
     @POST
     public CanalDTO crearCanal(CanalDTO canalDTO) throws BusinessLogicException
@@ -58,7 +53,8 @@ public class CanalResource {
     }
     
     @PUT
-    public CanalDTO updateCanal(CanalDTO canalDTO, Long idCanal) throws BusinessLogicException
+    @Path("{id: \\d+}")
+    public CanalDTO updateCanal(CanalDTO canalDTO,@PathParam("id") Long idCanal) throws BusinessLogicException
     {
         //Busca el id del canal a actualizar
         CanalEntity entity=logica.darCanal(idCanal);
