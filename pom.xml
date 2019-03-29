@@ -10,10 +10,7 @@
     <packaging>pom</packaging>
     <name>s1_foros</name>
  
-    <modules>
-        <module>s1_foros-back</module>
-        <module>s1_foros-api</module>
-    </modules>
+    <modules></modules>
     
     <repositories>
         <repository>
