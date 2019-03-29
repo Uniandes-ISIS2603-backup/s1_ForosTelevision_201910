@@ -5,23 +5,16 @@
  */
 package co.edu.uniandes.csw.foros.ejb;
 
-import co.edu.uniandes.csw.foros.entities.CanalEntity;
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
-import co.edu.uniandes.csw.foros.persistence.CanalPersistence;
 import co.edu.uniandes.csw.foros.persistence.ResenaPersistence;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.transaction.UserTransaction;
-import uk.co.jemos.podam.api.PodamFactory;
-import uk.co.jemos.podam.api.PodamFactoryImpl;
 
 /**
  *
@@ -32,8 +25,12 @@ public class ResenaLogic {
     
     @Inject
     private ResenaPersistence resenaPersistence;
+    @Inject
+    private UsuarioLogic usuarioLogic;
+    @Inject
+    private ProduccionLogic produccionLogic;
     
-    public ResenaEntity createResena(ResenaEntity resena) throws BusinessLogicException
+    public ResenaEntity createResena(Long user_id,Long produccion_id,ResenaEntity resena) throws BusinessLogicException
     {
         Calendar fechaActual= new GregorianCalendar();
         if((resena.getDescripcion().length()>800))
@@ -52,9 +49,13 @@ public class ResenaLogic {
          {
              throw new BusinessLogicException("La fecha de la reseña no puede ser mayor que la actual");
          }
-   
-        resena=resenaPersistence.create(resena);
-        return resena;
+        UsuarioEntity usuarioEntity=usuarioLogic.find(user_id);
+        if(usuarioEntity!=null)
+            resena.setUsuarioResena(usuarioEntity);
+        ProduccionEntity produccionEntity=produccionLogic.darProduccion(produccion_id);
+        if(produccionEntity!=null)
+            resena.setProduccionResena(produccionEntity);
+        return resenaPersistence.create(resena);
     }
 
      /**
