@@ -53,7 +53,7 @@ public class BusinessLogicExceptionMapper implements ExceptionMapper<BusinessLog
         // retorna una respuesta
         return Response.status(Response.Status.PRECONDITION_FAILED)
                 .entity(getInitCause(exception).getLocalizedMessage())
-                .type(MediaType.TEXT_PLAIN_TYPE)
+                .type(MediaType.APPLICATION_JSON)
                 .build(); //To change body of generated methods, choose Tools | Templates.
     }
 
