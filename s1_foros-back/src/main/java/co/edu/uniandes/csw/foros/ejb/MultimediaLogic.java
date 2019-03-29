@@ -77,5 +77,20 @@ public class MultimediaLogic {
         return entProd.getMultimedia();
     }
     
+    /**
+     * Método que retorna una multimedia según el id.
+     * 
+     * @param idMultimedia id de la multimedia a retornar.
+     * @return la multimedia encontrada.
+     * @throws BusinessLogicException si no encuentra la multimedia.
+     */
+    public MultimediaEntity darMultimedia(Long idMultimedia) throws BusinessLogicException {
+        MultimediaEntity multimediaEntity = mp.find(idMultimedia);
+        if(multimediaEntity == null) {
+            throw new BusinessLogicException("El recurso multimedia no existe.");
+        }
+        return multimediaEntity;
+    }
+    
     
 }

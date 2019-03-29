@@ -2,8 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe75308a-3d64-479e-b7b7-3c972344e37b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/s1_foros-back/target/" />
@@ -49,8 +48,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="132" column="5" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+            <state relative-caret-position="2618">
+              <caret line="132" column="5" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -58,12 +57,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8467">
-              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#5098#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="22">
+              <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
             </state>
           </provider>
         </entry>
@@ -71,7 +66,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/persistence/ProduccionPersistence.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
+            <state relative-caret-position="242">
               <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
             </state>
           </provider>
@@ -80,8 +75,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="131" column="37" lean-forward="true" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+            <state relative-caret-position="2530">
+              <caret line="131" column="37" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -140,9 +135,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
-    <option name="width" value="960" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1380" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectView">
     <navigator currentView="PackagesPane" proportions="" version="1">
@@ -244,7 +240,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551779101183" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551779109686" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -452,7 +448,8 @@
       <workItem from="1551716556738" duration="6932000" />
       <workItem from="1551746062325" duration="1084000" />
       <workItem from="1551751176240" duration="72000" />
-      <workItem from="1551752534512" duration="11675000" />
+      <workItem from="1551752534512" duration="12341000" />
+      <workItem from="1552102002129" duration="598000" />
     </task>
     <servers />
   </component>
@@ -462,15 +459,14 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48036000" />
+    <option name="totallyTimeSpent" value="49300000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.17185822" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.24865736" />
       <window_info id="Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
       <window_info id="UI Designer" order="5" />
@@ -496,7 +492,7 @@
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.49777284" visible="true" weight="0.1482277" />
+      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.49658704" visible="true" weight="0.21106337" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.24973147" />
       <window_info anchor="right" id="Maven" order="6" />
@@ -506,7 +502,7 @@
       <window_info anchor="right" id="Palette&#9;" order="10" />
       <window_info anchor="right" id="CDI" order="11" />
       <window_info anchor="right" id="Bean Validation" order="12" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="13" sideWeight="0.5022272" side_tool="true" visible="true" weight="0.1482277" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="13" sideWeight="0.50341296" side_tool="true" visible="true" weight="0.2113323" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,17 +645,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffProduccionLogic.java" />
-    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6446">
-          <caret line="320" column="13" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
-          <folding>
-            <element signature="e#3556#3557#0" expanded="true" />
-            <element signature="e#3629#3630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffProduccionesResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -744,38 +729,45 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/persistence/ProduccionPersistence.java">
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
-          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="131" column="37" lean-forward="true" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+        <state relative-caret-position="6446">
+          <caret line="320" column="13" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3629#3630#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="132" column="5" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+        <state relative-caret-position="2618">
+          <caret line="132" column="5" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/persistence/ProduccionPersistence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2530">
+          <caret line="131" column="37" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8467">
-          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
-          <folding>
-            <element signature="e#0#5098#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="22">
+          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
         </state>
       </provider>
     </entry>
