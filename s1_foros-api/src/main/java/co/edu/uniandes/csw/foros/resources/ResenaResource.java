@@ -44,7 +44,8 @@ public class ResenaResource {
     }
     
     @PUT
-    public ResenaDTO updateResena(ResenaDTO resenaDTO, Long resenaId) throws BusinessLogicException
+     @Path("{id: \\d+}")
+    public ResenaDTO updateResena(@PathParam("id") Long resenaId,ResenaDTO resenaDTO) throws BusinessLogicException
     {
         //Busca el id del canal a actualizar
         ResenaEntity entity=resenaLogic.find(resenaId);
