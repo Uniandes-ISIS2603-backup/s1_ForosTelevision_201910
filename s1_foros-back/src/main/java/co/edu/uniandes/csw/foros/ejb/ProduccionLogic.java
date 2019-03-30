@@ -173,6 +173,28 @@ public class ProduccionLogic {
     }
     
     /**
+     * Método que elimina una reseña de una producción.
+     * 
+     * @param idProduccion id de la producción.
+     * @param idResena id de la reseña.
+     * @throws BusinessLogicException 
+     */
+    public void eliminarResena(Long idProduccion, Long idResena) throws BusinessLogicException {
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        boolean encontrado = false;
+        for(ResenaEntity resenaEntity : produccionEntity.getResenas()) {
+            if(Objects.equals(idResena, resenaEntity.getId())) {
+                encontrado = true;
+                produccionEntity.getResenas().remove(resenaEntity);
+                break;
+            }
+        }
+        if(encontrado == false) {
+            throw new BusinessLogicException("No existe esa reseña dento de la producción.");
+        }
+    }
+    
+    /**
      * Retorna los capítulos de la producción.
      * 
      * @param idProduccion id de la producción a retornar sus capítulos.

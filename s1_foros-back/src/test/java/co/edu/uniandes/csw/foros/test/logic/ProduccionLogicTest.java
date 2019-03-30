@@ -7,7 +7,7 @@ package co.edu.uniandes.csw.foros.test.logic;
 
 /**
  *
- * @author estudiante
+ * @author jf.castaneda
  */
 public class ProduccionLogicTest {
     
