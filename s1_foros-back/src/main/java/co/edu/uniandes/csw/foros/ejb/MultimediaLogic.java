@@ -39,10 +39,8 @@ public class MultimediaLogic {
      if(ent.getPortada()==null){
        throw new BusinessLogicException("Seleccione una portada");
      }
-     if(!validateFileExtn(ent.getPortada())){
-       throw new BusinessLogicException("Seleccione una extension de arhivo valida");
-     }
-     return mp.create(ent);
+     MultimediaEntity m = mp.create(ent);
+     return m;
     }
     
     public MultimediaEntity adicionarImagen(Long idMultimedia,String archivo)throws BusinessLogicException{
@@ -52,9 +50,6 @@ public class MultimediaLogic {
         }
         if(archivo==null){
             throw new BusinessLogicException("El archivo no es valido");
-        }
-        if(!validateFileExtn(archivo)){
-            throw new BusinessLogicException("El formato de archivo no valido");
         }
         ArchivoEntity arch=new ArchivoEntity();
         arch.setUrl(archivo);
