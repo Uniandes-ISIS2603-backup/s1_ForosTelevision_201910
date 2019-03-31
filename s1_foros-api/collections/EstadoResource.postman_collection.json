@@ -1,0 +1,230 @@
+{
+	"info": {
+		"_postman_id": "32d11521-8982-42a6-84d4-6b91390396e8",
+		"name": "EstadoResource",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener todos los estados",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f1ad4480-d799-4baf-92cb-59e605fb837f",
+						"exec": [
+							"tests[\"No genera error en el Get ALL\"] = responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_foros-api/api/estados",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"estados"
+					]
+				},
+				"description": "Prueba para obtener todos los estados"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear estado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0b8ec355-bded-4c97-a546-d28435ef6d51",
+						"exec": [
+							"tests[\"No genera error en el Post\"] = responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"produccion\": {},\n\t\"usuarios\":[],\n\t\"estado\": 1\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/estados",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"estados"
+					]
+				},
+				"description": "Prueba para crear un estado"
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener un estado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8a641765-d710-438a-8063-81a4117bc690",
+						"exec": [
+							"tests[\"No genera error en el Get\"] = responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/estados/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"estados",
+						"1"
+					]
+				},
+				"description": "Prueba para obtener un solo estado"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Estado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0d3c7464-b3a1-4870-861b-2296ac3f784a",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code == 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"produccion\": {},\n\t\"usuarios\":[],\n\t\"estado\": 3\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/estados/3",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"estados",
+						"3"
+					]
+				},
+				"description": "Prueba para eliminar el estado"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Estado",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b871a827-a98a-4b1a-b72a-75c948b78755",
+						"exec": [
+							"tests[\"No genera error en el Put\"] = responseCode.code == 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"produccion\": {},\n\t\"usuarios\":[],\n\t\"estado\": 3\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/estados/1",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"estados",
+						"1"
+					]
+				},
+				"description": "Prueba para actualizar un estado"
+			},
+			"response": []
+		}
+	]
+}

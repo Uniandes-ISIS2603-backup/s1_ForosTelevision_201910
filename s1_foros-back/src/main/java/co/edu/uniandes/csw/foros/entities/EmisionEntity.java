@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.foros.entities;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -24,17 +23,27 @@ import uk.co.jemos.podam.common.PodamExclude;
 @Entity
 public class EmisionEntity extends BaseEntity implements Serializable {
     
+    /**
+     * Canal en el que será transmitida la emisión.
+     */
     @PodamExclude
-    @OneToOne(fetch=EAGER)
+    @OneToOne
     private CanalEntity canal;
     
+    /**
+     * Días en los que se dará la emisión.
+     */
     @PodamExclude
-    @OneToMany(mappedBy="emision", fetch=LAZY)
+    @OneToMany(fetch=LAZY)
     private List<DiaEntity> dias;
     
+    /**
+     * Producción que presentará la emisión.
+     */
     @PodamExclude
     @ManyToOne 
     private ProduccionEntity produccion;
+    
     /**
      * Rating de la emision.
      */

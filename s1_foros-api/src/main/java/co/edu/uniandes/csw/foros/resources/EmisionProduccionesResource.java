@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.resources;
 
-import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
+import co.edu.uniandes.csw.foros.dtos.ProduccionDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.EmisionProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.EmisionLogic;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
@@ -41,30 +41,30 @@ public class EmisionProduccionesResource {
     
     @POST
     @Path("{prodId: \\d+}")
-    public ProduccionDTO agregarProduccion(@PathParam("emisionId") Long emisionId, @PathParam("prodId") Long prodId) throws BusinessLogicException{
+    public ProduccionDetailDTO agregarProduccion(@PathParam("emisionId") Long emisionId, @PathParam("prodId") Long prodId) throws BusinessLogicException{
         if(emLogic.getEmisionPorId(emisionId)==null){
             throw new WebApplicationException("La emisión con el id " + emisionId + " no existe.", 404);
         }
-        ProduccionDTO produccionDTO = new ProduccionDTO(emProdLogic.agregarProduccion(emisionId, prodId));
+        ProduccionDetailDTO produccionDTO = new ProduccionDetailDTO(emProdLogic.agregarProduccion(emisionId, prodId));
         return produccionDTO;
     }
        
     @GET
     @Path("{produccionId: \\d+}")
-    public ProduccionDTO obtenerProduccion(@PathParam("emisionId") Long emisionId, @PathParam("produccionId") Long produccionId) throws BusinessLogicException{
+    public ProduccionDetailDTO obtenerProduccion(@PathParam("emisionId") Long emisionId, @PathParam("produccionId") Long produccionId) throws BusinessLogicException{
         if(logicProd.darProduccion(produccionId)==null){
             throw new WebApplicationException("La produccion con el id " + produccionId + " no existe.", 404);
         }
-        ProduccionDTO dto = new ProduccionDTO(emProdLogic.obtenerProduccion(emisionId));
+        ProduccionDetailDTO dto = new ProduccionDetailDTO(emProdLogic.obtenerProduccion(emisionId));
         return dto;
     }
     
     @PUT
-    public ProduccionDTO actualizarProduccion(@PathParam("emisionId") Long emisionId, ProduccionDTO produccion)throws BusinessLogicException{
+    public ProduccionDetailDTO actualizarProduccion(@PathParam("emisionId") Long emisionId, ProduccionDetailDTO produccion)throws BusinessLogicException{
         if(emLogic.getEmisionPorId(emisionId)==null){
             throw new WebApplicationException("La emisión con el id " + emisionId + " no existe.", 404);
         }
-        ProduccionDTO dto = new ProduccionDTO(emProdLogic.actualizarProduccion(emisionId, produccion.toEntity()));
+        ProduccionDetailDTO dto = new ProduccionDetailDTO(emProdLogic.actualizarProduccion(emisionId, produccion.toEntity()));
         return dto;
     }
     
