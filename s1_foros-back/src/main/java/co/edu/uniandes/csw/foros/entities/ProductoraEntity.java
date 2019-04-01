@@ -47,7 +47,7 @@ public class ProductoraEntity extends BaseEntity implements Serializable {
      *
      * @return Las producciones de un productora.
      */
-    public List<ProduccionEntity> getProducciones() {
+    public List<ProduccionEntity> getProduccciones() {
         return producciones;
     }
 

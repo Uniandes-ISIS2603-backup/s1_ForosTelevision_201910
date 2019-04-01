@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -19,17 +20,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.MediaType;
 
 /**
  *
  * @author Jhonattan Fonseca.
  */
 @Path("productoras")
-@Produces("application/json")
-@Consumes("application/json")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
+@RequestScoped
 public class ProductoraResource {
 
-    private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProductoraResource.class.getName());
 
     @Inject
     private ProductoraLogic productoraLogic;
@@ -41,14 +44,25 @@ public class ProductoraResource {
      * @return el DTO con la información de la producción.
      */
     @GET
-    @Path("/productoras/{id:\\d+}")
+    @Path("{id:\\d+}")
     public ProductoraDTO darProductora(@PathParam("id") Long id) {
-        return new ProductoraDTO();
+        LOGGER.log(Level.INFO, "ProductoraResource darProductora: input: {0}", id);
+        ProductoraEntity productoraEntity = null;
+        try {
+            productoraEntity = productoraLogic.find(id);
+            if (productoraEntity == null) {
+                throw new WebApplicationException("El recurso/productoras/" + id + " no existe.", 404);
+            }
+        } catch (BusinessLogicException e) {
+            throw new WebApplicationException(e.getMessage(), 412);
+        }
+        return new ProductoraDTO(productoraEntity);
     }
 
     /**
      * Crea una productora con la información dada.
      *
+     * @param productoraDTO
      * @return mensaje de éxito del proceso.
      */
     @POST
@@ -67,25 +81,22 @@ public class ProductoraResource {
     /**
      * Modifica la informacion de una productora.
      *
+     * @param id
+     * @param productora
      * @return ProductoraDTO la cual fue actualizada.
+     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
      */
     @PUT
     @Path("{id: \\d+}")
-    public ProductoraDTO editarProductora(@PathParam("id") Long id, ProductoraDTO productoraDTO) throws BusinessLogicException {
-
-        LOGGER.log(Level.INFO, "ProductoraResource editarProductora: input: id: {0} , productora: {1}", new Object[]{id, productoraDTO.toString()});
-        productoraDTO.setId(id);
+    public ProductoraDetailDTO editarProductora(@PathParam("id") Long id, ProductoraDetailDTO productora) throws BusinessLogicException {
+    LOGGER.log(Level.INFO, "ProductoraResource editarProductora: input: id: {0} , productora: {1}", new Object[]{id, productora});
+        productora.setId(id);
         if (productoraLogic.getProductora(id) == null) {
             throw new WebApplicationException("El recurso /productoras/" + id + " no existe.", 404);
         }
-        ProductoraDetailDTO productoraDetailDTO;
-        try {
-            productoraDetailDTO = new ProductoraDetailDTO(productoraLogic.editarProduccion(id, productoraDTO.toEntity()));
-        } catch (BusinessLogicException e) {
-            throw new WebApplicationException(e.getMessage(), 412);
-        }
-        LOGGER.log(Level.INFO, "ProdcutoraREsource editarProductora: output: {0}", productoraDetailDTO.toString());
-        return productoraDetailDTO;
+        ProductoraDetailDTO detailDTO = new ProductoraDetailDTO(productoraLogic.editarProductora(id, productora.toEntity()));
+        LOGGER.log(Level.INFO, "ProductoraResource editarProductora: output: {0}", detailDTO);
+        return detailDTO;
     }
 
     /**
@@ -96,7 +107,7 @@ public class ProductoraResource {
      */
     @DELETE
     @Path("{id:\\d+}")
-    public void eliminarProductora(@PathParam("id") Long id) throws BusinessLogicException {
+    public String eliminarProductora(@PathParam("id") Long id) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ProdcutoraResource eliminarProductora: input: {0}", id);
         ProductoraEntity entity = productoraLogic.getProductora(id);
         if (entity == null) {
@@ -104,6 +115,7 @@ public class ProductoraResource {
         }
         productoraLogic.borrarProductora(id);
         LOGGER.info("ProduccionResource eliminarProduccion: output: void");
+        return "Se borro exitosamente la productora con id: " + id;
     }
 
     /**
@@ -113,8 +125,24 @@ public class ProductoraResource {
      * @return La lista de las producciones de la productora.
      */
     @GET
-    @Path("/productoras/(id:\\d+)/producciones")
-    public List<ProductoraDTO> darProducciones(@PathParam("id") Long id) {
-        return new ArrayList<>();
+    public List<ProductoraDetailDTO> darProductoras() {
+        LOGGER.info("AuthorResource getProductoras: input: void");
+        List<ProductoraDetailDTO> listaProductoras = listEntity2DTO(productoraLogic.getProductoras());
+        LOGGER.log(Level.INFO, "ProductoraResource getProductoras: output: {0}", listaProductoras);
+        return listaProductoras;    }
+    
+    
+    /**
+     * Convierte una lista de AuthorEntity a una lista de AuthorDetailDTO.
+     *
+     * @param entityList Lista de AuthorEntity a convertir.
+     * @return Lista de AuthorDetailDTO convertida.
+     */
+    private List<ProductoraDetailDTO> listEntity2DTO(List<ProductoraEntity> entityList) {
+        List<ProductoraDetailDTO> list = new ArrayList<>();
+        for (ProductoraEntity entity : entityList) {
+            list.add(new ProductoraDetailDTO(entity));
+        }
+        return list;
     }
 }

@@ -99,7 +99,7 @@ public class ProductoraLogic {
      * @throws BusinessLogicException cuando alguno de los atributos no cumple
      * con las reglas de negocio.
      */
-    public ProductoraEntity editarProduccion(Long idProductora, ProductoraEntity productoraEntity) throws BusinessLogicException {
+    public ProductoraEntity editarProductora(Long idProductora, ProductoraEntity productoraEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la productora con id = {0}", idProductora);
         if (idProductora == null) {
             throw new BusinessLogicException("El id de la producción debe existir");
@@ -110,11 +110,17 @@ public class ProductoraLogic {
         return newEntity;
     }
 
-    public ProductoraEntity find(Long idProduccion) throws BusinessLogicException {
-        ProductoraEntity prod = productoraPersistence.find(idProduccion);
+    public ProductoraEntity find(Long idProductora) throws BusinessLogicException {
+       LOGGER.log(Level.INFO, "Inicia proceso de consultar la productora con id = {0}", idProductora);
+       if(idProductora == null)
+       {
+           throw new BusinessLogicException("Identificador no valido");
+       }
+       ProductoraEntity prod = productoraPersistence.find(idProductora);
         if (prod == null) {
-            throw new BusinessLogicException("Produccion no registrada");
+            throw new BusinessLogicException("Productora no registrada");
         }
+       LOGGER.log(Level.INFO, "Termina el proceso de consultar la productora con id = {0}", idProductora);
         return prod;
     }
 

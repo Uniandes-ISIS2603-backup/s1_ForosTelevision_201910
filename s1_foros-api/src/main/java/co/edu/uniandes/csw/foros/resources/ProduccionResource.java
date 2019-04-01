@@ -28,6 +28,7 @@ public class ProduccionResource {
 
     private static final Logger LOGGER = Logger.getLogger(ProduccionResource.class.getName());
 
+    
     private ProduccionLogic produccionLogic;
 
     /**
