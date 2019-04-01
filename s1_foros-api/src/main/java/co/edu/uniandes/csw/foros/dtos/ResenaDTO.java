@@ -1,12 +1,7 @@
 package co.edu.uniandes.csw.foros.dtos;
 
-
-import co.edu.uniandes.csw.foros.entities.CanalEntity;
-import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
-
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,13 +11,12 @@ import java.util.Date;
  */
 public class ResenaDTO implements Serializable {
     
+    private Long id;
     private String descripcion;
     private Integer calificacionProduccion;
     private boolean recomendada;
     private Date fecha;
     private Integer calificacionResena;
-    private Long id;
-    private UsuarioDTO usuario;
     
     public ResenaDTO()
     {}
@@ -32,14 +26,10 @@ public class ResenaDTO implements Serializable {
         this.id=resenaEntity.getId();
         this.descripcion=resenaEntity.getDescripcion();
         this.calificacionProduccion=resenaEntity.getCalificacionProduccion();
-         this.id=resenaEntity.getId();
-            UsuarioEntity usuario=resenaEntity.getUsuarioResena();
-            UsuarioDTO usuarioDTO=new UsuarioDTO(usuario);
-          this.usuario=usuarioDTO;
-           this.calificacionProduccion=resenaEntity.getCalificacionProduccion();
-           this.recomendada=resenaEntity.isRecomendada();
-      
-        
+        this.fecha=resenaEntity.getFecha();
+        this.id=resenaEntity.getId();
+        this.calificacionResena=resenaEntity.getCalificacionResena();
+        this.recomendada=resenaEntity.isRecomendada();      
     }
    
     /**
@@ -126,20 +116,6 @@ public class ResenaDTO implements Serializable {
         this.id = id;
     }
 
-
-    /**
-     * @return the usuario
-     */
-    public UsuarioDTO getUsuario() {
-        return usuario;
-    }
-
-    /**
-     * @param usuario the usuario to set
-     */
-    public void setUsuario(UsuarioDTO usuario) {
-        this.usuario = usuario;
-    }
     
     public ResenaEntity toEntity()
     {
@@ -147,11 +123,9 @@ public class ResenaDTO implements Serializable {
         resenaEntity.setId( this.id);
         resenaEntity.setDescripcion(this.descripcion);
         resenaEntity.setCalificacionProduccion(this.calificacionProduccion);
-        resenaEntity.setId(this.id);
-        UsuarioEntity usuarioEntity=usuario.toEntity();
-        resenaEntity.setUsuarioResena(usuarioEntity);
         resenaEntity.setCalificacionResena(this.calificacionResena);
         resenaEntity.setRecomendada(this.recomendada);
+        resenaEntity.setFecha(this.fecha);
         return resenaEntity;
     }
 

@@ -46,15 +46,17 @@ public class CanalResource {
     @POST
     public CanalDTO crearCanal(CanalDTO canalDTO) throws BusinessLogicException
     {
-    
+        CanalDTO aRetornar=null;
         CanalEntity canalEntity=canalDTO.toEntity();
         canalEntity =logica.createCanal(canalEntity);
-        return new CanalDTO (canalEntity);
+        aRetornar= new CanalDTO(canalEntity);
+         return aRetornar;
     }
     
     @PUT
     @Path("{id: \\d+}")
     public CanalDTO updateCanal(CanalDTO canalDTO,@PathParam("id") Long idCanal) throws BusinessLogicException
+
     {
         //Busca el id del canal a actualizar
         CanalEntity entity=logica.darCanal(idCanal);

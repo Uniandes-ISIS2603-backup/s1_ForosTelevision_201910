@@ -10,6 +10,7 @@ import co.edu.uniandes.csw.foros.entities.EmisionEntity;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CanalPersistence;
+import java.time.Clock;
 import java.util.List;
 import java.util.Objects;
 import javax.ejb.Stateless;
@@ -27,8 +28,11 @@ public class CanalLogic {
     
     public CanalEntity createCanal(CanalEntity canal) throws BusinessLogicException
     {
+        
+       
         if(canalPersistence.findByName(canal.getNombre())!=null)
         {
+          
             throw new BusinessLogicException("Ya existe un canal con ese nombre \"" + canal.getNombre());
         }
         if(canal.getNombre()=="")
@@ -39,6 +43,7 @@ public class CanalLogic {
         {
              throw new BusinessLogicException("Rating no puede ser nagtivo");
         }
+       
         canal= canalPersistence.create(canal);
         return canal;
  

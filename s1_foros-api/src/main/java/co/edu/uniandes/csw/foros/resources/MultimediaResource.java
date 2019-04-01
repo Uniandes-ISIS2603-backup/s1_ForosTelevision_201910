@@ -8,6 +8,8 @@ import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.*;
 import java.util.logging.Logger;
@@ -34,6 +36,20 @@ public class MultimediaResource {
     @Path("/produccion/{id: \\d+}")
     public MultimediaEntity darRecursosMultimedia(@PathParam("id")Long id) throws BusinessLogicException{
         return logicMultimedia.darRecursosMultimediaProduccion(id);
+    }
+    
+    /**
+     * Retorna los recursos
+     * @return entidad de recursos
+     * @throws BusinessLogicException si no  exitste la produccion 
+     */
+    @GET
+    @Path("/all")
+    public List<MultimediaDTO> all() throws BusinessLogicException{
+        List<MultimediaDTO> ret=new ArrayList<>();
+        for(MultimediaEntity ent:logicMultimedia.darRecursosMultimedia())
+            ret.add(new MultimediaDTO(ent));
+        return ret;
     }
 
     /**
