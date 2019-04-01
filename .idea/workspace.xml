@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe75308a-3d64-479e-b7b7-3c972344e37b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-api/sql/s1_foros.sql" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/sql/s1_foros.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/MultimediaResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/MultimediaResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/MultimediaLogicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/MultimediaLogicTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/s1_foros-back/target/" />
@@ -45,15 +49,24 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
+            <state relative-caret-position="637">
               <caret line="194" column="4" selection-start-line="194" selection-start-column="4" selection-end-line="194" selection-end-column="4" />
               <folding>
                 <element signature="e#4185#4186#0" expanded="true" />
                 <element signature="e#4258#4259#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -99,6 +112,7 @@
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" />
         <option value="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java" />
         <option value="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" />
+        <option value="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java" />
       </list>
     </option>
   </component>
@@ -228,7 +242,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1553986007253" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554152149074" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -438,7 +452,7 @@
       <workItem from="1551751176240" duration="72000" />
       <workItem from="1551752534512" duration="12341000" />
       <workItem from="1552102002129" duration="598000" />
-      <workItem from="1553983346325" duration="2711000" />
+      <workItem from="1553983346325" duration="3917000" />
     </task>
     <servers />
   </component>
@@ -448,15 +462,15 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52011000" />
+    <option name="totallyTimeSpent" value="53217000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.25226977" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.20891514" />
       <window_info id="Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
       <window_info id="UI Designer" order="5" />
@@ -482,7 +496,7 @@
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.49658704" visible="true" weight="0.21076524" />
+      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.49658704" visible="true" weight="0.1745435" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.24973147" />
       <window_info anchor="right" id="Maven" order="6" />
@@ -764,12 +778,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
+        <state relative-caret-position="637">
           <caret line="194" column="4" selection-start-line="194" selection-start-column="4" selection-end-line="194" selection-end-column="4" />
           <folding>
             <element signature="e#4185#4186#0" expanded="true" />
             <element signature="e#4258#4259#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="71" column="48" lean-forward="true" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
         </state>
       </provider>
     </entry>

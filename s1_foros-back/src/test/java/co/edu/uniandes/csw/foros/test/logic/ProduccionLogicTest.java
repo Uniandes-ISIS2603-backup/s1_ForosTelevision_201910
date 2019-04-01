@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.foros.ejb.CategoriaLogic;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 import co.edu.uniandes.csw.foros.entities.*;
+import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,9 @@ import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
 import org.jboss.shrinkwrap.api.spec.JavaArchive;
+import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import uk.co.jemos.podam.api.PodamFactory;
 import uk.co.jemos.podam.api.PodamFactoryImpl;
@@ -192,6 +195,56 @@ public class ProduccionLogicTest {
         data.get(1).setResenas(nuevasResenas);
     }
 
+    /**
+     * Método que prueba que la lógica cumpla al crear un producción.
+     */
+    @Test
+    public void crearStaffTest() {
+        ProduccionEntity produccionEntity = factory.manufacturePojo(ProduccionEntity.class);
+        produccionEntity.setCapitulos(new ArrayList<>());
+        produccionEntity.setCategorias(new ArrayList());
+        produccionEntity.setEmisiones(new ArrayList());
+        produccionEntity.setResenas(new ArrayList());
+        produccionEntity.setStaff(new ArrayList());
+        try {
+            produccionLogic.crearProduccion(produccionEntity);
+            data.add(produccionEntity);
+        } catch (BusinessLogicException ble) {
+            // El método funcionó.
+        }
+        Assert.assertEquals(em.find(ProduccionEntity.class, produccionEntity.getId()).getNombre(), produccionEntity.getNombre());
+    }
     
+    /**
+     * Método que prueba que la lógica cumpla al crear un producción.
+     */
+    @Test
+    public void darTodasProduccionesTest() {
+        List<ProduccionEntity> produccionesEntities = produccionLogic.darTodasProducciones();
+        boolean bien = true;
+        for(ProduccionEntity produccionEntity: produccionesEntities) {
+            if(!data.contains(produccionEntity)) {
+                bien = false;
+            }
+        }
+        Assert.assertTrue(bien);
+    }
+    
+    @Test
+    public void darProduccionTest() {
+        ProduccionEntity produccionEntity = data.get(0);
+        ProduccionEntity darProduccion = null;
+        try {
+            darProduccion = produccionLogic.darProduccion(produccionEntity.getId());
+        } catch (BusinessLogicException ble) {
+            // Nunca debería pasar.
+        }
+        Assert.assertEquals(produccionEntity.getNombre(), darProduccion.getNombre());
+    }
+    
+    @Test
+    public void editarProduccionTest() {
+        
+    }
 
 }
