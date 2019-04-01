@@ -7,6 +7,7 @@ import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ArchivoPersistence;
 import co.edu.uniandes.csw.foros.persistence.MultimediaPersistence;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.ejb.Stateless;
@@ -70,6 +71,10 @@ public class MultimediaLogic {
     public MultimediaEntity darRecursosMultimediaProduccion(Long idProduccion) throws BusinessLogicException{
         ProduccionEntity entProd=produccion.darProduccion(idProduccion);
         return entProd.getMultimedia();
+    }
+    
+    public List<MultimediaEntity> darRecursosMultimedia() throws BusinessLogicException{
+        return mp.getAll();
     }
     
     
