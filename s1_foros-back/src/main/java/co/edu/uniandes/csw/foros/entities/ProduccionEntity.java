@@ -88,6 +88,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     /**
      * Clasificación de audiencia de la producción.
      */
+    @PodamExclude
     @Enumerated(EnumType.STRING)
     private ClasificacionAudiencia clasificacionAudiencia;
     

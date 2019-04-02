@@ -9,6 +9,7 @@ import co.edu.uniandes.csw.foros.ejb.CategoriaLogic;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 import co.edu.uniandes.csw.foros.entities.*;
+import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.UserTransaction;
 
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
+import java.util.logging.Level;
 import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.shrinkwrap.api.ShrinkWrap;
@@ -92,12 +94,12 @@ public class ProduccionLogicTest {
     /**
      * Multimedia de la producción.
      */
-    private final MultimediaEntity multimediaEntity = new MultimediaEntity();
+    private final MultimediaEntity multimediaEntity = factory.manufacturePojo(MultimediaEntity.class);
 
     /**
      * Productora de la producción.
      */
-    private final ProductoraEntity productoraEntity = new ProductoraEntity();
+    private final ProductoraEntity productoraEntity = factory.manufacturePojo(ProductoraEntity.class);
 
     /**
      * Lista que tiene los datos de reseñas.
@@ -193,6 +195,9 @@ public class ProduccionLogicTest {
         List<ResenaEntity> nuevasResenas = new ArrayList<>();
         nuevasResenas.add(resenas.get(0));
         data.get(1).setResenas(nuevasResenas);
+        multimediaEntity.setPortada(multimediaEntity.getPortada()+".png");
+        em.persist(multimediaEntity);
+        em.persist(productoraEntity);
     }
 
     /**
@@ -201,11 +206,15 @@ public class ProduccionLogicTest {
     @Test
     public void crearStaffTest() {
         ProduccionEntity produccionEntity = factory.manufacturePojo(ProduccionEntity.class);
+        Assert.assertTrue(produccionEntity.getClasificacionAudiencia() + "", true);
         produccionEntity.setCapitulos(new ArrayList<>());
         produccionEntity.setCategorias(new ArrayList());
         produccionEntity.setEmisiones(new ArrayList());
         produccionEntity.setResenas(new ArrayList());
         produccionEntity.setStaff(new ArrayList());
+        produccionEntity.setClasificacionAudiencia(ClasificacionAudiencia.FAMILIAR);
+        produccionEntity.setMultimedia(multimediaEntity);
+        produccionEntity.setProductora(productoraEntity);
         try {
             produccionLogic.crearProduccion(produccionEntity);
             data.add(produccionEntity);

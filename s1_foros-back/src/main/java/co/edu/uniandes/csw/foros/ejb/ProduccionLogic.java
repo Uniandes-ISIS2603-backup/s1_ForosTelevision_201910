@@ -72,13 +72,14 @@ public class ProduccionLogic {
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
         //comprobarReglasDeNegocioProduccion(produccionEntity);
-        LOGGER.log(Level.INFO, "Valido reglas negocio.");
-        MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
-        LOGGER.log(Level.INFO, "Valido multimedia." + multimediaEntity.toString());
-        ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora().getId());
-        LOGGER.log(Level.INFO, "Valido productora." + productoraEntity.toString());
-        produccionEntity.setMultimedia(multimediaEntity);
-        produccionEntity.setProductora(productoraEntity);
+        if(produccionEntity.getMultimedia() != null && produccionEntity.getMultimedia().getId() != null) {
+            MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
+            produccionEntity.setMultimedia(multimediaEntity);
+        }
+        if(produccionEntity.getProductora() != null && produccionEntity.getProductora().getId() != null) {
+            ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora().getId());
+            produccionEntity.setProductora(productoraEntity);
+        }
         LOGGER.log(Level.INFO, "Termina proceso de creación de la producción");
         return produccionPersistence.create(produccionEntity);
     }
