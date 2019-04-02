@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -86,6 +88,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     /**
      * Clasificación de audiencia de la producción.
      */
+    @Enumerated(EnumType.STRING)
     private ClasificacionAudiencia clasificacionAudiencia;
     
     /**

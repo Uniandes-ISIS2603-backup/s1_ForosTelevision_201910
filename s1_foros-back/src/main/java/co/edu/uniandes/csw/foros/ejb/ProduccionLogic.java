@@ -4,6 +4,7 @@ import co.edu.uniandes.csw.foros.entities.CapituloEntity;
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
 import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
+import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
@@ -54,6 +55,12 @@ public class ProduccionLogic {
      */
     @Inject
     private MultimediaLogic multimediaLogic;
+    
+    /**
+     * Inyección de la productora.
+     */
+    @Inject
+    private ProductoraLogic productoraLogic;
 
     /**
      * Método con el cual se crea una producción.
@@ -64,10 +71,16 @@ public class ProduccionLogic {
      */
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
-        comprobarReglasDeNegocioProduccion(produccionEntity);
-        produccionEntity = produccionPersistence.create(produccionEntity);
+        //comprobarReglasDeNegocioProduccion(produccionEntity);
+        LOGGER.log(Level.INFO, "Valido reglas negocio.");
+        MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
+        LOGGER.log(Level.INFO, "Valido multimedia." + multimediaEntity.toString());
+        ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora().getId());
+        LOGGER.log(Level.INFO, "Valido productora." + productoraEntity.toString());
+        produccionEntity.setMultimedia(multimediaEntity);
+        produccionEntity.setProductora(productoraEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la producción");
-        return produccionEntity;
+        return produccionPersistence.create(produccionEntity);
     }
 
     /**
@@ -146,30 +159,39 @@ public class ProduccionLogic {
      */
     private void comprobarReglasDeNegocioProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         // Validación atributo nombre.
+        
         if(produccionEntity.getNombre() == null) {
+            LOGGER.log(Level.INFO, "1");
             throw new BusinessLogicException("El nombre de la producción debe existir.");
         }
         if(produccionEntity.getNombre().equals("")) {
+            LOGGER.log(Level.INFO, "2");
             throw new BusinessLogicException("El nombre de la producción no debe ser vacío.");
         }
         // Validación atributo descripción.
         if(produccionEntity.getDescripcion() == null) {
+            LOGGER.log(Level.INFO, "3");
             throw new BusinessLogicException("La descripción de la producción debe existir.");
         }
-        if(produccionEntity.getDescripcion().equals("")) {
+        if(produccionEntity.getDescripcion().length() == 0) {
+            LOGGER.log(Level.INFO, "4");
             throw new BusinessLogicException("La descripción de la producción no debe ser vacía.");
         }
         // Validación atibuto clasificación.
         if(produccionEntity.getClasificacionAudiencia() == null) {
+            LOGGER.log(Level.INFO, "5");
             throw new BusinessLogicException("La clasificación de la audiencia no puede ser nula.");
         }
         // Validación atributo calificación promedio.
         if(produccionEntity.getCalificacionPromedio() < 0) {
+            LOGGER.log(Level.INFO, "6");
             throw new BusinessLogicException("La calificación promedio es menor a 0.");
         }
         if(produccionEntity.getCalificacionPromedio() > 1000) {
+            LOGGER.log(Level.INFO, "7");
             throw new BusinessLogicException("La calificación promedio es mayor a 1000.");
         }
+        
     }
     
     /**

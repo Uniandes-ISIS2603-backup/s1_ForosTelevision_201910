@@ -215,6 +215,7 @@ public class ProduccionLogicTest {
         Assert.assertEquals(em.find(ProduccionEntity.class, produccionEntity.getId()).getNombre(), produccionEntity.getNombre());
     }
     
+    // TODO: arreglar
     /**
      * Método que prueba que la lógica cumpla al crear un producción.
      */
