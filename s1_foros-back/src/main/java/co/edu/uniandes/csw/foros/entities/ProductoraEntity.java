@@ -8,6 +8,7 @@ package co.edu.uniandes.csw.foros.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -21,7 +22,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ProductoraEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
-    @OneToMany(mappedBy = "productora")
+    @OneToMany(fetch=LAZY,mappedBy = "productora")
     private List<ProduccionEntity> producciones;
 
     private String nombre;

@@ -33,7 +33,6 @@ public class EmisionProduccionLogic {
         return produccion;
     }
     
-    
     public ProduccionEntity obtenerProduccion(Long emisionId){
         return emPersistence.find(emisionId).getProduccion();
     }

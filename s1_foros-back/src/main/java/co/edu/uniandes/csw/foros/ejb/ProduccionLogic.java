@@ -1,11 +1,17 @@
 package co.edu.uniandes.csw.foros.ejb;
 
+import co.edu.uniandes.csw.foros.entities.CapituloEntity;
+import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
+import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
+import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
+import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
 import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.Stateless;
@@ -27,10 +33,34 @@ public class ProduccionLogic {
     private ProduccionPersistence produccionPersistence;
 
     /**
-     * Inyección de los miembros del staff.
+     * Inyección de lo capítulos.
      */
     @Inject
-    private StaffPersistence staffPersistence;
+    private CapituloLogic capituloLogic;
+    
+    /**
+     * Inyección de las reseñas.
+     */
+    @Inject
+    private ResenaLogic resenaLogic;
+    
+    /**
+     * Inyección de las categorías.
+     */
+    @Inject
+    private CategoriaLogic categoriaLogic;
+    
+    /**
+     * Inyección de la multimedia.
+     */
+    @Inject
+    private MultimediaLogic multimediaLogic;
+    
+    /**
+     * Inyección de la productora.
+     */
+    @Inject
+    private ProductoraLogic productoraLogic;
 
     /**
      * Método con el cual se crea una producción.
@@ -41,10 +71,16 @@ public class ProduccionLogic {
      */
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
-        comprobarReglasDeNegocio(produccionEntity);
-        produccionEntity = produccionPersistence.create(produccionEntity);
+        //comprobarReglasDeNegocioProduccion(produccionEntity);
+        LOGGER.log(Level.INFO, "Valido reglas negocio.");
+        MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
+        LOGGER.log(Level.INFO, "Valido multimedia." + multimediaEntity.toString());
+        ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora().getId());
+        LOGGER.log(Level.INFO, "Valido productora." + productoraEntity.toString());
+        produccionEntity.setMultimedia(multimediaEntity);
+        produccionEntity.setProductora(productoraEntity);
         LOGGER.log(Level.INFO, "Termina proceso de creación de la producción");
-        return produccionEntity;
+        return produccionPersistence.create(produccionEntity);
     }
 
     /**
@@ -92,7 +128,7 @@ public class ProduccionLogic {
         if(idProduccion == null) {
             throw new BusinessLogicException("El id de la producción debe existir");
         }
-        comprobarReglasDeNegocio(produccionEntity);
+        comprobarReglasDeNegocioProduccion(produccionEntity);
         ProduccionEntity newEntity = produccionPersistence.update(produccionEntity);
         LOGGER.log(Level.INFO, "Termina proceso de actualizar el libro con id = {0}", produccionEntity.getId());
         return newEntity;
@@ -111,7 +147,6 @@ public class ProduccionLogic {
         if (produccionEntity == null) {
             throw new BusinessLogicException("No existe una producción con ese id.");
         }
-        staffPersistence.delete(idProduccion);
         LOGGER.log(Level.INFO, "Termina proceso de eliminación del miembro del staff.");
         return produccionEntity;
     }
@@ -122,32 +157,167 @@ public class ProduccionLogic {
      * @param produccionEntity entidad a comprobar.
      * @throws BusinessLogicException cuando alguno de los atributos no cumple con las reglas de negocio.
      */
-    private void comprobarReglasDeNegocio(ProduccionEntity produccionEntity) throws BusinessLogicException {
+    private void comprobarReglasDeNegocioProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         // Validación atributo nombre.
+        
         if(produccionEntity.getNombre() == null) {
+            LOGGER.log(Level.INFO, "1");
             throw new BusinessLogicException("El nombre de la producción debe existir.");
         }
         if(produccionEntity.getNombre().equals("")) {
+            LOGGER.log(Level.INFO, "2");
             throw new BusinessLogicException("El nombre de la producción no debe ser vacío.");
         }
         // Validación atributo descripción.
         if(produccionEntity.getDescripcion() == null) {
+            LOGGER.log(Level.INFO, "3");
             throw new BusinessLogicException("La descripción de la producción debe existir.");
         }
-        if(produccionEntity.getDescripcion().equals("")) {
+        if(produccionEntity.getDescripcion().length() == 0) {
+            LOGGER.log(Level.INFO, "4");
             throw new BusinessLogicException("La descripción de la producción no debe ser vacía.");
         }
         // Validación atibuto clasificación.
         if(produccionEntity.getClasificacionAudiencia() == null) {
+            LOGGER.log(Level.INFO, "5");
             throw new BusinessLogicException("La clasificación de la audiencia no puede ser nula.");
         }
         // Validación atributo calificación promedio.
         if(produccionEntity.getCalificacionPromedio() < 0) {
+            LOGGER.log(Level.INFO, "6");
             throw new BusinessLogicException("La calificación promedio es menor a 0.");
         }
         if(produccionEntity.getCalificacionPromedio() > 1000) {
+            LOGGER.log(Level.INFO, "7");
             throw new BusinessLogicException("La calificación promedio es mayor a 1000.");
         }
+        
+    }
+    
+    /**
+     * Método que elimina una reseña de una producción.
+     * 
+     * @param idProduccion id de la producción.
+     * @param idResena id de la reseña.
+     * @throws BusinessLogicException 
+     */
+    public void eliminarResena(Long idProduccion, Long idResena) throws BusinessLogicException {
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        boolean encontrado = false;
+        for(ResenaEntity resenaEntity : produccionEntity.getResenas()) {
+            if(Objects.equals(idResena, resenaEntity.getId())) {
+                encontrado = true;
+                produccionEntity.getResenas().remove(resenaEntity);
+                break;
+            }
+        }
+        if(encontrado == false) {
+            throw new BusinessLogicException("No existe esa reseña dento de la producción.");
+        }
+    }
+    
+    /**
+     * Retorna los capítulos de la producción.
+     * 
+     * @param idProduccion id de la producción a retornar sus capítulos.
+     * @return una lista con los capítulos de la producción.
+     * @throws BusinessLogicException si algo se pifea.
+     */
+    public List<CapituloEntity> darCapitulos(Long idProduccion) throws BusinessLogicException {
+        List<CapituloEntity> capitulos = darProduccion(idProduccion).getCapitulos();
+        if(capitulos.isEmpty()) throw  new BusinessLogicException("No hay capítulos registrados");
+        return capitulos;
+    }
+    
+    /**
+     * Registra un capítulo de la producción.
+     * 
+     * @param idProduccion id de la producción a la que se le registrará un capítulo.
+     * @param idCapitulo id del capítulo a registrar.
+     * @throws BusinessLogicException 
+     */
+    public void registrarCapitulo(Long idProduccion, Long idCapitulo)throws BusinessLogicException{
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        produccionEntity.getCapitulos().add(capituloLogic.getCapituloPorId(idCapitulo));
+        this.editarProduccion(produccionEntity.getId(), produccionEntity);
+    }
+    
+    /**
+     * Retorna las reseñas de la producción.
+     * 
+     * @param idProduccion id de la producción a retornar sus reseñas.
+     * @return una lista con las reseñas de la producción.
+     * @throws BusinessLogicException si algo se pifea.
+     */
+    public List<ResenaEntity> darResenas(Long idProduccion) throws BusinessLogicException {
+        List<ResenaEntity> resenas = darProduccion(idProduccion).getResenas();
+        if(resenas.isEmpty()) throw  new BusinessLogicException("No hay reseñas registradas");
+        return resenas;
+    }
+    
+    /**
+     * Registra una reseña de la producción.
+     * 
+     * @param idProduccion id de la producción a la que se le registrará un capítulo.
+     * @param idResena id de la reseña a registrar.
+     * @throws BusinessLogicException 
+     */
+    public void registrarResena(Long idProduccion, Long idResena)throws BusinessLogicException{
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        produccionEntity.getResenas().add(resenaLogic.find(idResena));
+        this.editarProduccion(produccionEntity.getId(), produccionEntity);
+    }
+    
+    /**
+     * Retorna las categorías de la producción.
+     * 
+     * @param idProduccion id de la producción a retornar sus categorías.
+     * @return una lista con las categorías de la producción.
+     * @throws BusinessLogicException si algo se pifea.
+     */
+    public List<CategoriaEntity> darCategorias(Long idProduccion) throws BusinessLogicException {
+        List<CategoriaEntity> categorias = darProduccion(idProduccion).getCategorias();
+        if(categorias.isEmpty()) throw  new BusinessLogicException("No hay categorías registradas");
+        return categorias;
+    }
+    
+    /**
+     * Registra una categoría de la producción.
+     * 
+     * @param idProduccion id de la producción a la que se le registrará un capítulo.
+     * @param idCategoria id de la categoría a registrar.
+     * @throws BusinessLogicException 
+     */
+    public void registrarCategoria(Long idProduccion, Long idCategoria)throws BusinessLogicException{
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        produccionEntity.getCategorias().add(categoriaLogic.getCategoria(idCategoria));
+        this.editarProduccion(produccionEntity.getId(), produccionEntity);
+    }
+    
+    /**
+     * Retorna la multimedia de la producción.
+     * 
+     * @param idProduccion id de la producción a retornar su multimedia.
+     * @return la multimedia de la producción.
+     * @throws BusinessLogicException si algo se pifea.
+     */
+    public MultimediaEntity darMultimedia(Long idProduccion) throws BusinessLogicException {
+        MultimediaEntity multimedia = darProduccion(idProduccion).getMultimedia();
+        if(multimedia == null) throw  new BusinessLogicException("No hay multimedia registrada");
+        return multimedia;
+    }
+    
+    /**
+     * Registra una multimedia de la producción.
+     * 
+     * @param idProduccion id de la producción a la que se le registrará una multimedia.
+     * @param idMultimedia id de la multimedia a registrar.
+     * @throws BusinessLogicException 
+     */
+    public void registrarMultimediaNueva(Long idProduccion, Long idMultimedia) throws BusinessLogicException{
+        ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
+        produccionEntity.setMultimedia(multimediaLogic.darMultimedia(idMultimedia));
+        this.editarProduccion(produccionEntity.getId(), produccionEntity);
     }
 
 }

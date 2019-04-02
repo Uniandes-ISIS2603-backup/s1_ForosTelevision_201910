@@ -1,8 +1,9 @@
 package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.ProduccionDetailDTO;
+import co.edu.uniandes.csw.foros.dtos.StaffDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
-import co.edu.uniandes.csw.foros.ejb.StaffProduccionesLogic;
+import co.edu.uniandes.csw.foros.ejb.StaffLogic;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -15,22 +16,22 @@ import java.util.logging.Logger;
  *
  * @author jf.castaneda
  */
-@Path("staff")
+@Path("producciones")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class StaffProduccionesResource {
+public class ProduccionesStaffResource {
 
-    private static final Logger LOGGER = Logger.getLogger(StaffProduccionesResource.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProduccionesStaffResource.class.getName());
 
     @Inject
-    private StaffProduccionesLogic staffProduccionesLogic;
+    private StaffLogic staffLogic;
 
     @Inject
     private ProduccionLogic produccionLogic;
 
     @POST
-    @Path("{idStaff: \\d+}/{idProduccion: \\d+}")
-    public ProduccionDetailDTO addProduccion(@PathParam("idStaff") Long idStaff, @PathParam("idProduccion") Long idProduccion) {
+    @Path("{idProduccion: \\d+}/{idStaff: \\d+}")
+    public ProduccionDetailDTO addStaff(@PathParam("idStaff") Long idStaff, @PathParam("idProduccion") Long idProduccion) {
         LOGGER.log(Level.INFO, "StaffProduccionesResource addProduccion: input: booksId {0} , authorsId {1}", new Object[]{idStaff, idProduccion});
         //if (produccionLogic.darProduccion(idProduccion) == null) {
             //throw new WebApplicationException("El recurso /producciones/" + idProduccion + " no existe.", 404);
@@ -40,5 +41,5 @@ public class StaffProduccionesResource {
         //return detailDTO;
         return null;
     }
-
+    
 }

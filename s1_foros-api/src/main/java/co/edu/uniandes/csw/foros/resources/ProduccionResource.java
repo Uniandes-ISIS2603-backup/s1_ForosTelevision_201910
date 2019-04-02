@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 
 /**
@@ -29,6 +30,7 @@ public class ProduccionResource {
 
     private static final Logger LOGGER = Logger.getLogger(ProduccionResource.class.getName());
 
+    @Inject
     private ProduccionLogic produccionLogic;
 
     /**
@@ -97,7 +99,7 @@ public class ProduccionResource {
     @Path("{id: \\d+}")
     public ProduccionDTO editarProduccion(@PathParam("id") Long id, ProduccionDTO produccionDTO) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "ProduccionResource editarProduccion: input: id: {0} , produccion: {1}", new Object[]{id, produccionDTO.toString()});
-        produccionDTO.editarIdProduccion(id);
+        produccionDTO.setId(id);
         if(produccionLogic.darProduccion(id) == null) {
             throw new WebApplicationException("El recurso /producciones/" + id + " no existe.", 404);
         }

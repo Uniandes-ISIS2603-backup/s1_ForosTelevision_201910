@@ -81,11 +81,5 @@ public class CategoriaLogic {
         categoriaPersistence.delete(categoriaId);
 
     }
-    
-    public CategoriaEntity find(Long  idProduccion)throws BusinessLogicException{
-        CategoriaEntity prod=categoriaPersistence.find(idProduccion);
-        if(prod==null) throw new BusinessLogicException("Produccion no registrada");
-        return prod;
-     }
 
 }
