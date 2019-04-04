@@ -8,7 +8,6 @@ import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ProduccionPersistence;
-import co.edu.uniandes.csw.foros.persistence.StaffPersistence;
 
 import java.util.List;
 import java.util.Objects;
@@ -71,7 +70,7 @@ public class ProduccionLogic {
      */
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
-        //comprobarReglasDeNegocioProduccion(produccionEntity);
+        comprobarReglasDeNegocioProduccion(produccionEntity);
         if(produccionEntity.getMultimedia() != null && produccionEntity.getMultimedia().getId() != null) {
             MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
             produccionEntity.setMultimedia(multimediaEntity);
@@ -142,6 +141,7 @@ public class ProduccionLogic {
      * @return producción que se eliminó.
      * @throws BusinessLogicException si no existe la entidad.
      */
+    // TODO: toca eliminar todo.
     public ProduccionEntity eliminarProduccion(Long idProduccion) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de eliminación de una producción");
         ProduccionEntity produccionEntity = produccionPersistence.find(idProduccion);
