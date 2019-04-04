@@ -38,6 +38,7 @@ public class StaffEntity extends BaseEntity implements Serializable{
     /**
      * Rol que cumple el staff dentro de la producción.
      */
+    @PodamExclude
     @Enumerated(EnumType.STRING)
     private RolStaff rol;
     
