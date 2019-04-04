@@ -21,8 +21,8 @@ public class CategoriaEntity extends BaseEntity implements Serializable {
 
     private String nombre;
     
-    @PodamExclude
-    @OneToMany(mappedBy = "categoria")
+    //7@PodamExclude
+    //@OneToMany(mappedBy = "categoria")
     private List<ProduccionEntity> producciones;
 
     /**
