@@ -6,6 +6,8 @@ import co.edu.uniandes.csw.foros.dtos.ProductoraDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.CategoriaLogic;
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.enterprise.context.RequestScoped;
@@ -30,9 +32,9 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @RequestScoped
 public class CategoriaResource {
-
+    
     private static final Logger LOGGER = Logger.getLogger(MultimediaResource.class.getName());
-
+    
     @Inject
     private CategoriaLogic categoriaLogic;
 
@@ -45,7 +47,7 @@ public class CategoriaResource {
     @GET
     @Path("{id:\\d+}")
     public CategoriaDTO darCategoria(@PathParam("id") Long id) {
-
+        
         LOGGER.log(Level.INFO, "CategoríaResource darCategoria: input {0}", id);
         CategoriaEntity entity = null;
         try {
@@ -69,13 +71,10 @@ public class CategoriaResource {
     public CategoriaDTO crearCategoria(CategoriaDTO categoriaDTO) {
         LOGGER.log(Level.INFO, "CategoriaResource crearCategoria : input: {0}");
         CategoriaDTO nuevaCategoria = null;
-        try
-        {
+        try {
             CategoriaEntity entity = categoriaLogic.crearCategoria(categoriaDTO.toEntity());
             nuevaCategoria = new CategoriaDTO(entity);
-        }
-        catch(BusinessLogicException e)
-        {
+        } catch (BusinessLogicException e) {
             throw new WebApplicationException(e.getMessage(), 412);
         }
         return nuevaCategoria;
@@ -92,7 +91,7 @@ public class CategoriaResource {
     @PUT
     @Path("{id: \\d+}")
     public CategoriaDetailDTO editarProductora(@PathParam("id") Long id, CategoriaDetailDTO categoria) throws BusinessLogicException {
-    LOGGER.log(Level.INFO, "CategoriaResource editarCategoria: input: id: {0} , categoria : {1}", new Object[]{id, categoria});
+        LOGGER.log(Level.INFO, "CategoriaResource editarCategoria: input: id: {0} , categoria : {1}", new Object[]{id, categoria});
         categoria.setId(id);
         if (categoriaLogic.getCategoria(id) == null) {
             throw new WebApplicationException("El recurso /categorias/" + id + " no existe.", 404);
@@ -103,14 +102,44 @@ public class CategoriaResource {
     }
 
     /**
-     * Elimina una categoria
+     * Elimina una Categoria por su id.
      *
      * @param id id de la categoria a eliminar.
      * @return
      */
     @DELETE
-    @Path("/categorias/eliminar/{id:\\d+}")
-    public String eliminarCategoria(@PathParam("id") Long id) {
-        return "se eliminó la cateogoria";
+    @Path("{id:\\d+}")
+    public String eliminarProductora(@PathParam("id") Long id) throws BusinessLogicException {
+        LOGGER.log(Level.INFO, "ProdcutoraResource eliminarcategoria: input: {0}", id);
+        CategoriaEntity entity = categoriaLogic.getCategoria(id);
+        if (entity == null) {
+            throw new WebApplicationException("El recurso /productoras/" + id + " no existe.", 404);
+        }
+        categoriaLogic.borrarCategoria(id);
+        LOGGER.info("ProduccionResource eliminarProduccion: output: void");
+        return "Se borro exitosamente la categoria con id: " + id;
+    }
+    
+    @GET
+    public List<CategoriaDetailDTO> darCategorias() {
+        LOGGER.info("CategoriaREsource darCategorias: input: void");
+        List<CategoriaDetailDTO> listacategoria = listEntity2DTO(categoriaLogic.getCategorias());
+        LOGGER.log(Level.INFO, "CategoriaResource darCategorias: input: {0}", listacategoria);
+        return listacategoria;
+    }
+    
+    
+    /**
+     * Convierte una lista de CategoriaEntity a una lista de CategoriaDetailDTO.
+     *
+     * @param entityList Lista de CategoriaEntity a convertir.
+     * @return Lista de AuthorDetailDTO convertida.
+     */
+    private List<CategoriaDetailDTO> listEntity2DTO(List<CategoriaEntity> entityList) {
+        List<CategoriaDetailDTO> list = new ArrayList<>();
+        for (CategoriaEntity entity : entityList) {
+            list.add(new CategoriaDetailDTO(entity));
+        }
+        return list;
     }
 }

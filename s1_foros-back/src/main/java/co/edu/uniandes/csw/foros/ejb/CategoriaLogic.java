@@ -26,7 +26,6 @@ public class CategoriaLogic {
     @Inject
     private CategoriaPersistence categoriaPersistence;
 
-
     /**
      * Crea una categoria y verifica los requisitos necesarios para su
      * creaci{on.
@@ -38,15 +37,15 @@ public class CategoriaLogic {
      */
     public CategoriaEntity crearCategoria(CategoriaEntity entity) throws BusinessLogicException {
 
-        if (categoriaPersistence.findByName(entity.getNombre()).size()!=0) {
+        if (categoriaPersistence.findByName(entity.getNombre()).size() != 0) {
 
             throw new BusinessLogicException("Ya existe una categoria con el nombre = " + entity.getNombre());
         }
-       categoriaPersistence.create(entity);
+        categoriaPersistence.create(entity);
         return entity;
     }
 
-   public List<CategoriaEntity> getCategorias() {
+    public List<CategoriaEntity> getCategorias() {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar todas las categorias");
         List<CategoriaEntity> lista = categoriaPersistence.findAll();
         LOGGER.log(Level.INFO, "Termina proceso de consultar todos los autores");
@@ -57,7 +56,8 @@ public class CategoriaLogic {
      * Obtiene los datos de una instancia de Categoria a partir de su ID.
      *
      * @param categoriasId Identificador de la instancia a consultar
-     * @return Instancia de CategoriaEntity con los datos del Categoria consultado.
+     * @return Instancia de CategoriaEntity con los datos del Categoria
+     * consultado.
      */
     public CategoriaEntity getCategoria(Long categoriasId) {
         LOGGER.log(Level.INFO, "Inicia proceso de consultar la categoria con id = {0}", categoriasId);
@@ -68,30 +68,32 @@ public class CategoriaLogic {
         LOGGER.log(Level.INFO, "Termina proceso de consultar el autor con id = {0}", categoriasId);
         return categoriaEntity;
     }
+
     /**
-     * Borrar una Categoria.
+     * Borrar una Categoria. Borra una categoria con el id dado por parametro.
      *
      * @param categoriaId: id de la categoria a borrar.
      */
     public void borrarCategoria(Long categoriaId) throws BusinessLogicException {
 
-        if (categoriaPersistence.find(categoriaId) == null) {
-            throw new BusinessLogicException("La categoria con id: " + categoriaId + " no fue encontrada");
+        LOGGER.log(Level.INFO, "Inicia proceso de eliminación de una categoria");
+        CategoriaEntity categoriaEntity = categoriaPersistence.find(categoriaId);
+        if (categoriaEntity == null) {
+            throw new BusinessLogicException("No existe una categoria con el id :" + categoriaId);
         }
         categoriaPersistence.delete(categoriaId);
+        LOGGER.log(Level.INFO, "Termina proceso de eliminación de una categoria");
 
     }
-    
-    public CategoriaEntity find(Long  idProduccion)throws BusinessLogicException{
-        CategoriaEntity prod=categoriaPersistence.find(idProduccion);
-        if(prod==null)
-        {
+
+    public CategoriaEntity find(Long idProduccion) throws BusinessLogicException {
+        CategoriaEntity prod = categoriaPersistence.find(idProduccion);
+        if (prod == null) {
             throw new BusinessLogicException("Categoria no registrada");
         }
         return prod;
-     }
+    }
 
-    
     public CategoriaEntity editarCategoria(Long idCategoria, CategoriaEntity categoriaEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de actualizar la categoria con id = {0}", idCategoria);
         if (idCategoria == null) {
@@ -102,11 +104,13 @@ public class CategoriaLogic {
         LOGGER.log(Level.INFO, "Termina proceso de actualizar la categoria con id = {0}", categoriaEntity.getId());
         return newEntity;
     }
-    
+
     /**
      * Comprueba las reglas de negocio de la Categoria.
+     *
      * @param categoriaEntity categoria a evaluar reglas de negocio.
-     * @throws BusinessLogicException si se presenta alguna corrupción en las reglas de negocio.
+     * @throws BusinessLogicException si se presenta alguna corrupción en las
+     * reglas de negocio.
      */
     private void comprobarReglasDeNegocio(CategoriaEntity categoriaEntity) throws BusinessLogicException {
 

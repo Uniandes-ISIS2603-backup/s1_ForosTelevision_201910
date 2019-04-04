@@ -126,17 +126,17 @@ public class ProductoraResource {
      */
     @GET
     public List<ProductoraDetailDTO> darProductoras() {
-        LOGGER.info("AuthorResource getProductoras: input: void");
+        LOGGER.info("ProductoraResource darProductoras: input: void");
         List<ProductoraDetailDTO> listaProductoras = listEntity2DTO(productoraLogic.getProductoras());
-        LOGGER.log(Level.INFO, "ProductoraResource getProductoras: output: {0}", listaProductoras);
+        LOGGER.log(Level.INFO, "ProductoraResource darProductoras: output: {0}", listaProductoras);
         return listaProductoras;    }
     
     
     /**
-     * Convierte una lista de AuthorEntity a una lista de AuthorDetailDTO.
+     * Convierte una lista de ProductoraEntity a una lista de ProductoraDetailDTO.
      *
      * @param entityList Lista de AuthorEntity a convertir.
-     * @return Lista de AuthorDetailDTO convertida.
+     * @return Lista de ProductoraEntity convertida.
      */
     private List<ProductoraDetailDTO> listEntity2DTO(List<ProductoraEntity> entityList) {
         List<ProductoraDetailDTO> list = new ArrayList<>();
