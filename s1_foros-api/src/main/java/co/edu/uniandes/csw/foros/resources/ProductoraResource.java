@@ -63,7 +63,7 @@ public class ProductoraResource {
      * Crea una productora con la información dada.
      *
      * @param productoraDTO
-     * @return mensaje de éxito del proceso.
+     * @return ProductoraDTO con la información de la nueva categoria.
      */
     @POST
     public ProductoraDTO crearProductora(ProductoraDTO productoraDTO) {

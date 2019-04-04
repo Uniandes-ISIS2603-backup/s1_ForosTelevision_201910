@@ -53,8 +53,8 @@ public class ProductoraDetailDTO extends ProductoraDTO implements Serializable {
     }
 
      /**
-     * Convierte un objeto AuthorDetailDTO a ProductoraEntity incluyendo los
-     * atributos de AuthorDTO.
+     * Convierte un objeto ProductoraDTO a ProductoraEntity incluyendo los
+     * atributos de ProductoraDTO.
      *
      * @return Nueva objeto ProductoraEntity.
      *

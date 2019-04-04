@@ -6,7 +6,10 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import uk.co.jemos.podam.common.PodamExclude;
 
 
 /**
@@ -17,6 +20,10 @@ import javax.persistence.Entity;
 public class CategoriaEntity extends BaseEntity implements Serializable {
 
     private String nombre;
+    
+    @PodamExclude
+    @OneToMany(mappedBy = "categoria")
+    private List<ProduccionEntity> producciones;
 
     /**
      * Retorna el nombre de la categoria.
@@ -35,5 +42,25 @@ public class CategoriaEntity extends BaseEntity implements Serializable {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
+    
+    /**
+     *
+     * @return Las producciones de un productora.
+     */
+    public List<ProduccionEntity> getProduccciones() {
+        return producciones;
+    }
+
+    /**
+     * Remplaza la lista de producciones de la categoria.
+     * @param producciones Lista d eproducciones de la categoria.
+     */
+    public void setProducciones(List<ProduccionEntity> producciones) {
+        this.producciones = producciones;
+    }
+
+
+
 
 }
