@@ -13,6 +13,7 @@ import co.edu.uniandes.csw.foros.entities.CanalEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
+import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CanalPersistence;
 import java.util.ArrayList;
@@ -202,6 +203,7 @@ public class ResenaLogicTest {
         ProduccionEntity produccion = factory.manufacturePojo(ProduccionEntity.class);
         produccion.setCalificacionPromedio(0);
         usuarioLogic.crearUsuario(usuario);
+        produccion.setClasificacionAudiencia(ClasificacionAudiencia.FAMILIAR);
         produccionLogic.crearProduccion(produccion);
         resenaEntity.setUsuarioResena(usuario);
         resenaEntity.setProduccionResena(produccion);
