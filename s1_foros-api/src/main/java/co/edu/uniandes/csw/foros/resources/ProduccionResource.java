@@ -201,9 +201,9 @@ public class ProduccionResource {
      */
     @GET
     @Path("{idProduccion: \\d+}/capitulos/")
-    public List<CapituloDetailDTO> darCapitulos(@PathParam("idProduccion") Long id) {
+    public List<CapituloDTO> darCapitulos(@PathParam("idProduccion") Long id) {
         ProduccionEntity produccionEntity = darEntidadProduccion(id);
-        List<CapituloDetailDTO> capitulos = listEntity2DetailDTOCapitulos(produccionEntity.getCapitulos());
+        List<CapituloDTO> capitulos = listEntity2DetailDTOCapitulos(produccionEntity.getCapitulos());
         return capitulos;
     }
     
@@ -271,10 +271,10 @@ public class ProduccionResource {
      * vamos a convertir a DTO.
      * @return la lista de libros en forma DTO (json)
      */
-    private List<CapituloDetailDTO> listEntity2DetailDTOCapitulos(List<CapituloEntity> entityList) {
-        List<CapituloDetailDTO> list = new ArrayList<>();
+    private List<CapituloDTO> listEntity2DetailDTOCapitulos(List<CapituloEntity> entityList) {
+        List<CapituloDTO> list = new ArrayList<>();
         for (CapituloEntity entity : entityList) {
-            list.add(new CapituloDetailDTO(entity));
+            list.add(new CapituloDTO(entity));
         }
         return list;
     }
