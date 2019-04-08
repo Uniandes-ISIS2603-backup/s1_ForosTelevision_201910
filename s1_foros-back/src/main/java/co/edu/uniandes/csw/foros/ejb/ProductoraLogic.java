@@ -43,6 +43,11 @@ public class ProductoraLogic {
 
             throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
         }
+        int tamaño = entity.getNombre().length();
+        if(tamaño < 5)
+        {
+            throw new BusinessLogicException("La productora debe tener un nombre válido.");
+        }
         productoraPersistence.create(entity);
         return entity;
     }
