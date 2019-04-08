@@ -1,17 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
@@ -24,27 +19,22 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     private String descripcion;
     private Integer calificacionProduccion;
     private boolean recomendada;
+    @Temporal(TemporalType.DATE)
     private Date fecha;
     private Integer calificacionResena;
-  
-    
-    
-    
-    
      /**
      * Relación entre reseña y usuario.
      */
     @PodamExclude
-    @ManyToOne(fetch=LAZY)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private UsuarioEntity usuarioResena;
-
-    
-    /**
-     * Relación entre reseña y produccion.
-     */
-    @PodamExclude
-    @ManyToOne(fetch=LAZY)
-    private ProduccionEntity produccionResena;
+   
+   /**
+    * Relación entre reseña y produccion.
+    */
+   @PodamExclude
+   @ManyToOne(cascade = CascadeType.PERSIST)
+   private ProduccionEntity produccionResena;
 
     /**
      * @return the descripcion
@@ -54,67 +44,97 @@ public class ResenaEntity extends BaseEntity implements Serializable  {
     }
 
     /**
-     * @param descripcion the descripcion to set
+     * @param descripcion descripcion de Produccion
      */
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
     /**
-     * @return the calificacionProduccion
+     * @return calificacionProduccion 
      */
     public Integer getCalificacionProduccion() {
         return calificacionProduccion;
     }
 
     /**
-     * @param calificacionProduccion the calificacionProduccion to set
+     * @param calificacionProduccion selecciona una calificacion
      */
     public void setCalificacionProduccion(Integer calificacionProduccion) {
         this.calificacionProduccion = calificacionProduccion;
     }
 
     /**
-     * @return the recomendada
+     * @return verdadero si la serie es recomendada
      */
     public boolean isRecomendada() {
-        return recomendada;
+        return this.recomendada;
     }
 
     /**
-     * @param recomendada the recomendada to set
+     * @param recomendada modifica si la serie es recomendada
      */
     public void setRecomendada(boolean recomendada) {
         this.recomendada = recomendada;
     }
 
     /**
-     * @return the fecha
+     * @return fecha de recomendacion
      */
     public Date getFecha() {
-        return fecha;
+        return this.fecha;
     }
 
     /**
-     * @param fecha the fecha to set
+     * @param fecha  asigna una fecha de recomendacion 
      */
     public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
     /**
-     * @return the calificacionResena
+     * @return the calificacion para la reseña de usuario
      */
     public Integer getCalificacionResena() {
-        return calificacionResena;
+        return this.calificacionResena;
     }
 
     /**
-     * @param calificacionResena the calificacionResena to set
+     * @param calificacionResena modifica la calificacion de reseña
      */
     public void setCalificacionResena(Integer calificacionResena) {
         this.calificacionResena = calificacionResena;
     }
+
+    /**
+     * @return the usuarioResena
+     */
+    public UsuarioEntity getUsuarioResena() {
+        return usuarioResena;
+    }
+
+    /**
+     * @param usuarioResena the usuarioResena to set
+     */
+    public void setUsuarioResena(UsuarioEntity usuarioResena) {
+        this.usuarioResena = usuarioResena;
+    }
+
+    /**
+     * @return the produccionResena
+     */
+    public ProduccionEntity getProduccionResena() {
+        return produccionResena;
+    }
+
+    /**
+     * @param produccionResena the produccionResena to set
+     */
+    public void setProduccionResena(ProduccionEntity produccionResena) {
+        this.produccionResena = produccionResena;
+    }
+
+   
 
 
 

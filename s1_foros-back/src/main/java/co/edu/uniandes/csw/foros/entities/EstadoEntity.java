@@ -33,7 +33,7 @@ public class EstadoEntity extends BaseEntity implements Serializable {
      * Constructor de la clase.
      */
     public EstadoEntity(){
-        
+        // Constructor vacío de la clase.
     }
 
     /**

@@ -7,6 +7,7 @@ package co.edu.uniandes.csw.foros.test.logic;
 
 import co.edu.uniandes.csw.foros.ejb.CanalLogic;
 import co.edu.uniandes.csw.foros.entities.CanalEntity;
+import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CanalPersistence;
 import java.util.ArrayList;
@@ -128,13 +129,60 @@ public class CanalLogicTest {
     {
        PodamFactory factory = new PodamFactoryImpl();
         CanalEntity newCanalEntity =factory.manufacturePojo(CanalEntity.class);
-         newCanalEntity.setNombre(data.get(0).getNombre());
-        canalLogic.createCanal(newCanalEntity);
+         newCanalEntity.setNombre("");
+          CanalEntity resultado=canalLogic.createCanal(newCanalEntity);
+
     }
+    
+  
+     @Test(expected=BusinessLogicException.class)
+    public void agregarRatingNegativo() throws BusinessLogicException
+    {
+       PodamFactory factory = new PodamFactoryImpl();
+        CanalEntity newCanalEntity =factory.manufacturePojo(CanalEntity.class);
+         newCanalEntity.setRating(-1.0);
+        canalLogic.createCanal(newCanalEntity);
+       
+    }
+    
+     @Test
+    public void updateCanalTest() throws BusinessLogicException
+    {
+        PodamFactory factory = new PodamFactoryImpl();
+        CanalEntity newCanalEntity=factory.manufacturePojo(CanalEntity.class);
+        CanalEntity newCanalEntity2=factory.manufacturePojo(CanalEntity.class);
+        canalLogic.createCanal(newCanalEntity);
+        canalLogic.createCanal(newCanalEntity2);
+        CanalEntity actualizado=canalLogic.actualizarCanal(newCanalEntity2,newCanalEntity.getId());
+        Assert.assertNotNull(actualizado);
+        Assert.assertNotNull(canalLogic.darCanal(actualizado.getId()));
+//        CanalEntity entity=em.find(CanalEntity.class,result.getId());
+//        Assert.assertEquals(newCanalEntity.getId(),entity.getId());
+//        Assert.assertEquals(newCanalEntity.getRating(),entity.getRating());
+  }
+    
+    
+    
+     /**
+     * Metodo que verifica la eliminacion
+     * @throws BusinessLogicException 
+     */
+    @Test(expected=BusinessLogicException.class)
+    public void deleteCanalTest() throws BusinessLogicException{
+        
+        PodamFactory factory = new PodamFactoryImpl();
+        CanalEntity canalEntity = factory.manufacturePojo(CanalEntity.class);
+        CanalEntity creado=canalLogic.createCanal(canalEntity);
+        canalLogic.eliminarCanal(creado.getId());
+        CanalEntity resultado=canalLogic.darCanal(creado.getId());
+        
+//        Assert.assertNull(canalLogic.darCanal(creado.getId()));
+    }
+    
     
     
 //  
   
-
+ 
     
 }

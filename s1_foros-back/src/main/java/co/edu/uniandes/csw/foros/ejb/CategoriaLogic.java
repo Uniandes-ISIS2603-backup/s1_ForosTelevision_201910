@@ -8,6 +8,9 @@ package co.edu.uniandes.csw.foros.ejb;
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CategoriaPersistence;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -18,11 +21,14 @@ import javax.inject.Inject;
 @Stateless
 public class CategoriaLogic {
 
+    private static final Logger LOGGER = Logger.getLogger(CategoriaLogic.class.getName());
+
     @Inject
-    CategoriaPersistence persitence;
+    private CategoriaPersistence categoriaPersistence;
+
 
     /**
-     * Crea una categoría y verifica los requisitos necesarios para su
+     * Crea una categoria y verifica los requisitos necesarios para su
      * creaci{on.
      *
      * @param entity Categoria a crear.
@@ -30,25 +36,56 @@ public class CategoriaLogic {
      * @throws BusinessLogicException si se intenta crear una categoria ya
      * registrada.
      */
-    public CategoriaEntity crearProductora(CategoriaEntity entity) throws BusinessLogicException {
-        if (persitence.find(entity.getId()) != null) {
-            throw new BusinessLogicException("Ya existe una productora con el nombre = " + entity.getNombre());
+    public CategoriaEntity crearCategoria(CategoriaEntity entity) throws BusinessLogicException {
+
+        if (categoriaPersistence.findByName(entity.getNombre()).size()!=0) {
+
+            throw new BusinessLogicException("Ya existe una categoria con el nombre = " + entity.getNombre());
         }
-        persitence.create(entity);
+       categoriaPersistence.create(entity);
         return entity;
     }
 
+   public List<CategoriaEntity> getCategorias() {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar todos los autores");
+        List<CategoriaEntity> lista = categoriaPersistence.findAll();
+        LOGGER.log(Level.INFO, "Termina proceso de consultar todos los autores");
+        return lista;
+    }
+
+    /**
+     * Obtiene los datos de una instancia de Categoria a partir de su ID.
+     *
+     * @param categoriasId Identificador de la instancia a consultar
+     * @return Instancia de CategoriaEntity con los datos del Categoria consultado.
+     */
+    public CategoriaEntity getCategoria(Long categoriasId) {
+        LOGGER.log(Level.INFO, "Inicia proceso de consultar el autor con id = {0}", categoriasId);
+        CategoriaEntity categoriaEntity = categoriaPersistence.find(categoriasId);
+        if (categoriaEntity == null) {
+            LOGGER.log(Level.SEVERE, "La editorial con el id = {0} no existe", categoriasId);
+        }
+        LOGGER.log(Level.INFO, "Termina proceso de consultar el autor con id = {0}", categoriasId);
+        return categoriaEntity;
+    }
     /**
      * Borrar una Categoria.
      *
-     * @param categoriaId: id de la catgoria a borrar.
+     * @param categoriaId: id de la categoria a borrar.
      */
-    public void borrarProductora(Long categoriaId) throws BusinessLogicException {
+    public void borrarCategoria(Long categoriaId) throws BusinessLogicException {
 
-        if (persitence.find(categoriaId) == null) {
-            throw new BusinessLogicException("La productora con id: " + categoriaId + " no fue encontrada");
+        if (categoriaPersistence.find(categoriaId) == null) {
+            throw new BusinessLogicException("La categoria con id: " + categoriaId + " no fue encontrada");
         }
-        persitence.delete(categoriaId);
+        categoriaPersistence.delete(categoriaId);
 
     }
+    
+    public CategoriaEntity find(Long  idProduccion)throws BusinessLogicException{
+        CategoriaEntity prod=categoriaPersistence.find(idProduccion);
+        if(prod==null) throw new BusinessLogicException("Produccion no registrada");
+        return prod;
+     }
+
 }

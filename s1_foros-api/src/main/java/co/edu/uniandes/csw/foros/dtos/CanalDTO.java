@@ -22,11 +22,13 @@ public class CanalDTO implements Serializable {
     {
         
     }
-
-    public CanalDTO(CanalEntity entidad)
+   
+    public CanalDTO(CanalEntity canalEntity)
     {
-        setId(entidad.getId());
-        setNombre(entidad.getNombre());
+        this.id=canalEntity.getId();
+        this.nombre=canalEntity.getNombre();
+        this.rating=canalEntity.getRating(); 
+        
     }
     
     /**
@@ -76,8 +78,10 @@ public class CanalDTO implements Serializable {
         CanalEntity entidad= new CanalEntity();
         entidad.setId(this.getId());
         entidad.setNombre(this.getNombre());
+        entidad.setRating(this.getRating());
         return entidad;
     }
+    
     
     
     

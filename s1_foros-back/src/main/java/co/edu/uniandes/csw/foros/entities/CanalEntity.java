@@ -6,15 +6,18 @@
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
+import java.util.Iterator;
+import java.util.List;
 import javax.persistence.Entity;
 import static javax.persistence.FetchType.EAGER;
 import static javax.persistence.FetchType.LAZY;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import uk.co.jemos.podam.common.PodamExclude;
 
 /**
  *
- * @author 
+ * @author mi.carrascal
  */
 @Entity
 public class CanalEntity extends BaseEntity implements Serializable {
@@ -23,8 +26,8 @@ public class CanalEntity extends BaseEntity implements Serializable {
     private Double rating;
     
     @PodamExclude
-    @OneToOne(fetch=LAZY)
-    private EmisionEntity emision;
+    @OneToMany(fetch=LAZY)
+    private List<EmisionEntity> emisiones;
     
     public CanalEntity(){
        
@@ -58,6 +61,40 @@ public class CanalEntity extends BaseEntity implements Serializable {
         this.rating = rating;
     }
 
+    public void addEmision(EmisionEntity emision) {
+        emisiones.add(emision);
+    }
+
+    public EmisionEntity getEmision(Long emisionId) {
+        EmisionEntity emision=null;
+        for(int i=0;i<emisiones.size();i++)
+        {
+            if(emisionId==emisiones.get(i).getId())
+            {
+                emision=emisiones.get(i);
+            }
+        }
+        
+        return emision;
+    }
+
+    public List<EmisionEntity> getEmisiones()
+    {
+        return emisiones;
+    }
+
+    public void eliminarEmision(Long emisionId) {
+        EmisionEntity emision=null;
+        for(int i=0;i<emisiones.size();i++)
+        {
+            if(emisionId==emisiones.get(i).getId())
+            {
+                emisiones.remove(i);
+            }
+        }
+        
+        
+    }
    
    
 }

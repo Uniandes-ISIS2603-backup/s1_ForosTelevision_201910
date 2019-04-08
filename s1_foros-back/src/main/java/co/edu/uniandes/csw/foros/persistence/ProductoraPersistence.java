@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.persistence;
 
-import co.edu.uniandes.csw.foros.entities.EmisionEntity;
+
 import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import java.util.List;
 import java.util.logging.Level;

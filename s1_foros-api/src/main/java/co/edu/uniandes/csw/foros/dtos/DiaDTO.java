@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.DiaEntity;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -29,6 +30,20 @@ public class DiaDTO implements Serializable {
      */
     public DiaDTO(){
         
+    }
+
+    public DiaDTO(DiaEntity d) {
+        this.id=d.getId();
+        this.nombre=d.getNombre();
+        this.horaEmision=d.getHoraEmision();
+    }
+    
+    public DiaEntity toEntity(){
+        DiaEntity d=new DiaEntity();
+        d.setId(id);
+        d.setHoraEmision(horaEmision);
+        d.setNombre(nombre);
+        return d;
     }
 
     /**

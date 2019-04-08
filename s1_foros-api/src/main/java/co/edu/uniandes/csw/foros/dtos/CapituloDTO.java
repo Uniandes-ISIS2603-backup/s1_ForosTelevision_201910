@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.CapituloEntity;
 import java.io.Serializable;
 
 /**
@@ -32,46 +33,61 @@ public class CapituloDTO implements Serializable {
      * Constructor de la clase.
      */
     public CapituloDTO(){
-        
+        //Constructor vacío.
     }
     
+    public CapituloDTO(CapituloEntity ent){
+            this.id=ent.getId();
+            this.descripcion=ent.getDescripcion();
+            this.nombre=ent.getNombre();
+            this.duracion=ent.getDuracion();
+    }
+    
+    public CapituloEntity toEntity(){
+        CapituloEntity entity = new CapituloEntity();
+        entity.setId(this.id);
+        entity.setDescripcion(this.descripcion);
+        entity.setNombre(this.nombre);
+        entity.setDuracion(this.duracion);
+        return entity;
+    }
     /**
-     * @return the id
+     * @return el identificador de Capitulo
      */
     public Long getId() {
         return id;
     }
 
     /**
-     * @param id the id to set
+     * @param id modifica el identificador de recurso
      */
     public void setId(Long id) {
         this.id = id;
     }
 
     /**
-     * @return the duracion
+     * @return duracion del capitulo
      */
     public int getDuracion() {
         return duracion;
     }
 
     /**
-     * @param duracion the duracion to set
+     * @param duracion en minutos de capitulo
      */
     public void setDuracion(int duracion) {
         this.duracion = duracion;
     }
 
     /**
-     * @return the nombre
+     * @return nombre del capitulo
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * @param nombre the nombre to set
+     * @param nombre representativo de capitulo
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -90,5 +106,4 @@ public class CapituloDTO implements Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
 }
