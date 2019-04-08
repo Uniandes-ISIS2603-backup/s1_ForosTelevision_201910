@@ -6,8 +6,10 @@
 package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.*;
+import co.edu.uniandes.csw.foros.ejb.CapituloLogic;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
+import co.edu.uniandes.csw.foros.entities.CapituloEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
@@ -36,6 +38,9 @@ public class ProduccionResource {
     
     @Inject
     private StaffLogic staffLogic;
+
+    @Inject
+    private CapituloLogic capituloLogic;
 
     /**
      * Método que retorna una producción.
@@ -164,6 +169,43 @@ public class ProduccionResource {
         List<StaffDetailDTO> staffs = listEntity2DetailDTOStaffs(produccionEntity.getStaff());
         return staffs;
     }
+
+    /**
+     * Método que registra un capítulo a una producción
+     *
+     * @param idProduccion id de la producción a la cual agregarle el staff.
+     * @param idCapitulo id del capítulo a agregar.
+     * @return DTO con la información de la producción actualizada.
+     * @throws BusinessLogicException
+     */
+    @POST
+    @Path("{idProduccion: \\d+}/capitulos/{idCapitulo: \\d+}")
+    public ProduccionDTO registrarCapitulo(@PathParam("idProduccion") Long idProduccion, @PathParam("idCapitulo") Long idCapitulo) throws BusinessLogicException {
+        ProduccionEntity produccionEntity = darEntidadProduccion(idProduccion);
+        List<CapituloEntity> capitulos = produccionEntity.getCapitulos();
+        CapituloEntity nuevaRelacionCapitulo = capituloLogic.getCapituloPorId(idCapitulo);
+        if(nuevaRelacionCapitulo == null) {
+            throw new WebApplicationException("El recurso /capitulo/" + idCapitulo + " no existe.", 404);
+        }
+        capitulos.add(nuevaRelacionCapitulo);
+        produccionEntity.setCapitulos(capitulos);
+        produccionEntity = produccionLogic.editarProduccion(idProduccion, produccionEntity);
+        return new ProduccionDetailDTO(produccionEntity);
+    }
+
+    /**
+     * Método que retorna los staffs de una producción.
+     *
+     * @param id id de la producción.
+     * @return lista con los staffs de la producción.
+     */
+    @GET
+    @Path("{idProduccion: \\d+}/capitulos/")
+    public List<CapituloDetailDTO> darCapitulos(@PathParam("idProduccion") Long id) {
+        ProduccionEntity produccionEntity = darEntidadProduccion(id);
+        List<CapituloDetailDTO> capitulos = listEntity2DetailDTOCapitulos(produccionEntity.getCapitulos());
+        return capitulos;
+    }
     
     /**
      * Método que retorna la entidad de una producción según su id.
@@ -218,4 +260,23 @@ public class ProduccionResource {
         }
         return list;
     }
+
+    /**
+     * Convierte una lista de entidades a DTO.
+     *
+     * Este método convierte una lista de objetos BookEntity a una lista de
+     * objetos BookDetailDTO (json)
+     *
+     * @param entityList corresponde a la lista de libros de tipo Entity que
+     * vamos a convertir a DTO.
+     * @return la lista de libros en forma DTO (json)
+     */
+    private List<CapituloDetailDTO> listEntity2DetailDTOCapitulos(List<CapituloEntity> entityList) {
+        List<CapituloDetailDTO> list = new ArrayList<>();
+        for (CapituloEntity entity : entityList) {
+            list.add(new CapituloDetailDTO(entity));
+        }
+        return list;
+    }
+
 }
