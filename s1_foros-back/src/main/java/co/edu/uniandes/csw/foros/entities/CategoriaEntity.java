@@ -8,7 +8,6 @@ package co.edu.uniandes.csw.foros.entities;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
 
@@ -21,7 +20,7 @@ public class CategoriaEntity extends BaseEntity implements Serializable {
 
     private String nombre;
     
-    //7@PodamExclude
+    @PodamExclude
     //@OneToMany(mappedBy = "categoria")
     private List<ProduccionEntity> producciones;
 

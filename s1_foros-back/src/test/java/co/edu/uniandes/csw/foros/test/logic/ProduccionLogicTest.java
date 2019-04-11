@@ -218,10 +218,10 @@ public class ProduccionLogicTest {
         try {
             produccionLogic.crearProduccion(produccionEntity);
             data.add(produccionEntity);
+             Assert.assertEquals(em.find(ProduccionEntity.class, produccionEntity.getId()).getNombre(), produccionEntity.getNombre());
         } catch (BusinessLogicException ble) {
             // El método funcionó.
         }
-        Assert.assertEquals(em.find(ProduccionEntity.class, produccionEntity.getId()).getNombre(), produccionEntity.getNombre());
     }
     
     // TODO: arreglar

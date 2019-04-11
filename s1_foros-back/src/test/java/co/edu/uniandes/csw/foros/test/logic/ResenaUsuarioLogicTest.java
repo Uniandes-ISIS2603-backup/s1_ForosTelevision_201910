@@ -7,6 +7,7 @@ import co.edu.uniandes.csw.foros.ejb.UsuarioLogic;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
+import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.ResenaPersistence;
 import co.edu.uniandes.csw.foros.persistence.UsuarioPersistence;
@@ -144,6 +145,7 @@ public class ResenaUsuarioLogicTest {
         usuario.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         ProduccionEntity produccion = factory.manufacturePojo(ProduccionEntity.class);
         produccion.setCalificacionPromedio(0);
+        produccion.setClasificacionAudiencia(ClasificacionAudiencia.FAMILIAR);
         usuarioLogic.crearUsuario(usuario);
         produccionLogic.crearProduccion(produccion);
         resenaEntity.setUsuarioResena(usuario);

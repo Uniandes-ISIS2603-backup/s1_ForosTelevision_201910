@@ -146,10 +146,11 @@ public class StaffLogicTest {
         try {
             staffLogic.crearStaff(staffEntity);
             data.add(staffEntity);
+             Assert.assertEquals(em.find(StaffEntity.class, staffEntity.getId()).getNombre(), staffEntity.getNombre());
         } catch (BusinessLogicException ble) {
             // El método funcionó.
         }
-        Assert.assertEquals(em.find(StaffEntity.class, staffEntity.getId()).getNombre(), staffEntity.getNombre());
+       
     }
 
     /**
