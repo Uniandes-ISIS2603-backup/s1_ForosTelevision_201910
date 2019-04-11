@@ -2,7 +2,6 @@ package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.CategoriaDTO;
 import co.edu.uniandes.csw.foros.dtos.CategoriaDetailDTO;
-import co.edu.uniandes.csw.foros.dtos.ProductoraDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.CategoriaLogic;
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
