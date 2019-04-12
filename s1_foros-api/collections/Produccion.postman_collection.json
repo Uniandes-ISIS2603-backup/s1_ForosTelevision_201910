@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "d7aac0ba-cb7e-44bd-9efa-40f3626dd4c4",
+		"name": "Produccion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear producción",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"soy un nombre\",\n\t\"descripción\" : \"soy una descripción\",\n\t\"clasificacionAudiencia\" : \"ADULTOS\",\n\t\"multimedia\" : \n\t{\n\t\t\"id\" : 1\n\t},\n\t\"productora\" : \n\t{\n\t\t\"id\" : 1\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar una producción",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar todas producciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/staff/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"staff",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar producción",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"Soy un nuevo nombre\",\n\t\"descripción\" : \"Soy una nueva descripción\",\n\t\"clasificacionAudiencia\" : \"INFANTIL\",\n\t\"multimedia\" : \n\t{\n\t\t\"id\" : 2\n\t},\n\t\"productora\" : \n\t{\n\t\t\"id\" : 2\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/staff/{{id}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"staff",
+						"{{id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
