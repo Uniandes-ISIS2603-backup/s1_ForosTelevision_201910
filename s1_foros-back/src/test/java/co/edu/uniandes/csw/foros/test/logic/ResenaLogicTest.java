@@ -197,7 +197,8 @@ public class ResenaLogicTest {
         UsuarioEntity usuario = factory.manufacturePojo(UsuarioEntity.class);
         Random r = new Random();
         char c = (char)(r.nextInt(26) + 'a');
-        usuario.setEmail("juan"+c+"@gmail.com");
+        char d = (char)(r.nextInt(26) + 'a');
+        usuario.setEmail("juan"+c+d+"@gmail.com");
         usuario.setClave("claveUser2020201");
         usuario.setPrivilegio(UsuarioEntity.Acceso.USUARIO);
         ProduccionEntity produccion = factory.manufacturePojo(ProduccionEntity.class);
