@@ -57,7 +57,7 @@ public class ProductoraPersistence {
      * @return productoras con el mismo nombre
      */
     public List<ProductoraEntity> findByName(String nombre) {
-        TypedQuery<ProductoraEntity> tp = em.createQuery("SELECT u FROM ProductoraEntity u WHERE u.nombre = :name", ProductoraEntity.class);
+        TypedQuery<ProductoraEntity> tp = em.createQuery("SELECT p FROM ProductoraEntity p WHERE p.nombre = :name", ProductoraEntity.class);
         tp.setParameter("name", nombre);
         return tp.getResultList();
     }

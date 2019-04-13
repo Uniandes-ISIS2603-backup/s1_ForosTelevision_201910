@@ -35,10 +35,10 @@ public class StaffLogic {
     private StaffPersistence staffPersistence;
 
     /**
-     * Inyección de un objeto que trata la persistencia de las producciones.
+     * Inyección de un objeto que trata la lógica de las producciones.
      */
     @Inject
-    private ProduccionPersistence produccionPersistence;
+    private ProduccionLogic produccionLogic;
 
     /**
      * Patrón de una imagen.
@@ -165,9 +165,31 @@ public class StaffLogic {
         if (staffEntity.getDescripcion().equals("")) {
             throw new BusinessLogicException("La descripción del miembro del staff no puede ser vacía.");
         }
-        // Validación relación con producción.
-        if (staffEntity.getProducciones() == null) {
-            throw new BusinessLogicException("Las producciones de un miembro del staff deben exisitir.");
-        }
+    }
+    
+    /**
+     * Método que retorna todas las producciones en las que participó un staff.
+     * 
+     * @param idStaff id del miembro del staff.
+     * @return lista con las producciones.
+     * @throws BusinessLogicException 
+     */
+    public List<ProduccionEntity> darTodasProducciones(Long idStaff) throws BusinessLogicException {
+        List<ProduccionEntity> producciones = darStaff(idStaff).getProducciones();
+        if(producciones.isEmpty()) throw  new BusinessLogicException("No hay producciones registradas");
+        return producciones;
+    }
+    
+    /**
+     * Registra una producción nueva del staff.
+     * 
+     * @param idStaff id del staff al que se le registrará una producción.
+     * @param idProduccion id de la producción registrar.
+     * @throws BusinessLogicException 
+     */
+    public void registrarProduccionNueva(Long idStaff, Long idProduccion) throws BusinessLogicException{
+        StaffEntity staffEntity = this.darStaff(idStaff);
+        staffEntity.getProducciones().add(produccionLogic.darProduccion(idProduccion));
+        this.editarStaff(staffEntity.getId(), staffEntity);
     }
 }

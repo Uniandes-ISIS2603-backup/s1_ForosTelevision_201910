@@ -9,6 +9,8 @@ import co.edu.uniandes.csw.foros.enums.RolStaff;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import static javax.persistence.FetchType.LAZY;
 import javax.persistence.ManyToMany;
 import uk.co.jemos.podam.common.PodamExclude;
@@ -36,6 +38,8 @@ public class StaffEntity extends BaseEntity implements Serializable{
     /**
      * Rol que cumple el staff dentro de la producción.
      */
+    @PodamExclude
+    @Enumerated(EnumType.STRING)
     private RolStaff rol;
     
     /**

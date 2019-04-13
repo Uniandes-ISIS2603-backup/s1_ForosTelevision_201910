@@ -47,6 +47,7 @@ public class ResenaResource {
         
     @PUT
      @Path("{id: \\d+}")
+
     public ResenaDTO updateResena(ResenaDTO resenaDTO,@PathParam("id") Long resenaId) throws BusinessLogicException
     {
         //Busca el id del canal a actualizar

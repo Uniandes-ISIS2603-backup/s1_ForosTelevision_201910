@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.UtilRespuesta;
 import co.edu.uniandes.csw.foros.ejb.CanalEmisionLogic;
 import co.edu.uniandes.csw.foros.ejb.CanalLogic;
 import co.edu.uniandes.csw.foros.ejb.EmisionLogic;
-import co.edu.uniandes.csw.foros.entities.CanalEntity;
 import co.edu.uniandes.csw.foros.entities.EmisionEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import java.util.List;
@@ -18,7 +13,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
-import javax.ws.rs.*;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -44,11 +38,10 @@ public class CanalEmisionResource {
     
     
     @GET
-    @Path("/emisiones")
-    public List<EmisionEntity> darEmisiones(@PathParam("id")Long idCanal)
+    @Path("/emisiones/{canalId: \\d+}")
+    public List<EmisionEntity> darEmisiones(@PathParam("id") Long idCanal)
     {
-        return relacionLogic.darEmisiones(idCanal);
-        
+        return relacionLogic.darEmisiones(idCanal);   
     }
     
     @DELETE
@@ -61,7 +54,7 @@ public class CanalEmisionResource {
     
     @PUT
     @Path("{canalId: \\d+}")
-    public UtilRespuesta<String>  actualizarEmision(Long idEmision,EmisionEntity emision) throws BusinessLogicException
+    public UtilRespuesta<String>  actualizarEmision(@PathParam("canalId") Long idEmision,EmisionEntity emision) throws BusinessLogicException
     {
         relacionLogic.updateEmision(idEmision, idEmision, emision);
        return new UtilRespuesta(200,"se eliminó la emision");

@@ -121,18 +121,7 @@ public class MultimediaLogicTest {
         newEntity.setPortada(null);
         MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
     }
-    
-    /**
-     * Prueba para crear un recurso multimedia null.
-     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
-     */
-    @Test(expected=BusinessLogicException.class)
-    public void createMultimediaTestFile() throws BusinessLogicException {
-        PodamFactory factory = new PodamFactoryImpl();
-        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
-    } 
-    
+     
     /**
      * Prueba para crear un recurso video un archivo de formato  soportado y agregarlo
      * a multimedia.
@@ -159,19 +148,7 @@ public class MultimediaLogicTest {
         MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
         logic.adicionarImagen(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.jpg");
     } 
-     /**
-     * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
-     * a multimedia.
-     * @throws co.edu.uniandes.csw.foros.exceptions.BusinessLogicException
-     */
-    @Test(expected=BusinessLogicException.class)
-    public void createMultimediaTestFileAddImgInvalid() throws BusinessLogicException {
-        PodamFactory factory = new PodamFactoryImpl();
-        MultimediaEntity newEntity = factory.manufacturePojo(MultimediaEntity.class);
-        newEntity.setPortada(newEntity.getPortada()+".png");
-        MultimediaEntity result = logic.crearRecursoMultimedia(newEntity);
-        logic.adicionarImagen(result.getId(), "https://s3-sa-east-1.amazonaws.com/forostv/game.slsls");
-    } 
+     
     
      /**
      * Prueba para crear un recurso imagen un archivo de formato  no soportado y agregarlo
