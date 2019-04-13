@@ -1,0 +1,139 @@
+{
+	"info": {
+		"_postman_id": "2b6978f1-71f6-4c4b-a27d-2f051240a15e",
+		"name": "ProductoraCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Productora",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8429e2b-84ea-4d53-9178-5efd2cf3c362",
+						"exec": [
+							"var response=JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_p\",response.id);",
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\":1,\n\"nombre\":\"Productora 3\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/productoras/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"productoras",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar Productora",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "03866e5e-f722-4fa7-844d-fbdb156c606b",
+						"exec": [
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\":{{id_p}},\n\"nombre\":\"Productora edit\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/productoras/{{id_p}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"productoras",
+						"{{id_p}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar productoras",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d3c3a723-e028-4459-922e-fbd47424c817",
+						"exec": [
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/productoras/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"productoras",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -2,8 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="fe75308a-3d64-479e-b7b7-3c972344e37b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-api/nb-configuration.xml" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/nb-configuration.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffProduccionesResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionesStaffResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/ProduccionEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/ProduccionEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/ProductoraEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/ProductoraEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/StaffEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/StaffEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <ignored path="$PROJECT_DIR$/s1_foros-back/target/" />
@@ -36,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6446">
-              <caret line="320" column="13" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
+            <state relative-caret-position="350">
+              <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
               <folding>
                 <element signature="e#3556#3557#0" expanded="true" />
                 <element signature="e#3629#3630#0" expanded="true" />
@@ -47,44 +56,28 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java">
+        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="132" column="5" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+            <state relative-caret-position="2155">
+              <caret line="248" column="5" selection-start-line="248" selection-start-column="5" selection-end-line="248" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="597">
+              <caret line="71" column="48" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java">
+        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="8467">
-              <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
-              <folding>
-                <element signature="e#0#5098#0" expanded="true" />
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/persistence/ProduccionPersistence.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-88">
-              <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="131" column="37" lean-forward="true" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="-2">
+              <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
             </state>
           </provider>
         </entry>
@@ -122,13 +115,15 @@
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDTO.java" />
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/StaffDetailDTO.java" />
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/dtos/ProduccionDetailDTO.java" />
-        <option value="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java" />
         <option value="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionStaffLogic.java" />
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffProduccionesResource.java" />
         <option value="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java" />
         <option value="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java" />
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java" />
         <option value="$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java" />
+        <option value="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java" />
+        <option value="$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java" />
+        <option value="$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java" />
       </list>
     </option>
   </component>
@@ -140,59 +135,16 @@
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="960" />
-    <option name="width" value="960" />
-    <option name="height" value="1040" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1380" />
+    <option name="height" value="744" />
   </component>
   <component name="ProjectView">
     <navigator currentView="PackagesPane" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
-              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
-              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
-              <item name="resources" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
-              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
-              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
-              <item name="ejb" type="1f31426a:PackageElementNode" />
-            </path>
-            <path>
-              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
-              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
-              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
-              <item name="entities" type="1f31426a:PackageElementNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -239,12 +191,69 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-api" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+              <item name="resources" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+              <item name="ejb" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+              <item name="entities" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+              <item name="test" type="1f31426a:PackageElementNode" />
+            </path>
+            <path>
+              <item name="s1_foros" type="58d84e3e:PackageViewProjectNode" />
+              <item name="s1_foros-back" type="616d4139:PackageViewModuleNode" />
+              <item name="co.edu.uniandes.csw.foros" type="1f31426a:PackageElementNode" />
+              <item name="test" type="1f31426a:PackageElementNode" />
+              <item name="logic" type="1f31426a:PackageElementNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1551779101183" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554222273593" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propCompiler" />
@@ -452,7 +461,9 @@
       <workItem from="1551716556738" duration="6932000" />
       <workItem from="1551746062325" duration="1084000" />
       <workItem from="1551751176240" duration="72000" />
-      <workItem from="1551752534512" duration="11675000" />
+      <workItem from="1551752534512" duration="12341000" />
+      <workItem from="1552102002129" duration="598000" />
+      <workItem from="1553983346325" duration="5733000" />
     </task>
     <servers />
   </component>
@@ -462,15 +473,14 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="48036000" />
+    <option name="totallyTimeSpent" value="55033000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Image Layers" order="0" />
       <window_info id="Capture Tool" order="1" />
-      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.17185822" />
+      <window_info content_ui="combo" id="Project" order="2" sideWeight="0.49944505" visible="true" weight="0.20891514" />
       <window_info id="Designer" order="3" />
       <window_info id="Persistence" order="4" side_tool="true" />
       <window_info id="UI Designer" order="5" />
@@ -490,13 +500,13 @@
       <window_info anchor="bottom" id="Java Enterprise" order="11" />
       <window_info anchor="bottom" id="Spring" order="12" />
       <window_info anchor="bottom" id="Database Changes" order="13" />
-      <window_info anchor="bottom" id="Version Control" order="14" weight="0.32874617" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="14" visible="true" weight="0.32850778" />
       <window_info anchor="bottom" id="Application Servers" order="15" weight="0.32962137" />
       <window_info anchor="bottom" id="Problems" order="16" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
-      <window_info active="true" anchor="right" id="Structure" order="3" sideWeight="0.49777284" visible="true" weight="0.1482277" />
+      <window_info anchor="right" id="Structure" order="3" sideWeight="0.49658704" visible="true" weight="0.1745435" />
       <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="5" weight="0.24973147" />
       <window_info anchor="right" id="Maven" order="6" />
@@ -506,7 +516,7 @@
       <window_info anchor="right" id="Palette&#9;" order="10" />
       <window_info anchor="right" id="CDI" order="11" />
       <window_info anchor="right" id="Bean Validation" order="12" />
-      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="13" sideWeight="0.5022272" side_tool="true" visible="true" weight="0.1482277" />
+      <window_info anchor="right" x="0" y="0" width="434" height="856" id="Documentation" order="13" sideWeight="0.50341296" side_tool="true" visible="true" weight="0.2113323" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -520,6 +530,32 @@
         <option value="3" />
         <option value="1" />
       </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="editorHistoryManager">
@@ -641,25 +677,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/EstadoProduccionesResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/EstadoProduccionesResource.java" />
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffProduccionLogic.java" />
-    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6446">
-          <caret line="320" column="13" selection-start-line="320" selection-start-column="13" selection-end-line="320" selection-end-column="13" />
-          <folding>
-            <element signature="e#3556#3557#0" expanded="true" />
-            <element signature="e#3629#3630#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffProduccionesResource.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="440">
@@ -737,45 +756,73 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java">
+    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="487">
-          <caret line="102" column="62" selection-start-line="102" selection-start-column="62" selection-end-line="102" selection-end-column="62" />
+        <state relative-caret-position="2618">
+          <caret line="132" column="5" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-198">
+          <caret line="15" column="31" lean-forward="true" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/persistence/ProduccionPersistence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-88">
+        <state relative-caret-position="242">
           <caret line="22" column="13" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/StaffLogic.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="131" column="37" lean-forward="true" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
+        <state relative-caret-position="611">
+          <caret line="131" column="37" selection-start-line="131" selection-start-column="37" selection-end-line="131" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/StaffResource.java">
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/entities/MultimediaEntity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="132" column="5" lean-forward="true" selection-start-line="115" selection-start-column="4" selection-end-line="132" selection-end-column="5" />
+        <state relative-caret-position="44">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/s1_foros-api/src/main/java/co/edu/uniandes/csw/foros/resources/ProduccionResource.java">
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/StaffLogicTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8467">
-          <caret line="146" column="5" selection-start-line="146" selection-start-column="5" selection-end-line="146" selection-end-column="5" />
+        <state relative-caret-position="350">
+          <caret line="131" column="9" selection-start-line="131" selection-start-column="9" selection-end-line="131" selection-end-column="9" />
           <folding>
-            <element signature="e#0#5098#0" expanded="true" />
-            <element signature="imports" expanded="true" />
+            <element signature="e#3556#3557#0" expanded="true" />
+            <element signature="e#3629#3630#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/test/java/co/edu/uniandes/csw/foros/test/logic/ProduccionLogicTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2155">
+          <caret line="248" column="5" selection-start-line="248" selection-start-column="5" selection-end-line="248" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/MultimediaLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="597">
+          <caret line="71" column="48" selection-start-line="71" selection-start-column="48" selection-end-line="71" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/s1_foros-back/src/main/java/co/edu/uniandes/csw/foros/ejb/ProduccionLogic.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="115" column="5" selection-start-line="115" selection-start-column="5" selection-end-line="115" selection-end-column="5" />
         </state>
       </provider>
     </entry>

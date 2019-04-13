@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.entities;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import static javax.persistence.FetchType.LAZY;
 import javax.persistence.OneToMany;
 import uk.co.jemos.podam.common.PodamExclude;
 
@@ -21,7 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ProductoraEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
-    @OneToMany(mappedBy = "productora")
+    @OneToMany(fetch=LAZY,mappedBy = "productora")
     private List<ProduccionEntity> producciones;
 
     private String nombre;
@@ -47,7 +42,7 @@ public class ProductoraEntity extends BaseEntity implements Serializable {
      *
      * @return Las producciones de un productora.
      */
-    public List<ProduccionEntity> getProducciones() {
+    public List<ProduccionEntity> getProduccciones() {
         return producciones;
     }
 
