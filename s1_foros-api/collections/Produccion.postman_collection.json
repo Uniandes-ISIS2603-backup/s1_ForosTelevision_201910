@@ -1,0 +1,247 @@
+{
+	"info": {
+		"_postman_id": "0dc62a63-36aa-4d31-8086-4ea25bb3d90a",
+		"name": "Produccion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Crear Multimedia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "91a19b6b-0c74-4109-8caa-1ed5855a6f94",
+						"exec": [
+							"var response=JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_m\",response.data.id);",
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\":201,\r\n\"portada\": \"https://aws.amazon.com/s3/file/e43l33a/portada.jpg\",\r\n\"video\":\"https://www.youtube.com/watch?v=Z3F9DHpuPS8&t=497s\",\r\n\"imagenes\":[\r\n   {\r\n     \"url\":\"https://aws.amazon.com/s3/file/e43l33a/portada2.jpg\"\r\n   },\r\n   {\r\n     \"url\":\"https://aws.amazon.com/s3/file/e43l33a/portada2.jpg\"\r\n   }\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/multimedia/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"multimedia",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Productora",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b8429e2b-84ea-4d53-9178-5efd2cf3c362",
+						"exec": [
+							"var response=JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_p\",response.id);",
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"id\":1,\n\"nombre\":\"Productora 3\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/productoras/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"productoras",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear producción",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f13b8d28-d9fe-4f41-901f-5da91a984865",
+						"exec": [
+							"var response=JSON.parse(responseBody);",
+							"postman.setGlobalVariable(\"id_prod\",response.id);",
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : 1,\n\t\"nombre\" : \"soy un nombre\",\n\t\"descripcion\" : \"soy una descripción\",\n\t\"clasificacionAudiencia\" : \"ADULTOS\",\n\t\"calificacionPromedio\":12,\n\t\"multimedia\" : \n\t{\n\t\t\"id\" : {{id_m}}\n\t},\n\t\"productora\" : \n\t{\n\t\t\"id\" : {{id_p}}\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar una producción",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dcd8c5f5-5dc6-4410-8e57-db2e368974dd",
+						"exec": [
+							"tests[\"No genera error\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/{{id_prod}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						"{{id_prod}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Dar todas producciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Editar producción",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\" : {{id_prod}},\n\t\"nombre\" : \"soy un nombre\",\n\t\"descripcion\" : \"soy una descripción\",\n\t\"clasificacionAudiencia\" : \"ADULTOS\",\n\t\"calificacionPromedio\":12,\n\t\"multimedia\" : \n\t{\n\t\t\"id\" : {{id_m}}\n\t},\n\t\"productora\" : \n\t{\n\t\t\"id\" : {{id_p}}\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/producciones/{{id_prod}}",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"producciones",
+						"{{id_prod}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

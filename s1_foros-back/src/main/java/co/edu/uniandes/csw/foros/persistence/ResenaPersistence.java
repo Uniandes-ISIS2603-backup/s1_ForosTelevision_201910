@@ -1,11 +1,4 @@
-
 package co.edu.uniandes.csw.foros.persistence;
-
-
-import static co.edu.uniandes.csw.foros.ejb.MultimediaLogic.validateFileExtn;
-import co.edu.uniandes.csw.foros.entities.CanalEntity;
-import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
-
 
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import java.util.List;

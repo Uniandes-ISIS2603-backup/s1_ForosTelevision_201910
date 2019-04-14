@@ -1,5 +1,6 @@
 package co.edu.uniandes.csw.foros.dtos;
 
+import co.edu.uniandes.csw.foros.entities.UsuarioEntity;
 import co.edu.uniandes.csw.foros.entities.ResenaEntity;
 import java.io.Serializable;
 import java.util.Date;
@@ -10,25 +11,27 @@ import java.util.Date;
  */
 public class ResenaDTO implements Serializable {
     
+    private Long id;
     private String descripcion;
     private Integer calificacionProduccion;
     private boolean recomendada;
     private Date fecha;
     private Integer calificacionResena;
-    private Long id;
     
+    public ResenaDTO()
+    {}
     
-    public ResenaDTO(){}
-    
-    public ResenaDTO(ResenaEntity ent){
-        this.calificacionProduccion=ent.getCalificacionProduccion();
-        this.calificacionResena=ent.getCalificacionResena();
-        this.id=ent.getId();
-        this.fecha=ent.getFecha();
-        this.descripcion=ent.getDescripcion();
-        this.recomendada=ent.isRecomendada();
+    public ResenaDTO(ResenaEntity resenaEntity)
+    {
+        this.id=resenaEntity.getId();
+        this.descripcion=resenaEntity.getDescripcion();
+        this.calificacionProduccion=resenaEntity.getCalificacionProduccion();
+        this.fecha=resenaEntity.getFecha();
+        this.id=resenaEntity.getId();
+        this.calificacionResena=resenaEntity.getCalificacionResena();
+        this.recomendada=resenaEntity.isRecomendada();      
     }
-    
+   
     /**
      * @return la descripcion de la reseña
      */
@@ -113,15 +116,20 @@ public class ResenaDTO implements Serializable {
         this.id = id;
     }
 
-    public ResenaEntity toEntity() {
-       ResenaEntity r=new ResenaEntity();
-       r.setCalificacionProduccion(calificacionProduccion);
-       r.setCalificacionResena(calificacionResena);
-       r.setDescripcion(descripcion);
-       r.setFecha(fecha);
-       r.setId(id);
-       r.setRecomendada(recomendada);
-       return r;
-    }
     
+    public ResenaEntity toEntity()
+    {
+        ResenaEntity resenaEntity=new ResenaEntity();
+        resenaEntity.setId( this.id);
+        resenaEntity.setDescripcion(this.descripcion);
+        resenaEntity.setCalificacionProduccion(this.calificacionProduccion);
+        resenaEntity.setCalificacionResena(this.calificacionResena);
+        resenaEntity.setRecomendada(this.recomendada);
+        resenaEntity.setFecha(this.fecha);
+        return resenaEntity;
+    }
+
+   
+
 }
+

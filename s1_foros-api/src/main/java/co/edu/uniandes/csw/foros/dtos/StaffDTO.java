@@ -15,7 +15,7 @@ public class StaffDTO implements Serializable {
     /**
      * Id del miembro del staff de al menos una película.
      */
-    private Long idStaff;
+    private Long id;
 
     /**
      * Rol que cumple el staff dentro de la producción.
@@ -38,11 +38,6 @@ public class StaffDTO implements Serializable {
     private String descripcion;
 
     /**
-     * Relación del staff con las producciones en que ha participado.
-     */
-    private List<ProduccionDTO> producciones;
-
-    /**
      * Constructor vacío del DTO de un miembro del staff de al menos una
      * película.
      */
@@ -57,7 +52,7 @@ public class StaffDTO implements Serializable {
      */
     public StaffDTO(StaffEntity staffEntity) {
         if (staffEntity != null) {
-            this.idStaff = staffEntity.getId();
+            this.id = staffEntity.getId();
             this.rol = staffEntity.getRol();
             this.descripcion = staffEntity.getDescripcion();
             this.nombre = staffEntity.getNombre();
@@ -72,7 +67,7 @@ public class StaffDTO implements Serializable {
      */
     public StaffEntity toEntity() {
         StaffEntity staffEntity = new StaffEntity();
-        staffEntity.setId(this.idStaff);
+        staffEntity.setId(this.id);
         staffEntity.setRol(this.rol);
         staffEntity.setDescripcion(this.descripcion);
         staffEntity.setNombre(this.nombre);
@@ -80,94 +75,44 @@ public class StaffDTO implements Serializable {
         return staffEntity;
     }
 
-    /**
-     * Getter del id del miembro del staff.
-     *
-     * @return id del miembro del staff.
-     */
-    public Long darIdStaff() {
-        return idStaff;
+    public Long getId() {
+        return id;
     }
 
-    /**
-     * Setter del id del miembro del staff.
-     *
-     * @param idStaff nuevo id del miembro del staff.
-     */
-    public void editarIdStaff(long idStaff) {
-        this.idStaff = idStaff;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * Getter del rol del miembro del staff.
-     *
-     * @return rol del miembro del staff.
-     */
-    public RolStaff darRol() {
+    public RolStaff getRol() {
         return rol;
     }
 
-    /**
-     * Setter del rol del miembro del staff.
-     *
-     * @param rol nuevo rol del miembro del staff.
-     */
-    public void editarRol(RolStaff rol) {
+    public void setRol(RolStaff rol) {
         this.rol = rol;
     }
 
-    /**
-     * Getter del nombre del miembro del staff.
-     *
-     * @return nombre del miembro del staff.
-     */
-    public String darNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter del nombre del miembro del staff.
-     *
-     * @param nombre nuevo nombre del miembro del staff.
-     */
-    public void editarNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter de la foto del miembro del staff.
-     *
-     * @return ruta de la foto del miembro del staff.
-     */
-    public String darFoto() {
+    public String getFoto() {
         return foto;
     }
 
-    /**
-     * Setter de la nueva foto del miembro del staff.
-     *
-     * @param foto nueva ruta de la foto del mimebro del staff.
-     */
-    public void editarFoto(String foto) {
+    public void setFoto(String foto) {
         this.foto = foto;
     }
 
-    /**
-     * Getter de la descripción del miembro del staff.
-     *
-     * @return descripción del miembro del staff.
-     */
-    public String darDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Setter de la descripción del miembro del staff.
-     *
-     * @param descripcion nueva descripción del miembro del staff.
-     */
-    public void editarDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    
 }

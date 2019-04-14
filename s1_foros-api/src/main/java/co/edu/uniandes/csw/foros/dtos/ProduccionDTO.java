@@ -1,6 +1,5 @@
 package co.edu.uniandes.csw.foros.dtos;
 
-import co.edu.uniandes.csw.foros.entities.MultimediaEntity;
 import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 
@@ -16,7 +15,7 @@ public class ProduccionDTO implements Serializable {
     /**
      * Id de la producción
      */
-    private Long idProduccion;
+    private Long id;
 
     /**
      * Nombre de la producción.
@@ -65,7 +64,7 @@ public class ProduccionDTO implements Serializable {
             this.nombre = produccionEntity.getNombre();
             this.descripcion = produccionEntity.getDescripcion();
             this.clasificacionAudiencia = produccionEntity.getClasificacionAudiencia();
-            this.idProduccion = produccionEntity.getId();
+            this.id = produccionEntity.getId();
             this.calificacionPromedio = produccionEntity.getCalificacionPromedio();
             if(produccionEntity.getMultimedia() != null) {
                 this.multimedia = new MultimediaDTO(produccionEntity.getMultimedia());
@@ -89,7 +88,7 @@ public class ProduccionDTO implements Serializable {
         ProduccionEntity produccionEntity = new ProduccionEntity();
         produccionEntity.setCalificacionPromedio(this.calificacionPromedio);
         produccionEntity.setDescripcion(this.descripcion);
-        produccionEntity.setId(this.idProduccion);
+        produccionEntity.setId(this.id);
         produccionEntity.setNombre(this.nombre);
         produccionEntity.setMultimedia(this.multimedia.toEntity());
         produccionEntity.setClasificacionAudiencia(this.clasificacionAudiencia);
@@ -97,131 +96,61 @@ public class ProduccionDTO implements Serializable {
         return produccionEntity;
     }
 
-    /**
-     * Getter del id de la producción.
-     *
-     * @return id de la producción.
-     */
-    public Long darIdProduccion() {
-        return idProduccion;
+    public Long getId() {
+        return id;
     }
 
-    /**
-     * Setter del id de la producción.
-     *
-     * @param idProduccion nuevo id de la producción.
-     */
-    public void editarIdProduccion(long idProduccion) {
-        this.idProduccion = idProduccion;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    /**
-     * Getter del nombre de la producción.
-     *
-     * @return nombre de la producción.
-     */
-    public String darNombre() {
+    public String getNombre() {
         return nombre;
     }
 
-    /**
-     * Setter del nombre de la producción.
-     *
-     * @param nombre nuevo nombre de la producción.
-     */
-    public void editarNombre(String nombre) {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    /**
-     * Getter de la descripción de la producción.
-     *
-     * @return nombre de la producción.
-     */
-    public String darDescripcion() {
+    public String getDescripcion() {
         return descripcion;
     }
 
-    /**
-     * Setter de la descripción de la producción.
-     *
-     * @param descripcion nueva descripción de la producción.
-     */
-    public void editarDescripcion(String descripcion) {
+    public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
 
-    /**
-     * Getter de la clasificación de audiencia de la producción.
-     *
-     * @return clasificacionAudiencia clasificación de audiencia de la
-     * producción.
-     */
-    public ClasificacionAudiencia darClasificacionAudiencia() {
+    public ClasificacionAudiencia getClasificacionAudiencia() {
         return clasificacionAudiencia;
     }
 
-    /**
-     * Setter de la clasificación de audiencia de la producción.
-     *
-     * @param clasificacionAudiencia nueva clasificación de audiencia de la
-     * producción.
-     */
     public void setClasificacionAudiencia(ClasificacionAudiencia clasificacionAudiencia) {
         this.clasificacionAudiencia = clasificacionAudiencia;
     }
 
-    /**
-     * Getter de la calificación promedio de la producción.
-     *
-     * @return calificacionPromedio calificación promedio de la producción.
-     */
     public Integer getCalificacionPromedio() {
         return calificacionPromedio;
     }
 
-    /**
-     * Setter de la calificación promedio de la producción.
-     *
-     * @param calificacionPromedio nueva calificación promedio de la producción.
-     */
-    public void setCalificacionPromedio(int calificacionPromedio) {
+    public void setCalificacionPromedio(Integer calificacionPromedio) {
         this.calificacionPromedio = calificacionPromedio;
     }
 
-    /**
-     * Getter de la multimedia de la producción.
-     *
-     * @return DTO de multimedia de la producción
-     */
     public MultimediaDTO getMultimedia() {
         return multimedia;
     }
 
-    /**
-     * Setter de la multimedia de una producción.
-     *
-     * @param multimedia nueva multimedia de la producción.
-     */
     public void setMultimedia(MultimediaDTO multimedia) {
         this.multimedia = multimedia;
     }
 
-    /**
-     * Getter de la productora de una producción.
-     *
-     * @return DTO de productora de la producción.
-     */
     public ProductoraDTO getProductora() {
         return productora;
     }
 
-    /**
-     * Setter de la productora de una producción.
-     *
-     * @param productora nueva productora de la producción.
-     */
     public void setProductora(ProductoraDTO productora) {
         this.productora = productora;
     }
+    
+    
 }

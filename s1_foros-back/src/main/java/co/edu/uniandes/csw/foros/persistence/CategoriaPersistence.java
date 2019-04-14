@@ -6,7 +6,6 @@
 package co.edu.uniandes.csw.foros.persistence;
 
 import co.edu.uniandes.csw.foros.entities.CategoriaEntity;
-import co.edu.uniandes.csw.foros.entities.ProductoraEntity;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -73,7 +72,7 @@ public class CategoriaPersistence {
     }
 
     /**
-     * Busca las productoras por nombre
+     * Busca la categoria por nombre
      *
      * @param nombre registrado
      * @return productoras con el mismo nombre
