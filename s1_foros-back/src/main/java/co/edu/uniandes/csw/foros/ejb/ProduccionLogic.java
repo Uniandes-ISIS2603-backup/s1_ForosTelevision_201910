@@ -71,11 +71,11 @@ public class ProduccionLogic {
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
         comprobarReglasDeNegocioProduccion(produccionEntity);
-        if(produccionEntity.getMultimedia() != null && produccionEntity.getMultimedia() != null) {
+        if(produccionEntity.getMultimedia() != null) {
           //  MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia());
           //  produccionEntity.setMultimedia(multimediaEntity.getId());
         }
-        if(produccionEntity.getProductora() != null && produccionEntity.getProductora() != null) {
+        if(produccionEntity.getProductora() != null) {
           //  ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora());
           //  produccionEntity.setProductora(productoraEntity.getId());
         }
