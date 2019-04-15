@@ -111,36 +111,49 @@ public class EmisionDiasLogicTest {
     
     @Test
     public void obtenerDiasTest(){
-        List<DiaEntity> dias = emDiasLogic.obtenerDias(data.get(0).getId());
+         if(data.size()>0){
+          EmisionEntity entity = data.get(0);
+        DiaEntity diaEntity = diasData.get(1);
+        DiaEntity response = emDiasLogic.agregarDia(entity.getId(), diaEntity.getId());
+        List<DiaEntity> dias = emDiasLogic.obtenerDias(response.getId());
         Assert.assertEquals(dias.size(), 1);
+         }
     }
     
     @Test
     public void obtenerDiaTest(){
-        DiaEntity dia = diasData.get(0);
-        EmisionEntity emision = data.get(0);
-        
-        DiaEntity resultado = emDiasLogic.obtenerDia(emision.getId(), dia.getId());
-        
+          if(data.size()>0){
+               EmisionEntity entity = data.get(0);
+        DiaEntity diaEntity = diasData.get(1);
+        DiaEntity response = emDiasLogic.agregarDia(entity.getId(), diaEntity.getId());
+        if(response!=null){
+            DiaEntity dia = diasData.get(0);
+        DiaEntity resultado = emDiasLogic.obtenerDia(response.getId(), dia.getId());
         Assert.assertEquals(resultado.getId(), dia.getId());
         Assert.assertEquals(resultado.getNombre(), dia.getNombre());
+          }
+       
     }
+        }
+        
     
     @Test
     public void actualizarDiasTest() throws BusinessLogicException{
-        EmisionEntity entity = data.get(0);
-        List<DiaEntity> list = diasData.subList(1, 2);
-        emDiasLogic.actualizarDias(entity.getId(), list);
-
-        entity = emLogic.getEmisionPorId(entity.getId());
-        Assert.assertEquals(list.size(), entity.getDias().size());
+        if(data.size()>0){
+            EmisionEntity entity = data.get(0);
+            List<DiaEntity> list = diasData.subList(1, 2);
+            emDiasLogic.actualizarDias(entity.getId(), list);
+            entity = emLogic.getEmisionPorId(entity.getId());
+             Assert.assertEquals(list.size(), entity.getDias().size());
+        }
     }
     
     @Test
     public void eliminarDiaTest(){
-        DiaEntity dia = diasData.get(0);
+        if(diasData.size()>0){
+         DiaEntity dia = diasData.get(0);
         emDiasLogic.eliminarDia(data.get(0).getId(), dia.getId());
-        
         Assert.assertFalse(data.get(0).getDias().contains(dia));
+        }
     }
 }

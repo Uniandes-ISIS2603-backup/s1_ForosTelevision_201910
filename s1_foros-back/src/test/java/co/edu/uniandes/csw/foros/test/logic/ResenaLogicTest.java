@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package co.edu.uniandes.csw.foros.test.logic;
 
 import co.edu.uniandes.csw.foros.ejb.CanalLogic;
@@ -17,7 +12,6 @@ import co.edu.uniandes.csw.foros.enums.ClasificacionAudiencia;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 import co.edu.uniandes.csw.foros.persistence.CanalPersistence;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Random;
 import javax.inject.Inject;
