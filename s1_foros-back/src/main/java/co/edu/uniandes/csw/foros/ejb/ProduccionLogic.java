@@ -71,13 +71,13 @@ public class ProduccionLogic {
     public ProduccionEntity crearProduccion(ProduccionEntity produccionEntity) throws BusinessLogicException {
         LOGGER.log(Level.INFO, "Inicia proceso de creación de la producción.");
         comprobarReglasDeNegocioProduccion(produccionEntity);
-        if(produccionEntity.getMultimedia() != null && produccionEntity.getMultimedia().getId() != null) {
-            MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia().getId());
-            produccionEntity.setMultimedia(multimediaEntity);
+        if(produccionEntity.getMultimedia() != null && produccionEntity.getMultimedia() != null) {
+            MultimediaEntity multimediaEntity = multimediaLogic.darMultimedia(produccionEntity.getMultimedia());
+            produccionEntity.setMultimedia(multimediaEntity.getId());
         }
-        if(produccionEntity.getProductora() != null && produccionEntity.getProductora().getId() != null) {
-            ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora().getId());
-            produccionEntity.setProductora(productoraEntity);
+        if(produccionEntity.getProductora() != null && produccionEntity.getProductora() != null) {
+            ProductoraEntity productoraEntity = productoraLogic.find(produccionEntity.getProductora());
+            produccionEntity.setProductora(productoraEntity.getId());
         }
         LOGGER.log(Level.INFO, "Termina proceso de creación de la producción");
         return produccionPersistence.create(produccionEntity);
@@ -303,7 +303,7 @@ public class ProduccionLogic {
      * @throws BusinessLogicException si algo se pifea.
      */
     public MultimediaEntity darMultimedia(Long idProduccion) throws BusinessLogicException {
-        MultimediaEntity multimedia = darProduccion(idProduccion).getMultimedia();
+        MultimediaEntity multimedia = multimediaLogic.darMultimedia(darProduccion(idProduccion).getMultimedia());
         if(multimedia == null) throw  new BusinessLogicException("No hay multimedia registrada");
         return multimedia;
     }
@@ -317,7 +317,7 @@ public class ProduccionLogic {
      */
     public void registrarMultimediaNueva(Long idProduccion, Long idMultimedia) throws BusinessLogicException{
         ProduccionEntity produccionEntity = this.darProduccion(idProduccion);
-        produccionEntity.setMultimedia(multimediaLogic.darMultimedia(idMultimedia));
+        produccionEntity.setMultimedia(multimediaLogic.darMultimedia(idMultimedia).getId());
         this.editarProduccion(produccionEntity.getId(), produccionEntity);
     }
 

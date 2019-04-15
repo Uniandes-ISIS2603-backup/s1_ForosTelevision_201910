@@ -70,7 +70,7 @@ public class MultimediaLogic {
     
     public MultimediaEntity darRecursosMultimediaProduccion(Long idProduccion) throws BusinessLogicException{
         ProduccionEntity entProd=produccion.darProduccion(idProduccion);
-        return entProd.getMultimedia();
+        return darMultimedia(entProd.getMultimedia());
     }
     
     /**

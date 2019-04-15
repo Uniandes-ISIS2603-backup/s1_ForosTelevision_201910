@@ -16,7 +16,7 @@ import uk.co.jemos.podam.common.PodamExclude;
 public class ProductoraEntity extends BaseEntity implements Serializable {
 
     @PodamExclude
-    @OneToMany(fetch=LAZY,mappedBy = "productora")
+    @OneToMany(fetch=LAZY)
     private List<ProduccionEntity> producciones;
 
     private String nombre;

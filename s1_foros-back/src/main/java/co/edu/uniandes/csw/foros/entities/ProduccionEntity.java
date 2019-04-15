@@ -57,16 +57,12 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
     /**
      * Relación entre producción y multimedia.
      */
-    @PodamExclude
-    @OneToOne
-    private MultimediaEntity multimedia;
+    private Long multimedia;
     
     /**
      * Relación entre producción y productora.
      */
-    @PodamExclude
-    @ManyToOne(fetch=LAZY)
-    private ProductoraEntity productora;
+    private Long productora;
     
     /**
      * Relación entre producción y reseña.
@@ -172,7 +168,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la multimedia de la producción.
      * @return entidad de la multimedia de la producción.
      */
-    public MultimediaEntity getMultimedia() {
+    public Long getMultimedia() {
         return multimedia;
     }
 
@@ -180,7 +176,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la multimedia de la producción.
      * @param multimedia las nueva multimedia.
      */
-    public void setMultimedia(MultimediaEntity multimedia) {
+    public void setMultimedia(Long multimedia) {
         this.multimedia = multimedia;
     }
     
@@ -188,7 +184,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Getter de la productora de la producción.
      * @return la entidad de la productora de la producción.
      */
-    public ProductoraEntity getProductora() {
+    public Long getProductora() {
         return productora;
     }
 
@@ -196,7 +192,7 @@ public class ProduccionEntity extends BaseEntity implements Serializable {
      * Setter de la productora de la producción.
      * @param productora las nueva productora.
      */
-    public void setProductora(ProductoraEntity productora) {
+    public void setProductora(Long productora) {
         this.productora = productora;
     }
     
