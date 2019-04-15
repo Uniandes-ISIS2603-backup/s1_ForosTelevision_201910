@@ -22,6 +22,9 @@ import javax.ws.rs.GET;
 
 public class ResenaUsuarioResource {
     
+    
+    
+    
     @Inject
     private EmisionLogic emLogic;
     

@@ -42,9 +42,10 @@ public class EmisionProduccionesResource {
     @POST
     @Path("{prodId: \\d+}")
     public ProduccionDTO agregarProduccion(@PathParam("emisionId") Long emisionId, @PathParam("prodId") Long prodId) throws BusinessLogicException{
-        if(emLogic.getEmisionPorId(emisionId)==null){
-            throw new WebApplicationException("La emisión con el id " + emisionId + " no existe.", 404);
+        if(logicProd.darProduccion(prodId)==null){
+            throw new WebApplicationException("La produccion con el id " + emisionId + " no existe.", 404);
         }
+        
         ProduccionDTO produccionDTO = new ProduccionDTO(emProdLogic.agregarProduccion(emisionId, prodId));
         return produccionDTO;
     }

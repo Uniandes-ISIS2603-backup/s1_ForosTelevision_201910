@@ -64,6 +64,11 @@ public class CanalEntity extends BaseEntity implements Serializable {
     public void addEmision(EmisionEntity emision) {
         emisiones.add(emision);
     }
+    
+    public void setEmisiones(List<EmisionEntity> emisiones)
+    {
+       this.emisiones=emisiones;
+    }
 
     public EmisionEntity getEmision(Long emisionId) {
         EmisionEntity emision=null;

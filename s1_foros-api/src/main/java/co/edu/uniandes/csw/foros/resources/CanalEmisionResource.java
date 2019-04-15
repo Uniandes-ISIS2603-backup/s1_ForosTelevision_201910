@@ -22,7 +22,7 @@ import javax.ws.rs.core.MediaType;
  *
  * @author mi.carrascal
  */
-//    @Path("canal/{canalId: \\d+}/emision")
+    @Path("canal/{canalId: \\d+}/emisiones")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
 public class CanalEmisionResource {

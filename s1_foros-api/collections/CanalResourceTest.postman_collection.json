@@ -48,7 +48,8 @@
 						"api",
 						"canales"
 					]
-				}
+				},
+				"description": "Crea un canal con los valores dados."
 			},
 			"response": []
 		},
@@ -96,7 +97,8 @@
 						"canales",
 						"{{id}}"
 					]
-				}
+				},
+				"description": "Retorna el canal con el id dado"
 			},
 			"response": []
 		},
@@ -140,7 +142,8 @@
 						"api",
 						"{{id}}"
 					]
-				}
+				},
+				"description": "Actualiza la informacion de un canal con id dado."
 			},
 			"response": []
 		},
@@ -189,7 +192,8 @@
 						"canales",
 						"all"
 					]
-				}
+				},
+				"description": "Da todos los canales registrados"
 			},
 			"response": []
 		},
@@ -234,7 +238,8 @@
 						"canales",
 						"{{new_id}}"
 					]
-				}
+				},
+				"description": "Elimina un canal con el id dado."
 			},
 			"response": []
 		}

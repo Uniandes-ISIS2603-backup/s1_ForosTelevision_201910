@@ -23,7 +23,7 @@ import javax.ws.rs.Produces;
  *
  * @author mi.carrascal
  */
-@Path("resenas")
+@Path("usuarios/{usuarioId: \\d+}/producciones{produccionId: \\d+}/resenas")
 @Produces("application/json")
 @Consumes("application/json")
 @RequestScoped
@@ -35,9 +35,10 @@ public class ResenaResource {
     
       
     @POST
-    @Path("/{usuario_id: \\d+}/{produccion_id: \\d+}")
+    @Path("/{usuario_id: \\d+}/{produccion_id: \\d+}/")
     public ResenaDTO crearResena(@PathParam("usuario_id")Long user_id,@PathParam("produccion_id")Long produccion_id,ResenaDTO resenaDTO) throws BusinessLogicException
     {   
+        
         ResenaDTO aRetornar=null;
         ResenaEntity resenaEntity=resenaDTO.toEntity();
         resenaEntity =resenaLogic.createResena(user_id,produccion_id,resenaEntity);
