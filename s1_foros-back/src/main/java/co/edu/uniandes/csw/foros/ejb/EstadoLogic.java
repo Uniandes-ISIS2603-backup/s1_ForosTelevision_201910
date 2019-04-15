@@ -70,6 +70,7 @@ public class EstadoLogic {
         }
         else{
             EstadoEntity estadoNuevo = persistence.update(estado);
+            estadoNuevo.setId(id);
             return estadoNuevo;
         }
     }

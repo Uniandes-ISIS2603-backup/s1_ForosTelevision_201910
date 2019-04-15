@@ -32,8 +32,9 @@ public class EmisionLogic {
      * @return entidad creada.
      */
     public EmisionEntity createEmision(EmisionEntity entidad) throws BusinessLogicException{
-        if(persistence.find(entidad.getId())!=null)
+        if(persistence.find(entidad.getId())!=null){
               throw new BusinessLogicException("No pueden haber dos emisiones iguales");
+        }
         EmisionEntity emision = persistence.create(entidad);
         return emision;
     }

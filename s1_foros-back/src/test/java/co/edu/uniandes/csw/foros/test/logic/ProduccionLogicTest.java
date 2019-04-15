@@ -213,8 +213,8 @@ public class ProduccionLogicTest {
         produccionEntity.setResenas(new ArrayList());
         produccionEntity.setStaff(new ArrayList());
         produccionEntity.setClasificacionAudiencia(ClasificacionAudiencia.FAMILIAR);
-        produccionEntity.setMultimedia(multimediaEntity);
-        produccionEntity.setProductora(productoraEntity);
+        produccionEntity.setMultimedia(multimediaEntity.getId());
+        produccionEntity.setProductora(productoraEntity.getId());
         try {
             produccionLogic.crearProduccion(produccionEntity);
             data.add(produccionEntity);

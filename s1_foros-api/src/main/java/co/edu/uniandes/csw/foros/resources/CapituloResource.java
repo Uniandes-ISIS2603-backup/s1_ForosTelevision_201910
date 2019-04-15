@@ -94,12 +94,9 @@ public class CapituloResource {
     @DELETE
     @Path("/{id: \\d+}")
     public void deleteCapitulo(@PathParam("id")Long id){
-        CapituloEntity entity = logic.getCapituloPorId(id);
-        if(entity !=null){
-            logic.borrarCapitulo(id);    
-        }
-        else{
+        if(logic.getCapituloPorId(id)==null){
             throw new WebApplicationException("El capítulo con el id: " + id + " no existe.", 404);
         }
+        logic.borrarCapitulo(id);    
     }
 }

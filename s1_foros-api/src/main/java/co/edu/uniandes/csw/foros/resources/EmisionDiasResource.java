@@ -93,7 +93,10 @@ public class EmisionDiasResource {
     
     @DELETE
     @Path("{produccionId: \\d+}")
-    public void removeProduccion(@PathParam("emisionId") Long emisionId, @PathParam("produccionId") Long produccionId){
-        emDiaLogic.eliminarDia(emisionId, produccionId);
+    public void removeDia(@PathParam("emisionId") Long emisionId, @PathParam("diaId") Long diaId){
+        if(diaLogic.getDiaPorId(diaId)==null){
+                throw new WebApplicationException("El dia con el id " + diaId + " no existe.", 404);
+        }
+        emDiaLogic.eliminarDia(emisionId, diaId);
     }
 }
