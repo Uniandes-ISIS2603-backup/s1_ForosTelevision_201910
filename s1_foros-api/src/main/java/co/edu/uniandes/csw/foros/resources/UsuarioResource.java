@@ -257,11 +257,11 @@ public class UsuarioResource {
      */
     @POST
     @Path("seguir")
-    public String seguirUsuario(String jsonString) throws BusinessLogicException {
+    public UtilRespuesta<String> seguirUsuario(String jsonString) throws BusinessLogicException {
         JsonElement jelement = new JsonParser().parse(jsonString);
         JsonObject jobject = jelement.getAsJsonObject();
         logicUser.seguirUsuario(jobject.get("id_usuario").getAsLong(), jobject.get("id_seguidor").getAsLong());
-        return "Usuario Registrado";
+        return new UtilRespuesta<>(200, "Usuario registrado");
     }
 
     /**
