@@ -29,7 +29,7 @@ public class DiaDTO implements Serializable {
      * Constructor de la clase.
      */
     public DiaDTO(){
-        
+        //Constructor vacío.
     }
 
     public DiaDTO(DiaEntity d) {

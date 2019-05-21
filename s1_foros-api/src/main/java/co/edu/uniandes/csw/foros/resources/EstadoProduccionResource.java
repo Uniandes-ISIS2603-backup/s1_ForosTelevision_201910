@@ -5,7 +5,7 @@
  */
 package co.edu.uniandes.csw.foros.resources;
 
-import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
+import co.edu.uniandes.csw.foros.dtos.ProduccionDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.EstadoProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.EstadoLogic;
@@ -41,32 +41,32 @@ public class EstadoProduccionResource {
     
     @POST
     @Path("{prodId: \\d+}")
-    public ProduccionDTO addProduccion(@PathParam("estadoId") Long estadoId, @PathParam("prodId") Long prodId) throws BusinessLogicException{
+    public ProduccionDetailDTO addProduccion(@PathParam("estadoId") Long estadoId, @PathParam("prodId") Long prodId) throws BusinessLogicException{
         if(logicProd.darProduccion(prodId)==null){
             throw new WebApplicationException("El estado con el id " + prodId + " no existe.", 404);
         }
         if(estLogic.getEstadoPorId(estadoId)==null){
             throw new WebApplicationException("El estado con el id " + estadoId + " no existe.", 404);
         }
-        ProduccionDTO produccionDTO = new ProduccionDTO(estProdLogic.agregarProduccion(estadoId, prodId));
+        ProduccionDetailDTO produccionDTO = new ProduccionDetailDTO(estProdLogic.agregarProduccion(estadoId, prodId));
         return produccionDTO;
     }
      
     @GET
-    public ProduccionDTO getProduccion(@PathParam("estadoId") Long estadoId) throws BusinessLogicException{
+    public ProduccionDetailDTO getProduccion(@PathParam("estadoId") Long estadoId) throws BusinessLogicException{
         if(estLogic.getEstadoPorId(estadoId)==null){
             throw new WebApplicationException("El estado con el id " + estadoId + " no existe.", 404);
         }
-        ProduccionDTO dto = new ProduccionDTO(estProdLogic.obtenerProduccion(estadoId));
+        ProduccionDetailDTO dto = new ProduccionDetailDTO(estProdLogic.obtenerProduccion(estadoId));
         return dto;
     }
     
     @PUT
-    public ProduccionDTO updateProduccion(@PathParam("estadoId") Long estadoId, ProduccionDTO produccion)throws BusinessLogicException{
+    public ProduccionDetailDTO updateProduccion(@PathParam("estadoId") Long estadoId, ProduccionDetailDTO produccion)throws BusinessLogicException{
         if(estLogic.getEstadoPorId(estadoId)==null){
             throw new WebApplicationException("El estado con el id " + estadoId + " no existe.", 404);
         }
-        ProduccionDTO dto = new ProduccionDTO(estProdLogic.actualizarProduccion(estadoId, produccion.toEntity()));
+        ProduccionDetailDTO dto = new ProduccionDetailDTO(estProdLogic.actualizarProduccion(estadoId, produccion.toEntity()));
         return dto;
     }
     

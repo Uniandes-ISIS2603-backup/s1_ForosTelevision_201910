@@ -38,7 +38,7 @@ public class DiaEntity extends BaseEntity implements Serializable{
      * Constructor de la clase.
      */
     public DiaEntity(){
-        
+        //Constructor vacío de la clase.
     }
 
     /**

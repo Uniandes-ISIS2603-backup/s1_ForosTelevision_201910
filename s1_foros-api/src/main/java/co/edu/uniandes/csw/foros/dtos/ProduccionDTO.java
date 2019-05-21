@@ -40,12 +40,12 @@ public class ProduccionDTO implements Serializable {
     /**
      * Relación de una producción con su multimedia.
      */
-    private MultimediaDTO multimedia;
+    private Long multimedia;
 
     /**
      * Relación de una producción con su productora.
      */
-    private ProductoraDTO productora;
+    private Long productora;
 
     /**
      * Constructor vacío del DTO de una producción.
@@ -66,16 +66,8 @@ public class ProduccionDTO implements Serializable {
             this.clasificacionAudiencia = produccionEntity.getClasificacionAudiencia();
             this.id = produccionEntity.getId();
             this.calificacionPromedio = produccionEntity.getCalificacionPromedio();
-            if(produccionEntity.getMultimedia() != null) {
-                this.multimedia = new MultimediaDTO(produccionEntity.getMultimedia());
-            } else {
-                this.multimedia = null;
-            }
-            if(produccionEntity.getProductora() != null) {
-                this.productora = new ProductoraDTO(produccionEntity.getProductora());
-            } else {
-                this.productora = null;
-            }
+            this.multimedia = produccionEntity.getMultimedia();
+            this.productora = produccionEntity.getProductora();
         }
     }
 
@@ -90,9 +82,9 @@ public class ProduccionDTO implements Serializable {
         produccionEntity.setDescripcion(this.descripcion);
         produccionEntity.setId(this.id);
         produccionEntity.setNombre(this.nombre);
-        produccionEntity.setMultimedia(this.multimedia.toEntity());
+        produccionEntity.setMultimedia(this.multimedia);
         produccionEntity.setClasificacionAudiencia(this.clasificacionAudiencia);
-        produccionEntity.setProductora(this.productora.toEntity());
+        produccionEntity.setProductora(this.productora);
         return produccionEntity;
     }
 
@@ -136,19 +128,19 @@ public class ProduccionDTO implements Serializable {
         this.calificacionPromedio = calificacionPromedio;
     }
 
-    public MultimediaDTO getMultimedia() {
+    public Long getMultimedia() {
         return multimedia;
     }
 
-    public void setMultimedia(MultimediaDTO multimedia) {
+    public void setMultimedia(Long multimedia) {
         this.multimedia = multimedia;
     }
 
-    public ProductoraDTO getProductora() {
+    public Long getProductora() {
         return productora;
     }
 
-    public void setProductora(ProductoraDTO productora) {
+    public void setProductora(Long productora) {
         this.productora = productora;
     }
     

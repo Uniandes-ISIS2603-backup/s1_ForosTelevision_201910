@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "891cf88c-a7b2-4456-ba87-ee2696ff36b0",
+		"name": "DiaResource",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Obtener dias",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d6651c3-dcfd-4f3e-bf57-5f656fd1d5ed",
+						"exec": [
+							"tests[\"No genera error en el Get All\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:8080/s1_foros-api/api/dias/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"dias",
+						""
+					]
+				},
+				"description": "Obtiene todos los dias"
+			},
+			"response": []
+		},
+		{
+			"name": "Crear día",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d6651c3-dcfd-4f3e-bf57-5f656fd1d5ed",
+						"exec": [
+							"tests[\"No genera error en el Post\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emision\":{},\n\t\"nombre\": \"Lunes\",\n\t\"horaEmision\": \"15:00\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/dias/",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"dias",
+						""
+					]
+				},
+				"description": "Prueba para crear un día"
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar día",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d6651c3-dcfd-4f3e-bf57-5f656fd1d5ed",
+						"exec": [
+							"tests[\"No genera error en el Put\"] = responseCode.code === 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nombre\": \"Martes\"\n}"
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/dias/4",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"dias",
+						"4"
+					]
+				},
+				"description": "Actualiza un día existente"
+			},
+			"response": []
+		},
+		{
+			"name": "Eliminar Dia",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3d6651c3-dcfd-4f3e-bf57-5f656fd1d5ed",
+						"exec": [
+							"tests[\"No genera error en el Delete\"] = responseCode.code === 204;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{ip}}:{{puerto}}/s1_foros-api/api/dias/3",
+					"protocol": "http",
+					"host": [
+						"{{ip}}"
+					],
+					"port": "{{puerto}}",
+					"path": [
+						"s1_foros-api",
+						"api",
+						"dias",
+						"3"
+					]
+				},
+				"description": "Prueba para eliminar un día"
+			},
+			"response": []
+		}
+	]
+}

@@ -21,12 +21,8 @@ public class EmisionDTO implements Serializable{
     
     private int rating;
     
-    private CanalDTO canal;
-    
-    private List<DiaDTO> dias;
-
     public EmisionDTO(){
-        
+        //Constructor vacío.
     }
 
     public EmisionDTO(EmisionEntity ent) {
@@ -34,13 +30,8 @@ public class EmisionDTO implements Serializable{
         this.fechaInicio=ent.getFechaInicio();
         this.fechaFin=ent.getFechaFin();
         this.rating=ent.getRating();
-        this.canal=new CanalDTO(ent.getCanal());
-        this.dias=new ArrayList<>();
-        for(DiaEntity d:ent.getDias())
-        {
-            dias.add(new DiaDTO(d));
-        }
     }
+    
     /**
      * @return the id
      */
@@ -95,18 +86,13 @@ public class EmisionDTO implements Serializable{
      */
     public void setRating(int rating) {
         this.rating = rating;
-    }   
-
+    }
+    
     EmisionEntity toEntity() {
         EmisionEntity em=new EmisionEntity();
-        em.setCanal(canal.toEntity());
         em.setFechaFin(fechaFin);
         em.setFechaInicio(fechaInicio);
         em.setId(id);
-        List<DiaEntity> d=new ArrayList<>();
-        for(DiaDTO dia:dias)
-            d.add(dia.toEntity());
-        em.setDias(d);
         return em;
     }
 }
