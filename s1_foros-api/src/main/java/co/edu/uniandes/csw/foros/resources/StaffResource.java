@@ -1,10 +1,12 @@
 package co.edu.uniandes.csw.foros.resources;
 
 import co.edu.uniandes.csw.foros.dtos.ProduccionDTO;
+import co.edu.uniandes.csw.foros.dtos.ProduccionDetailDTO;
 import co.edu.uniandes.csw.foros.dtos.StaffDTO;
 import co.edu.uniandes.csw.foros.dtos.StaffDetailDTO;
 import co.edu.uniandes.csw.foros.ejb.ProduccionLogic;
 import co.edu.uniandes.csw.foros.ejb.StaffLogic;
+import co.edu.uniandes.csw.foros.entities.ProduccionEntity;
 import co.edu.uniandes.csw.foros.entities.StaffEntity;
 import co.edu.uniandes.csw.foros.exceptions.BusinessLogicException;
 
@@ -132,6 +134,32 @@ public class StaffResource {
         LOGGER.log(Level.INFO, "StaffResource darTodosStaff: output: {0}", listaStaffDetailDTO.toString());
         return listaStaffDetailDTO;
     }
+    
+    /**
+     * Método que retorna los staffs de una producción.
+     * 
+     * @param id id de la producción.
+     * @return lista con los staffs de la producción.
+     */
+    @GET
+    @Path("{idStaff: \\d+}/producciones/")
+    public List<ProduccionDetailDTO> darProducciones(@PathParam("idStaff") Long id) {
+        StaffEntity staffEntity = darEntidadStaff(id);
+        List<ProduccionDetailDTO> producciones = listEntity2DetailDTOProducciones(staffEntity.getProducciones());
+        return producciones;
+    }
+    
+    private StaffEntity darEntidadStaff(Long id) {
+        try {
+            StaffEntity staffEntity = staffLogic.darStaff(id);
+            if (staffEntity == null) {
+                throw new WebApplicationException("El recurso /staff/" + id + " no existe.", 404);
+            }
+            return staffEntity;
+        } catch(BusinessLogicException ble) {
+            throw new WebApplicationException(ble.getMessage(), 412);
+        }
+    }
 
     /**
      * Convierte una lista de entidades a DTO.
@@ -147,6 +175,24 @@ public class StaffResource {
         List<StaffDetailDTO> list = new ArrayList<>();
         for (StaffEntity entity : entityList) {
             list.add(new StaffDetailDTO(entity));
+        }
+        return list;
+    }
+    
+    /**
+     * Convierte una lista de entidades a DTO.
+     *
+     * Este método convierte una lista de objetos BookEntity a una lista de
+     * objetos BookDetailDTO (json)
+     *
+     * @param entityList corresponde a la lista de libros de tipo Entity que
+     * vamos a convertir a DTO.
+     * @return la lista de libros en forma DTO (json)
+     */
+    private List<ProduccionDetailDTO> listEntity2DetailDTOProducciones(List<ProduccionEntity> entityList) {
+        List<ProduccionDetailDTO> list = new ArrayList<>();
+        for (ProduccionEntity entity : entityList) {
+            list.add(new ProduccionDetailDTO(entity));
         }
         return list;
     }
